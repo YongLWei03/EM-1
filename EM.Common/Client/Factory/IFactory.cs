@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EM.Common.Client
+namespace EM.Common.Client.Factory
 {
-  public interface IClient
+  public interface IFactory
   {
-    void Run();
+    IClient MakeClient(ITemplate template);
   }
 }

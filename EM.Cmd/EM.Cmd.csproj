@@ -62,5 +62,23 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EM.Client.Sample\EM.Client.Sample.csproj">
+      <Project>{c106b934-90b9-4724-b762-9edf291ae62e}</Project>
+      <Name>EM.Client.Sample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Common\EM.Common.csproj">
+      <Project>{bc444e24-53bb-4fa2-b442-bbef892a772a}</Project>
+      <Name>EM.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Factory.Sample\EM.Factory.Sample.csproj">
+      <Project>{95d98f1c-fb59-4afe-b5ac-d63235bec169}</Project>
+      <Name>EM.Factory.Sample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Repository\EM.Repository.Sample.csproj">
+      <Project>{b445548f-fdc8-4414-bf80-58128f8ee4a8}</Project>
+      <Name>EM.Repository.Sample</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

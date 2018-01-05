@@ -41,13 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repository.cs" />
+    <Compile Include="SampleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EM.Common\EM.Common.csproj">
       <Project>{bc444e24-53bb-4fa2-b442-bbef892a772a}</Project>
       <Name>EM.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Plugin.Sample\EM.Plugin.Sample.csproj">
+      <Project>{0b200ba8-4fea-4ab9-9fbb-cb81675501dd}</Project>
+      <Name>EM.Plugin.Sample</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

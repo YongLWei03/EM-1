@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC444E24-53BB-4FA2-B442-BBEF892A772A}</ProjectGuid>
+    <ProjectGuid>{95D98F1C-FB59-4AFE-B5AC-D63235BEC169}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EM.Common</RootNamespace>
-    <AssemblyName>EM.Common</AssemblyName>
+    <RootNamespace>EM.Factory.Sample</RootNamespace>
+    <AssemblyName>EM.Factory.Sample</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,14 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\Factory\IFactory.cs" />
-    <Compile Include="Client\IClient.cs" />
-    <Compile Include="Plugin\IPlugin.cs" />
-    <Compile Include="Plugin\ITemplate.cs" />
-    <Compile Include="Plugin\Template.cs" />
+    <Compile Include="SampleFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Plugin\Repository\IRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EM.Client.Sample\EM.Client.Sample.csproj">
+      <Project>{c106b934-90b9-4724-b762-9edf291ae62e}</Project>
+      <Name>EM.Client.Sample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Common\EM.Common.csproj">
+      <Project>{bc444e24-53bb-4fa2-b442-bbef892a772a}</Project>
+      <Name>EM.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

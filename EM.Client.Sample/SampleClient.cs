@@ -10,16 +10,18 @@ namespace EM.Client.Sample
 {
   public class SampleClient : IClient
   {
-    public SampleClient()
+    private AppDomain appDomain;
+    private IPlugin plugin;
+
+    public SampleClient(AppDomain appDomain, IPlugin plugin)
     {
-
+      this.appDomain = appDomain;
+      this.plugin = plugin;
     }
-
-    public IPlugin Plugin { get; set; }
 
     public void Run()
     {
-      Plugin.Run();
+      plugin.Run();
     }
   }
 }

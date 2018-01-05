@@ -1,4 +1,9 @@
-﻿using System;
+﻿using EM.Common.Client;
+using EM.Common.Client.Factory;
+using EM.Common.Plugin.Repository;
+using EM.Factory.Sample;
+using EM.Repository.Sample;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +27,19 @@ namespace EM.Cmd
       {
         ct.ThrowIfCancellationRequested();
 
+        IRepository repository = new SampleRepository();
+        IFactory factory = new SampleFactory();
+        IClient client = factory.MakeClient(repository.Get("EM.Plugin.Sample.SamplePlugin"));
+
         while (true)
         {
           if (ct.IsCancellationRequested)
           {
             ct.ThrowIfCancellationRequested();
           }
+
+
+
           Thread.Sleep(5000);
         }
       }, ct);
