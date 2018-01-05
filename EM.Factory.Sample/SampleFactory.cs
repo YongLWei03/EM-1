@@ -29,8 +29,8 @@ namespace EM.Factory.Sample
 
       // Create the second AppDomain.
       AppDomain ad = AppDomain.CreateDomain("AD #2", null, ads);
-      ad.FirstChanceException += Ad_FirstChanceException;
-      ad.UnhandledException += Ad_UnhandledException;
+      //ad.FirstChanceException += Ad_FirstChanceException;
+      //ad.UnhandledException += Ad_UnhandledException;
 
       Type t = template.PluginType;
 

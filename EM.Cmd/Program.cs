@@ -1,4 +1,5 @@
-﻿using EM.Common.Client;
+﻿using Common.Logging;
+using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Plugin.Repository;
 using EM.Factory.Sample;
@@ -16,7 +17,7 @@ namespace EM.Cmd
   {
     static void Main(string[] args)
     {
-      Common.Logging.ILog logger = Common.Logging.LogManager.GetLogger<Program>();
+      ILog logger = LogManager.GetLogger<Program>();
 
       logger.Info("Starting EM");
 
@@ -25,6 +26,8 @@ namespace EM.Cmd
 
       Task t = Task.Factory.StartNew(() =>
       {
+        logger.Debug("Task running...");
+
         ct.ThrowIfCancellationRequested();
 
         IRepository repository = new SampleRepository();
@@ -38,7 +41,7 @@ namespace EM.Cmd
             ct.ThrowIfCancellationRequested();
           }
 
-
+          client.Run();
 
           Thread.Sleep(5000);
         }
@@ -46,6 +49,7 @@ namespace EM.Cmd
 
       try
       {
+        Thread.Sleep(5000);
         tokenSource.Cancel();
         logger.Info("Waiting for task to finish.");
         t.Wait();

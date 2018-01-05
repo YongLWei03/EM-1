@@ -1,4 +1,5 @@
-﻿using EM.Common.Client;
+﻿using Common.Logging;
+using EM.Common.Client;
 using EM.Common.Plugin;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace EM.Client.Sample
   {
     private AppDomain appDomain;
     private IPlugin plugin;
+    private ILog logger = LogManager.GetLogger<SampleClient>();
 
     public SampleClient(AppDomain appDomain, IPlugin plugin)
     {
@@ -21,6 +23,7 @@ namespace EM.Client.Sample
 
     public void Run()
     {
+      logger.Debug("Sample client running ....");
       plugin.Run();
     }
   }
