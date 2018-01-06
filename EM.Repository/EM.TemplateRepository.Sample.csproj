@@ -7,8 +7,8 @@
     <ProjectGuid>{B445548F-FDC8-4414-BF80-58128F8EE4A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EM.Repository.Sample</RootNamespace>
-    <AssemblyName>EM.Repository.Sample</AssemblyName>
+    <RootNamespace>EM.TemplateRepository.Sample</RootNamespace>
+    <AssemblyName>EM.TemplateRepository.Sample</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SampleRepository.cs" />
+    <Compile Include="SampleTemplateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

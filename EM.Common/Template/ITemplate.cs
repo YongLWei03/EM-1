@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EM.Common.Plugin
+namespace EM.Common.Template
 {
   public interface ITemplate
   {

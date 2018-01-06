@@ -75,9 +75,9 @@
       <Project>{95d98f1c-fb59-4afe-b5ac-d63235bec169}</Project>
       <Name>EM.Factory.Sample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EM.Repository\EM.Repository.Sample.csproj">
+    <ProjectReference Include="..\EM.Repository\EM.TemplateRepository.Sample.csproj">
       <Project>{b445548f-fdc8-4414-bf80-58128f8ee4a8}</Project>
-      <Name>EM.Repository.Sample</Name>
+      <Name>EM.TemplateRepository.Sample</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

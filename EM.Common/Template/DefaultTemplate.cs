@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EM.Common.Plugin;
+using System;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EM.Common.Plugin
+namespace EM.Common.Template
 {
-  public class Template : ITemplate
+  public class DefaultTemplate : ITemplate
   {
     private string dllName;
     private string className;
     
-    public Template(string dllName, string className) 
+    public DefaultTemplate(string dllName, string className) 
     {
       this.dllName = dllName;
       this.className = className;

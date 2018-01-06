@@ -1,4 +1,5 @@
 ﻿using EM.Common.Plugin;
+using EM.Common.Template;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,6 +2,7 @@
 using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Plugin;
+using EM.Common.Template;
 using System;
 using System.Collections.Generic;
 using System.Linq;

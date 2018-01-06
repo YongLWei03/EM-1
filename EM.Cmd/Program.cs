@@ -1,13 +1,10 @@
 ﻿using Common.Logging;
 using EM.Common.Client;
 using EM.Common.Client.Factory;
-using EM.Common.Plugin.Repository;
+using EM.Common.Template.Repository;
 using EM.Factory.Sample;
 using EM.Repository.Sample;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +27,7 @@ namespace EM.Cmd
 
         ct.ThrowIfCancellationRequested();
 
-        IRepository repository = new SampleRepository();
+        ITemplateRepository repository = new SampleTemplateRepository();
         IFactory factory = new SampleFactory();
         IClient client = factory.MakeClient(repository.Get("EM.Plugin.Sample.SamplePlugin"));
 

@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{EAC587
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Plugin.Sample", "EM.Plugin.Sample\EM.Plugin.Sample.csproj", "{0B200BA8-4FEA-4AB9-9FBB-CB81675501DD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{34FF54D6-D1F3-4FEA-A5A1-FE8DB79D1F89}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TemplateRepository", "TemplateRepository", "{34FF54D6-D1F3-4FEA-A5A1-FE8DB79D1F89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Repository.Sample", "EM.Repository\EM.Repository.Sample.csproj", "{B445548F-FDC8-4414-BF80-58128F8EE4A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.TemplateRepository.Sample", "EM.Repository\EM.TemplateRepository.Sample.csproj", "{B445548F-FDC8-4414-BF80-58128F8EE4A8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{525E54B2-DBEF-4E5E-9C78-E19F4C2CEE23}"
 EndProject
