@@ -6,6 +6,7 @@ using EM.EF;
 using EM.Factory.Sample;
 using EM.Repository.Sample;
 using System;
+using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,6 +29,7 @@ namespace EM.Cmd
 
         ct.ThrowIfCancellationRequested();
 
+        Database.SetInitializer<EMContext>(new TemplateRepositoryInitializer());
         TemplateRepositoryBuilder builder = new TemplateRepositoryBuilder();
         ITemplateRepository  repository = builder.Build();
 
@@ -50,7 +52,7 @@ namespace EM.Cmd
 
       try
       {
-        Thread.Sleep(5000);
+        Thread.Sleep(15000);
         tokenSource.Cancel();
         logger.Info("Waiting for task to finish.");
         t.Wait();

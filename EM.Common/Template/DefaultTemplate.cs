@@ -10,6 +10,12 @@ namespace EM.Common.Template
     private string dllName;
     private string className;
 
+    public DefaultTemplate()
+    {
+      dllName = null;
+      className = null;
+    }
+
     public DefaultTemplate(string dllName, string className)
     {
       this.dllName = dllName;

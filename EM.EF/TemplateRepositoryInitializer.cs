@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EM.EF
 {
-  public class TemplateRepositoryInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<EMContext>
+  public class TemplateRepositoryInitializer : System.Data.Entity.CreateDatabaseIfNotExists<EMContext> //DropCreateDatabaseAlways
   {
     protected override void Seed(EMContext context)
     {
