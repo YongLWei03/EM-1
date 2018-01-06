@@ -9,6 +9,9 @@ namespace EM.Common.Client
 {
   public interface IClient
   {
+    IPlugin Plugin { get; set; }
+    ClientProperties Properties { get; set; }
+
     void Run();
   }
 }

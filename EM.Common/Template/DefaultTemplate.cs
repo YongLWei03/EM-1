@@ -9,14 +9,17 @@ namespace EM.Common.Template
   {
     private string dllName;
     private string className;
-    
-    public DefaultTemplate(string dllName, string className) 
+
+    public DefaultTemplate(string dllName, string className)
     {
       this.dllName = dllName;
       this.className = className;
     }
 
     public Type PluginType { get => GetPluginType(); }
+
+    public string DLLName { get => dllName; set => dllName = value; }
+    public string FullClassName { get => className; set => className = value; }
 
     private Type GetPluginType()
     {

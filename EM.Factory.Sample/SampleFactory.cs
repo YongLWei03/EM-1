@@ -37,7 +37,7 @@ namespace EM.Factory.Sample
 
       IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
 
-      return new SampleClient(ad,plugin);
+      return new DefaultClient(ad,plugin);
 
     }
 

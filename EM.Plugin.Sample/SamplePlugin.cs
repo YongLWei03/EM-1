@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace EM.Plugin.Sample
 {
+
   public class SamplePlugin : MarshalByRefObject, IPlugin
   {
     private ILog logger = LogManager.GetLogger<SamplePlugin>();
