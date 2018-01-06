@@ -2,6 +2,7 @@
 using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Template.Repository;
+using EM.EF;
 using EM.Factory.Sample;
 using EM.Repository.Sample;
 using System;
@@ -27,7 +28,10 @@ namespace EM.Cmd
 
         ct.ThrowIfCancellationRequested();
 
-        ITemplateRepository repository = new SampleTemplateRepository();
+        TemplateRepositoryBuilder builder = new TemplateRepositoryBuilder();
+        ITemplateRepository  repository = builder.Build();
+
+        //ITemplateRepository repository = new SampleTemplateRepository();
         IFactory factory = new SampleFactory();
         IClient client = factory.MakeClient(repository.Get("EM.Plugin.Sample.SamplePlugin"));
 

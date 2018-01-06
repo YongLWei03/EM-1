@@ -50,6 +50,7 @@
     <Compile Include="EMContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateRepositoryBuilder.cs" />
+    <Compile Include="TemplateRepositoryInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

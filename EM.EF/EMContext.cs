@@ -13,6 +13,7 @@ namespace EM.EF
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
+      modelBuilder.Entity<DefaultTemplate>().HasKey(t => t.FullClassName);
       modelBuilder.Entity<DefaultTemplate>().Ignore(t => t.PluginType);
       base.OnModelCreating(modelBuilder);
     }
