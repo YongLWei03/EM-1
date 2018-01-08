@@ -14,7 +14,19 @@ namespace EM.EF
     {
       DefaultTemplateRepository repo = new DefaultTemplateRepository();
 
-      using (var ctx = new EMContext())
+      //using (var ctx = new EMContext())
+      //{
+      //  var query = from t in ctx.Templates
+      //              select t;
+
+      //  foreach (var t in query)
+      //  {
+      //    repo.Add(t.FullClassName, t);
+      //  }
+      //}
+
+
+      using (var ctx = new EM.EF.EMModel())
       {
         var query = from t in ctx.Templates
                     select t;
@@ -24,7 +36,8 @@ namespace EM.EF
           repo.Add(t.FullClassName, t);
         }
       }
-        return repo;
+
+      return repo;
     }
   }
 }
