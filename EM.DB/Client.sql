@@ -1,0 +1,5 @@
+﻿CREATE TABLE [EM].[Client]
+(
+	[Id] BIGINT NOT NULL PRIMARY KEY, 
+    [TemplateID] BIGINT NOT NULL
+)
