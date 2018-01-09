@@ -22,7 +22,7 @@ namespace EM.EF
       //}
 
 
-      using (var ctx = new EM.EF.EMModel())
+      using (var ctx = new Entities())
       {
         var query = from t in ctx.Templates
                     select t;
