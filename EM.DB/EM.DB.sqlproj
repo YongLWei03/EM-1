@@ -73,6 +73,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="EM.DB.publish.xml" />
-    <None Include="EM_1.DB.publish.xml" />
   </ItemGroup>
 </Project>

@@ -21,4 +21,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ClientId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="26864f3b-0c95-4580-8300-60ee611a3f29" ChangeDateTime="01/09/2018 14:50:02">
+    <Property Name="ElementName" Value="[EM].[Client].[TemplateID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[EM].[Client]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TemplateId" />
+  </Operation>
 </Operations>
