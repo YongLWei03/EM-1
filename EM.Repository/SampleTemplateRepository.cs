@@ -1,5 +1,5 @@
-﻿using EM.Common.Template;
-using EM.Common.Template.Repository;
+﻿using EM.Common.PluginTemplate;
+using EM.Common.PluginTemplate.Repository;
 using System.Collections.Generic;
 
 namespace EM.Repository.Sample

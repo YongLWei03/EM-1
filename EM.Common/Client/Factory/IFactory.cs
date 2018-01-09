@@ -1,10 +1,4 @@
-﻿using EM.Common.Plugin;
-using EM.Common.Template;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EM.Common.PluginTemplate;
 
 namespace EM.Common.Client.Factory
 {

@@ -1,10 +1,9 @@
 ﻿using Common.Logging;
 using EM.Common.Client;
 using EM.Common.Client.Factory;
-using EM.Common.Template.Repository;
+using EM.Common.PluginTemplate.Repository;
 using EM.EF;
 using EM.Factory.Sample;
-using EM.Repository.Sample;
 using System;
 using System.Data.Entity;
 using System.Threading;

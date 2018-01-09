@@ -1,13 +1,8 @@
-﻿using EM.Client.Sample;
-using EM.Common.Client;
+﻿using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Plugin;
-using EM.Common.Template;
+using EM.Common.PluginTemplate;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EM.Factory.Sample
 {

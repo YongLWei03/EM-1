@@ -10,5 +10,17 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
+
+DECLARE @LASTID bigint;
+
 INSERT INTO [EM].Template ([DLLName], [FullClassName])
-VALUES ('EM.Plugin.Sample', 'EM.Plugin.Sample.SamplePlugin')
+VALUES ('EM.Plugin.Sample', 'EM.Plugin.Sample.SamplePlugin');
+
+SELECT @LASTID=SCOPE_IDENTITY();
+
+INSERT INTO [EM].Client([TemplateID],[Name]) VALUES (@LASTID,'Sample Client');
+
+SELECT @LASTID=SCOPE_IDENTITY();
+
+INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
+VALUES (@LASTID,'Name','Sample Client Name.');

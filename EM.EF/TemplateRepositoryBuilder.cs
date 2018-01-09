@@ -1,10 +1,6 @@
-﻿using EM.Common.Template;
-using EM.Common.Template.Repository;
-using System;
-using System.Collections.Generic;
+﻿using EM.Common.PluginTemplate;
+using EM.Common.PluginTemplate.Repository;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EM.EF
 {
@@ -33,7 +29,11 @@ namespace EM.EF
 
         foreach (var t in query)
         {
-          repo.Add(t.FullClassName, t);
+          repo.Add(t.FullClassName, new DefaultTemplate()
+          {
+            DLLName = t.DLLName,
+            FullClassName = t.FullClassName
+          });
         }
       }
 
