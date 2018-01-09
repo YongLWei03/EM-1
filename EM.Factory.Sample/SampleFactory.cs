@@ -8,7 +8,7 @@ namespace EM.Factory.Sample
 {
   public class SampleFactory : IFactory
   {
-    public SampleFactory()
+    public SampleFactory() //TODO Rename to default (and change namespace).
     {
 
     }
@@ -31,8 +31,18 @@ namespace EM.Factory.Sample
       Type t = template.PluginTemplate.PluginType;
 
       IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
+      //TODO Use reflection to setup plugin properties
+      //TODO Pass client properties to plugin
 
-      DefaultClient client = new DefaultClient(ad,plugin);
+      DefaultClient client = new DefaultClient()
+      {
+        AppDomain = ad,
+        Plugin = plugin,
+        Properties = new ClientProperties()
+        {
+          Properties = template.Properties //TODO Make your own copy.
+        }
+      };
       client.Properties.Name = template.Properties["Name"]; //TODO Use reflection.
 
       return client;

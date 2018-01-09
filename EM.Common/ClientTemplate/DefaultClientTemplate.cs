@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EM.Common.ClientTemplate
 {
-  public class DefaultClientTemplate : IClientTemplate
+  public class DefaultClientTemplate : IClientTemplate //TODO Move out of EM.Common
   {
     public string Name { get; set; }
     public IPluginTemplate PluginTemplate { get; set; }

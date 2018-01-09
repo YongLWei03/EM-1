@@ -11,7 +11,7 @@ namespace EM.Repository.Sample
       { "EM.Plugin.Sample.SamplePlugin", new DefaultPluginTemplate("EM.Plugin.Sample.dll", "EM.Plugin.Sample.SamplePlugin")}
     };
 
-    public IPluginTemplate Get(string name)
+    public IPluginTemplate Get(string name) //TODO Use []-operator
     {
       return templates[name];
     }

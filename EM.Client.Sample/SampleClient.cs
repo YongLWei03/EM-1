@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace EM.Client.Sample
 {
   [System.Obsolete]
-  public class SampleClient : IClient
+  public class SampleClient : IClient //TODO Rename to default (and namespace).
   {
     private AppDomain appDomain;
     private IPlugin plugin;

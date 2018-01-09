@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EM.Common.ClientTemplate.Repository
 {
-  public class DefaultClientTemplateRepository : IClientTemplateRepository
+  public class DefaultClientTemplateRepository : IClientTemplateRepository //Move out of EM.Common.
   {
     private Dictionary<string, IClientTemplate> templates = new Dictionary<string, IClientTemplate>();
 
@@ -15,7 +15,7 @@ namespace EM.Common.ClientTemplate.Repository
       templates.Add(key, template);
     }
 
-    public IClientTemplate Get(string key)
+    public IClientTemplate Get(string key) //TODO Use []-operator.
     {
       return templates[key];
     }

@@ -9,5 +9,7 @@ namespace EM.Common.Client
   public class ClientProperties
   {
     public string Name { get; set; }
+
+    public PropertyDictionary Properties { get; set; }
   }
 }

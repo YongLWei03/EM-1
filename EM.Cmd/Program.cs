@@ -36,7 +36,7 @@ namespace EM.Cmd
 
         //ITemplateRepository repository = new SampleTemplateRepository();
         IFactory factory = new SampleFactory();
-        IClient client = factory.MakeClient(clientTemplateRepo.Get("Sample Client"));
+        IClient client = factory.MakeClient(clientTemplateRepo.Get("Sample Client")); //TODO Turn this into a IClientRepository
 
         while (true)
         {

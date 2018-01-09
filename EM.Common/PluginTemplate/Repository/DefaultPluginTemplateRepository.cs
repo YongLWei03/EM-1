@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EM.Common.PluginTemplate.Repository
 {
-  public class DefaultPluginTemplateRepository : IPluginTemplateRepository
+  public class DefaultPluginTemplateRepository : IPluginTemplateRepository //TODO Move out of EM.Common.
   {
     private Dictionary<string, IPluginTemplate> templates = new Dictionary<string, IPluginTemplate>();
 
@@ -15,7 +15,7 @@ namespace EM.Common.PluginTemplate.Repository
       templates.Add(name, template);
     }
 
-    public IPluginTemplate Get(string name)
+    public IPluginTemplate Get(string name) //TODO use []-operator
     {
       return templates[name];
     }

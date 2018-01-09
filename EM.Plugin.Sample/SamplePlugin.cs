@@ -2,11 +2,6 @@
 using EM.Common.Client;
 using EM.Common.Plugin;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EM.Plugin.Sample
 {
@@ -15,11 +10,13 @@ namespace EM.Plugin.Sample
   {
     private ILog logger = LogManager.GetLogger<SamplePlugin>();
 
+    public PropertyDictionary Properties { get; set; }
+
     public void Run()
     {
       logger.Debug("SamplePlugin running ...");
     }
 
-   
+
   }
 }

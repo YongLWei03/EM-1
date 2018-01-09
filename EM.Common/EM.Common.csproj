@@ -65,7 +65,8 @@
     <Compile Include="PluginTemplate\Repository\IPluginTemplateRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Plugin\Repository\" />
+    <Folder Include="Client\Template\Repository\" />
+    <Folder Include="Plugin\Template\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

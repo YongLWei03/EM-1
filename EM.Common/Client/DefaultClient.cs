@@ -8,20 +8,14 @@ using EM.Common.Plugin;
 
 namespace EM.Common.Client
 {
-  public class DefaultClient : IClient
+  public class DefaultClient : IClient //TODO Move out of common.
   {
-    private AppDomain appDomain;
-    private IPlugin plugin;
-    private ClientProperties properties;
+    private AppDomain appDomain = null;
+    private IPlugin plugin = null;
+    private ClientProperties properties= new ClientProperties();
     private ILog logger = LogManager.GetLogger<DefaultClient>();
 
-    public DefaultClient(AppDomain appDomain, IPlugin plugin)
-    {
-      this.appDomain = appDomain;
-      this.plugin = plugin;
-      this.properties = new ClientProperties();
-    }
-
+    public AppDomain AppDomain { get => appDomain; set => appDomain = value; }
     public IPlugin Plugin { get => plugin; set => plugin = value; }
     public ClientProperties Properties { get => properties; set => properties = value; }
 

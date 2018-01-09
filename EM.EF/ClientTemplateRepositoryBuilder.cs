@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace EM.EF
 {
-  public class ClientTemplateRepositoryBuilder
+  public class ClientTemplateRepositoryBuilder //TODO Use an interface here.
   {
-    public DefaultClientTemplateRepository Build(IPluginTemplateRepository pluginTemplates)
+    public DefaultClientTemplateRepository Build(IPluginTemplateRepository pluginTemplates) //TODO Return an interface.
     {
       DefaultClientTemplateRepository repo = new DefaultClientTemplateRepository();
       using (var ctx = new Entities())

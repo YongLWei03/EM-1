@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace EM.EF
 {
-  public class PluginTemplateRepositoryBuilder
+  public class PluginTemplateRepositoryBuilder //TODO Use an interface here.
   {
-    public DefaultPluginTemplateRepository Build()
+    public DefaultPluginTemplateRepository Build() //TODO Return an interface.
     {
       DefaultPluginTemplateRepository repo = new DefaultPluginTemplateRepository();
 

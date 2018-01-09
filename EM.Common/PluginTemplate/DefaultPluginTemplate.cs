@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace EM.Common.PluginTemplate
 {
-  public class DefaultPluginTemplate : IPluginTemplate
+  public class DefaultPluginTemplate : IPluginTemplate //TODO Move out of EM.Common.
   {
     private string dllName;
     private string className;
