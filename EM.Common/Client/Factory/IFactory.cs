@@ -1,9 +1,9 @@
-﻿using EM.Common.PluginTemplate;
+﻿using EM.Common.ClientTemplate;
 
 namespace EM.Common.Client.Factory
 {
   public interface IFactory
   {
-    IClient MakeClient(IPluginTemplate template);
+    IClient MakeClient(IClientTemplate template);
   }
 }

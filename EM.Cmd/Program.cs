@@ -1,6 +1,7 @@
 ﻿using Common.Logging;
 using EM.Common.Client;
 using EM.Common.Client.Factory;
+using EM.Common.ClientTemplate.Repository;
 using EM.Common.PluginTemplate.Repository;
 using EM.EF;
 using EM.Factory.Sample;
@@ -29,12 +30,14 @@ namespace EM.Cmd
         ct.ThrowIfCancellationRequested();
 
         Database.SetInitializer<EMContext>(new TemplateRepositoryInitializer());
-        PluginTemplateRepositoryBuilder builder = new PluginTemplateRepositoryBuilder();
-        IPluginTemplateRepository  repository = builder.Build();
+        PluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
+        IPluginTemplateRepository  pluginRepo = pluginBuilder.Build();
+        ClientTemplateRepositoryBuilder clientBuilder = new ClientTemplateRepositoryBuilder();
+        IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
 
         //ITemplateRepository repository = new SampleTemplateRepository();
         IFactory factory = new SampleFactory();
-        IClient client = factory.MakeClient(repository.Get("EM.Plugin.Sample.SamplePlugin"));
+        IClient client = factory.MakeClient(clientTemplateRepo.Get("EM.Plugin.Sample.SamplePlugin"));
 
         while (true)
         {

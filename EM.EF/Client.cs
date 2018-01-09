@@ -23,8 +23,10 @@ namespace EM.EF
         public long Id { get; set; }
         public long TemplateID { get; set; }
         public string Name { get; set; }
+        public long TemplateId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientProperty> ClientProperties { get; set; }
+        public virtual Template Template { get; set; }
     }
 }

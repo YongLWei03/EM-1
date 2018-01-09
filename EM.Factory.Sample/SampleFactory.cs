@@ -1,7 +1,7 @@
 ﻿using EM.Common.Client;
 using EM.Common.Client.Factory;
+using EM.Common.ClientTemplate;
 using EM.Common.Plugin;
-using EM.Common.PluginTemplate;
 using System;
 
 namespace EM.Factory.Sample
@@ -13,7 +13,7 @@ namespace EM.Factory.Sample
 
     }
 
-    public IClient MakeClient(IPluginTemplate template)
+    public IClient MakeClient(IClientTemplate template)
     {
       // Construct and initialize settings for a second AppDomain.
       AppDomainSetup ads = new AppDomainSetup();
@@ -28,11 +28,14 @@ namespace EM.Factory.Sample
       //ad.FirstChanceException += Ad_FirstChanceException;
       //ad.UnhandledException += Ad_UnhandledException;
 
-      Type t = template.PluginType;
+      Type t = template.PluginTemplate.PluginType;
 
       IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
 
-      return new DefaultClient(ad,plugin);
+      DefaultClient client = new DefaultClient(ad,plugin);
+      client.Properties.Name = template.Properties["Name"]; //TODO Use reflection.
+
+      return client;
 
     }
 

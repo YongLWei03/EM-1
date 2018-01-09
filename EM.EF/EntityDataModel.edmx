@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EM.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EM.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TemplateID" Type="bigint" Nullable="false" />
+          <Property Name="TemplateId" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientProperty">
@@ -30,6 +30,18 @@
           <Property Name="DLLName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="FullClassName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Client_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClientProperty_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="ClientProperty" Type="Self.ClientProperty" Multiplicity="*" />
@@ -46,13 +58,16 @@
           <EntitySet Name="Client" EntityType="Self.Client" Schema="EM" store:Type="Tables" />
           <EntitySet Name="ClientProperty" EntityType="Self.ClientProperty" Schema="EM" store:Type="Tables" />
           <EntitySet Name="Template" EntityType="Self.Template" Schema="EM" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_Template" Association="Self.FK_Client_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientProperty_Client" Association="Self.FK_ClientProperty_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientProperty" EntitySet="ClientProperty" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EM.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -64,6 +79,8 @@
           <Property Name="TemplateID" Type="Int64" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ClientProperties" Relationship="Self.FK_ClientProperty_Client" FromRole="Client" ToRole="ClientProperty" />
+          <Property Name="TemplateId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Template" Relationship="EM.DBModel.FK_Client_Template" FromRole="Client" ToRole="Template" />
         </EntityType>
         <EntityType Name="ClientProperty">
           <Key>
@@ -82,6 +99,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DLLName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FullClassName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="EM.DBModel.FK_Client_Template" FromRole="Template" ToRole="Client" />
         </EntityType>
         <Association Name="FK_ClientProperty_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -103,7 +121,23 @@
             <End Role="Client" EntitySet="Clients" />
             <End Role="ClientProperty" EntitySet="ClientProperties" />
           </AssociationSet>
+          <AssociationSet Name="FK_Client_Template" Association="EM.DBModel.FK_Client_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Client_Template">
+          <End Type="EM.DBModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="EM.DBModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="TemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -113,8 +147,8 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="EM.DBModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>

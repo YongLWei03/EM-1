@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="EM.DBModel.ClientProperty" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EM.DBModel.Template" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="EM.DBModel.FK_ClientProperty_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="EM.DBModel.FK_Client_Template" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
