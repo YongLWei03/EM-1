@@ -13,7 +13,7 @@ namespace EM.Factory.Sample
 
     }
 
-    public IClient MakeClient(ITemplate template)
+    public IClient MakeClient(IPluginTemplate template)
     {
       // Construct and initialize settings for a second AppDomain.
       AppDomainSetup ads = new AppDomainSetup();

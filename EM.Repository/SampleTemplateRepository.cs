@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace EM.Repository.Sample
 {
-  public class SampleTemplateRepository : ITemplateRepository
+  public class SampleTemplateRepository : IPluginTemplateRepository
   {
-    private Dictionary<string, ITemplate> templates = new Dictionary<string, ITemplate>()
+    private Dictionary<string, IPluginTemplate> templates = new Dictionary<string, IPluginTemplate>()
     {
-      { "EM.Plugin.Sample.SamplePlugin", new DefaultTemplate("EM.Plugin.Sample.dll", "EM.Plugin.Sample.SamplePlugin")}
+      { "EM.Plugin.Sample.SamplePlugin", new DefaultPluginTemplate("EM.Plugin.Sample.dll", "EM.Plugin.Sample.SamplePlugin")}
     };
 
-    public ITemplate Get(string name)
+    public IPluginTemplate Get(string name)
     {
       return templates[name];
     }

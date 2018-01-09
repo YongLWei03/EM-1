@@ -47,17 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientTemplate\DefaultClientTemplate.cs" />
+    <Compile Include="ClientTemplate\IClientTemplate.cs" />
+    <Compile Include="ClientTemplate\Repository\DefaultClientTemplateRepository.cs" />
+    <Compile Include="ClientTemplate\Repository\IClientTemplateRepository.cs" />
     <Compile Include="Client\ClientProperties.cs" />
     <Compile Include="Client\DefaultClient.cs" />
     <Compile Include="Client\Factory\IFactory.cs" />
     <Compile Include="Client\IClient.cs" />
+    <Compile Include="Client\PropertyDictionary.cs" />
     <Compile Include="Client\Repository\IClientRepository.cs" />
     <Compile Include="Plugin\IPlugin.cs" />
-    <Compile Include="PluginTemplate\ITemplate.cs" />
-    <Compile Include="PluginTemplate\DefaultTemplate.cs" />
+    <Compile Include="PluginTemplate\IPluginTemplate.cs" />
+    <Compile Include="PluginTemplate\DefaultPluginTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PluginTemplate\Repository\DefaultTemplateRepository.cs" />
-    <Compile Include="PluginTemplate\Repository\ITemplateRepository.cs" />
+    <Compile Include="PluginTemplate\Repository\DefaultPluginTemplateRepository.cs" />
+    <Compile Include="PluginTemplate\Repository\IPluginTemplateRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugin\Repository\" />

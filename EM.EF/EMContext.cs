@@ -8,11 +8,11 @@ namespace EM.EF
 
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<DefaultTemplate>().HasKey(t => t.FullClassName);
-      modelBuilder.Entity<DefaultTemplate>().Ignore(t => t.PluginType);
+      modelBuilder.Entity<DefaultPluginTemplate>().HasKey(t => t.FullClassName);
+      modelBuilder.Entity<DefaultPluginTemplate>().Ignore(t => t.PluginType);
       base.OnModelCreating(modelBuilder);
     }
 
-    public DbSet<DefaultTemplate> Templates { get; set; }
+    public DbSet<DefaultPluginTemplate> Templates { get; set; }
   }
 }

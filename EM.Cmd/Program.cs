@@ -29,8 +29,8 @@ namespace EM.Cmd
         ct.ThrowIfCancellationRequested();
 
         Database.SetInitializer<EMContext>(new TemplateRepositoryInitializer());
-        TemplateRepositoryBuilder builder = new TemplateRepositoryBuilder();
-        ITemplateRepository  repository = builder.Build();
+        PluginTemplateRepositoryBuilder builder = new PluginTemplateRepositoryBuilder();
+        IPluginTemplateRepository  repository = builder.Build();
 
         //ITemplateRepository repository = new SampleTemplateRepository();
         IFactory factory = new SampleFactory();

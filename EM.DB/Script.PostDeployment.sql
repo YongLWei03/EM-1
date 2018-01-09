@@ -14,7 +14,7 @@ Post-Deployment Script Template
 DECLARE @LASTID bigint;
 
 INSERT INTO [EM].Template ([DLLName], [FullClassName])
-VALUES ('EM.Plugin.Sample', 'EM.Plugin.Sample.SamplePlugin');
+VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePlugin');
 
 SELECT @LASTID=SCOPE_IDENTITY();
 

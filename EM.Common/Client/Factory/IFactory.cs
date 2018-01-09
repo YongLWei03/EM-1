@@ -4,6 +4,6 @@ namespace EM.Common.Client.Factory
 {
   public interface IFactory
   {
-    IClient MakeClient(ITemplate template);
+    IClient MakeClient(IPluginTemplate template);
   }
 }
