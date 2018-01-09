@@ -21,7 +21,6 @@ namespace EM.EF
         }
     
         public long Id { get; set; }
-        public long TemplateID { get; set; }
         public string Name { get; set; }
         public long TemplateId { get; set; }
     

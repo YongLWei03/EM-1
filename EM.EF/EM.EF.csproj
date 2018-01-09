@@ -56,7 +56,6 @@
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientTemplateRepositoryBuilder.cs" />
-    <Compile Include="EMContext.cs" />
     <Compile Include="EntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,7 +76,6 @@
     <Compile Include="Template.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TemplateRepositoryInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

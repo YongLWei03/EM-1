@@ -29,7 +29,6 @@ namespace EM.Cmd
 
         ct.ThrowIfCancellationRequested();
 
-        Database.SetInitializer<EMContext>(new TemplateRepositoryInitializer());
         PluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
         IPluginTemplateRepository  pluginRepo = pluginBuilder.Build();
         ClientTemplateRepositoryBuilder clientBuilder = new ClientTemplateRepositoryBuilder();
@@ -37,7 +36,7 @@ namespace EM.Cmd
 
         //ITemplateRepository repository = new SampleTemplateRepository();
         IFactory factory = new SampleFactory();
-        IClient client = factory.MakeClient(clientTemplateRepo.Get("EM.Plugin.Sample.SamplePlugin"));
+        IClient client = factory.MakeClient(clientTemplateRepo.Get("Sample Client"));
 
         while (true)
         {

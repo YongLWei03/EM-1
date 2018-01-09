@@ -19,6 +19,7 @@ namespace EM.Common.Client
     {
       this.appDomain = appDomain;
       this.plugin = plugin;
+      this.properties = new ClientProperties();
     }
 
     public IPlugin Plugin { get => plugin; set => plugin = value; }

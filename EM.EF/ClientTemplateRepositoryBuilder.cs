@@ -25,7 +25,7 @@ namespace EM.EF
           repo.Add(client.Name, new DefaultClientTemplate()
           {
             Name = client.Name,
-            PluginTemplate = pluginTemplates.Get(client.Template.DLLName),
+            PluginTemplate = pluginTemplates.Get(client.Template.FullClassName),
             Properties = GetProperties(client.ClientProperties)
           });
         }
