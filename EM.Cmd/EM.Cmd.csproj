@@ -74,6 +74,10 @@
       <Project>{c106b934-90b9-4724-b762-9edf291ae62e}</Project>
       <Name>EM.Client.Sample</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EM.Client\EM.Client.csproj">
+      <Project>{84f074a9-c669-4b9c-9585-08ed5b683fc4}</Project>
+      <Name>EM.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EM.Common\EM.Common.csproj">
       <Project>{bc444e24-53bb-4fa2-b442-bbef892a772a}</Project>
       <Name>EM.Common</Name>
@@ -81,10 +85,6 @@
     <ProjectReference Include="..\EM.EF\EM.EF.csproj">
       <Project>{e466298c-52e5-4a97-8823-26efc6bc91b9}</Project>
       <Name>EM.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EM.Factory.Sample\EM.Factory.Sample.csproj">
-      <Project>{95d98f1c-fb59-4afe-b5ac-d63235bec169}</Project>
-      <Name>EM.Factory.Sample</Name>
     </ProjectReference>
     <ProjectReference Include="..\EM.Repository\EM.TemplateRepository.Sample.csproj">
       <Project>{b445548f-fdc8-4414-bf80-58128f8ee4a8}</Project>

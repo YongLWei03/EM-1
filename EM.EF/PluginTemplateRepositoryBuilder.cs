@@ -1,26 +1,15 @@
-﻿using EM.Common.PluginTemplate;
+﻿using EM.Common.Plugin.Template.Repository;
+using EM.Common.PluginTemplate;
 using EM.Common.PluginTemplate.Repository;
 using System.Linq;
 
 namespace EM.EF
 {
-  public class PluginTemplateRepositoryBuilder //TODO Use an interface here.
+  public class PluginTemplateRepositoryBuilder : IPluginTemplateRepositoryBuilder
   {
-    public DefaultPluginTemplateRepository Build() //TODO Return an interface.
+    public IPluginTemplateRepository Build()
     {
-      DefaultPluginTemplateRepository repo = new DefaultPluginTemplateRepository();
-
-      //using (var ctx = new EMContext())
-      //{
-      //  var query = from t in ctx.Templates
-      //              select t;
-
-      //  foreach (var t in query)
-      //  {
-      //    repo.Add(t.FullClassName, t);
-      //  }
-      //}
-
+      IPluginTemplateRepository repo = new DefaultPluginTemplateRepository();
 
       using (var ctx = new Entities())
       {

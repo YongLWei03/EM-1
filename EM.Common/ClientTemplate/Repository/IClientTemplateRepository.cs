@@ -2,6 +2,7 @@
 {
   public interface IClientTemplateRepository
   {
-    IClientTemplate Get(string key);
+    void Add(string name, IClientTemplate clientTemplate);
+    IClientTemplate this[string key] { get; set; }
   }
 }

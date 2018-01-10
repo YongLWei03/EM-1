@@ -15,9 +15,11 @@ namespace EM.Common.ClientTemplate.Repository
       templates.Add(key, template);
     }
 
-    public IClientTemplate Get(string key) //TODO Use []-operator.
+    public IClientTemplate this[string key]
     {
-      return templates[key];
+      get { return templates[key]; }
+      set { templates[key] = value; }
     }
+
   }
 }

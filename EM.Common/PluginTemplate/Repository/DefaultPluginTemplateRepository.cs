@@ -15,9 +15,10 @@ namespace EM.Common.PluginTemplate.Repository
       templates.Add(name, template);
     }
 
-    public IPluginTemplate Get(string name) //TODO use []-operator
+    public IPluginTemplate this[string name]
     {
-      return templates[name];
+      get { return templates[name]; }
+      set { templates[name] = value; }
     }
   }
 }

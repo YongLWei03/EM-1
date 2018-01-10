@@ -1,12 +1,11 @@
 ﻿using Common.Logging;
+using EM.Client.Repository;
 using EM.Common.Client;
-using EM.Common.Client.Factory;
+using EM.Common.Client.Repository;
 using EM.Common.ClientTemplate.Repository;
 using EM.Common.PluginTemplate.Repository;
 using EM.EF;
-using EM.Factory.Sample;
 using System;
-using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,10 +32,8 @@ namespace EM.Cmd
         IPluginTemplateRepository  pluginRepo = pluginBuilder.Build();
         ClientTemplateRepositoryBuilder clientBuilder = new ClientTemplateRepositoryBuilder();
         IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
-
-        //ITemplateRepository repository = new SampleTemplateRepository();
-        IFactory factory = new SampleFactory();
-        IClient client = factory.MakeClient(clientTemplateRepo.Get("Sample Client")); //TODO Turn this into a IClientRepository
+        IClientRepository clientRepo = new DefaultClientRepository() { ClientTemplateRepository = clientTemplateRepo};
+        IClient client = clientRepo["Sample Client"];
 
         while (true)
         {

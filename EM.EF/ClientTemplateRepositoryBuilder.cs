@@ -1,4 +1,5 @@
 ﻿using EM.Common.Client;
+using EM.Common.Client.Template.Repository;
 using EM.Common.ClientTemplate;
 using EM.Common.ClientTemplate.Repository;
 using EM.Common.PluginTemplate.Repository;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace EM.EF
 {
-  public class ClientTemplateRepositoryBuilder //TODO Use an interface here.
+  public class ClientTemplateRepositoryBuilder : IClientTemplateRepositoryBuilder
   {
-    public DefaultClientTemplateRepository Build(IPluginTemplateRepository pluginTemplates) //TODO Return an interface.
+    public IClientTemplateRepository Build(IPluginTemplateRepository pluginTemplates)
     {
-      DefaultClientTemplateRepository repo = new DefaultClientTemplateRepository();
+      IClientTemplateRepository repo = new DefaultClientTemplateRepository();
       using (var ctx = new Entities())
       {
         var query = from c in ctx.Clients
@@ -25,7 +26,7 @@ namespace EM.EF
           repo.Add(client.Name, new DefaultClientTemplate()
           {
             Name = client.Name,
-            PluginTemplate = pluginTemplates.Get(client.Template.FullClassName),
+            PluginTemplate = pluginTemplates[client.Template.FullClassName],
             Properties = GetProperties(client.ClientProperties)
           });
         }

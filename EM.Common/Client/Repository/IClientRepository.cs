@@ -8,5 +8,6 @@ namespace EM.Common.Client.Repository
 {
   public interface IClientRepository
   {
+    IClient this[string clientName] { get; }
   }
 }

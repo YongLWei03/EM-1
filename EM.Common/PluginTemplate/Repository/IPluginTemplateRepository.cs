@@ -8,6 +8,12 @@ namespace EM.Common.PluginTemplate.Repository
 {
   public interface IPluginTemplateRepository
   {
-    IPluginTemplate Get(string name);
+    void Add(string name, IPluginTemplate pluginTemplate);
+
+    IPluginTemplate this[string name]
+    {
+      get;
+      set;
+    }
   }
 }
