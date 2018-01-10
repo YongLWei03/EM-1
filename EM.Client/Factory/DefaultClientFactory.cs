@@ -2,13 +2,15 @@
 using EM.Common.Client.Factory;
 using EM.Common.Client.Template;
 using EM.Common.Plugin;
+using EM.Common.Utils;
 using System;
+using System.Reflection;
 
 namespace EM.Client.Factory
 {
   public class DefaultClientFactory : IFactory
   {
-    public DefaultClientFactory() 
+    public DefaultClientFactory()
     {
 
     }
@@ -31,21 +33,36 @@ namespace EM.Client.Factory
       Type t = template.PluginTemplate.PluginType;
 
       IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
-      //TODO Use reflection to setup plugin properties
       plugin.Properties = template.Properties;
 
       DefaultClient client = new DefaultClient()
       {
         AppDomain = ad,
         Plugin = plugin,
-        Properties = new ClientProperties()
-        {
-          Properties = template.Properties //TODO Make your own copy.
-        }
+        Properties = GetClientProperties(template)
       };
-      client.Properties.Name = template.Properties["Name"]; //TODO Use reflection.
-
+     
       return client;
+
+    }
+
+    private ClientProperties GetClientProperties(IClientTemplate template)
+    {
+      var properties = new ClientProperties()
+      {
+        Properties = template.Properties.Clone()
+      };
+      PopulateClientProperties(template, properties);
+
+      return properties;
+    }
+
+    private void PopulateClientProperties(IClientTemplate template, ClientProperties clientProperties)
+    {
+      foreach (var x in template.Properties)
+      {
+        ConvertUtils.SetPropertyValue(clientProperties, x.Key, x.Value);
+      }
 
     }
 

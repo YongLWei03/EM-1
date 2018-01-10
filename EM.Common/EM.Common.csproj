@@ -60,6 +60,7 @@
     <Compile Include="Plugin\Template\Repository\IPluginTemplateRepositoryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PluginTemplate\Repository\IPluginTemplateRepository.cs" />
+    <Compile Include="Utils\ConvertUtils.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

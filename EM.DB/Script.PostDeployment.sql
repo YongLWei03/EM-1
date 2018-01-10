@@ -24,3 +24,7 @@ SELECT @LASTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
 VALUES (@LASTID,'Name','Sample Client Name.');
+
+INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
+VALUES (@LASTID,'SomeValue','123');
+
