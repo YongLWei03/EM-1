@@ -11,20 +11,41 @@ Post-Deployment Script Template
 */
 
 
+-- -----------------------------------------------------------------------------------
 DECLARE @LASTID bigint;
+DECLARE @TEMPLATEID bigint;
+-- -----------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------
 INSERT INTO [EM].Template ([DLLName], [FullClassName])
 VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePlugin');
 
-SELECT @LASTID=SCOPE_IDENTITY();
+INSERT INTO [EM].Template ([DLLName], [FullClassName])
+VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePluginForever');
+-- -----------------------------------------------------------------------------------
 
-INSERT INTO [EM].Client([TemplateID],[Name]) VALUES (@LASTID,'Sample Client');
+
+-- -----------------------------------------------------------------------------------
+SELECT @TEMPLATEID=ID FROM [EM].Template WHERE FullClassName='EM.Plugin.Sample.SamplePluginForever';
+INSERT INTO [EM].Client([TemplateID],[Name],[Enabled],[RunContinously],[RunEverySeconds],[LastRun]) 
+VALUES (@TEMPLATEID,'Run forever client','TRUE','TRUE',0,'1900-01-01');
 
 SELECT @LASTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
-VALUES (@LASTID,'Name','Sample Client Name.');
+VALUES (@LASTID,'Name','Run forever client.');
+-- -----------------------------------------------------------------------------------
+
+
+-- -----------------------------------------------------------------------------------
+SELECT @TEMPLATEID=ID FROM [EM].Template WHERE FullClassName='EM.Plugin.Sample.SamplePlugin';
+INSERT INTO [EM].Client([TemplateID],[Name],[Enabled],[RunContinously],[RunEverySeconds],[LastRun]) 
+VALUES (@TEMPLATEID,'Sample client','TRUE','FALSE',10,'1900-01-01');
+
+SELECT @LASTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
-VALUES (@LASTID,'SomeValue','123');
+VALUES (@LASTID,'Name','Sample client.');
+-- -----------------------------------------------------------------------------------
+
 

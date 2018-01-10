@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="SamplePlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamplePluginForever.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EM.Common\EM.Common.csproj">

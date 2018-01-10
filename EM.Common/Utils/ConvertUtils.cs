@@ -12,7 +12,10 @@ namespace EM.Common.Utils
     public static void SetPropertyValue(object obj, string key, string value)
     {
       PropertyInfo prop = obj.GetType().GetProperty(key);
-      prop.SetValue(obj, System.Convert.ChangeType(value, prop.PropertyType));
+      if (prop != null)
+      {
+        prop.SetValue(obj, System.Convert.ChangeType(value, prop.PropertyType));
+      }
     }
   }
 }
