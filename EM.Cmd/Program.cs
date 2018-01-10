@@ -29,20 +29,33 @@ namespace EM.Cmd
         ct.ThrowIfCancellationRequested();
 
         PluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
-        IPluginTemplateRepository  pluginRepo = pluginBuilder.Build();
+        IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
         ClientTemplateRepositoryBuilder clientBuilder = new ClientTemplateRepositoryBuilder();
         IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
-        IClientRepository clientRepo = new DefaultClientRepository() { ClientTemplateRepository = clientTemplateRepo};
-        IClient client = clientRepo["Sample Client"];
+        IClientRepository clientRepo = new DefaultClientRepository() { ClientTemplateRepository = clientTemplateRepo };
+        //IClient client = clientRepo["Sample Client"];
 
         while (true)
         {
           if (ct.IsCancellationRequested)
           {
+            foreach (var client in clientRepo.Clients)
+            {
+              if (client.Running)
+              {
+                client.Stop();
+              }
+            }
             ct.ThrowIfCancellationRequested();
           }
 
-          client.Run();
+          foreach (var client in clientRepo.Clients)
+          {
+            if (!client.Running)
+            {
+              client.Run();
+            }
+          }
 
           Thread.Sleep(5000);
         }
