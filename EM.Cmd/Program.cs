@@ -39,6 +39,12 @@ namespace EM.Cmd
         {
           if (ct.IsCancellationRequested)
           {
+            //TODO list
+            //Monitor clients
+            //Restart clients
+            //Ping clients
+            //Receive heart beat
+            //Maintain status of each client (e.g. running, stopped, crashed) in e.g. db table.
             foreach (var client in clientRepo.Clients)
             {
               if (client.Running)
