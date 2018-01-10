@@ -70,10 +70,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EM.Client.Sample\EM.Client.Sample.csproj">
-      <Project>{c106b934-90b9-4724-b762-9edf291ae62e}</Project>
-      <Name>EM.Client.Sample</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EM.Client\EM.Client.csproj">
       <Project>{84f074a9-c669-4b9c-9585-08ed5b683fc4}</Project>
       <Name>EM.Client</Name>

@@ -1,12 +1,10 @@
-﻿using System;
+﻿using EM.Common.PluginTemplate;
+using EM.Common.PluginTemplate.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EM.Common.PluginTemplate.Repository
+namespace EM.Plugin.Template.Repository
 {
-  public class DefaultPluginTemplateRepository : IPluginTemplateRepository //TODO Move out of EM.Common.
+  public class DefaultPluginTemplateRepository : IPluginTemplateRepository
   {
     private Dictionary<string, IPluginTemplate> templates = new Dictionary<string, IPluginTemplate>();
 

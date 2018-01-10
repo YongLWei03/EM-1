@@ -1,11 +1,12 @@
 ﻿using EM.Common.Plugin;
+using EM.Common.PluginTemplate;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace EM.Common.PluginTemplate
+namespace EM.Plugin.Template
 {
-  public class DefaultPluginTemplate : IPluginTemplate //TODO Move out of EM.Common.
+  public class DefaultPluginTemplate : IPluginTemplate
   {
     private string dllName;
     private string className;

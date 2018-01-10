@@ -1,4 +1,5 @@
-﻿using EM.Common.Client;
+﻿using EM.Common;
+using EM.Common.Client;
 using EM.Common.Client.Template;
 using EM.Common.PluginTemplate;
 

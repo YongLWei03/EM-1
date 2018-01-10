@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Logging;
+﻿using Common.Logging;
+using EM.Common.Client;
 using EM.Common.Plugin;
+using System;
 
-namespace EM.Common.Client
+namespace EM.Client
 {
-  public class DefaultClient : IClient //TODO Move out of common.
+  public class DefaultClient : IClient 
   {
     private AppDomain appDomain = null;
     private IPlugin plugin = null;

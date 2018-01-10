@@ -1,5 +1,6 @@
 ﻿using EM.Client.Template;
 using EM.Client.Template.Repository;
+using EM.Common;
 using EM.Common.Client;
 using EM.Common.Client.Template.Repository;
 using EM.Common.PluginTemplate.Repository;

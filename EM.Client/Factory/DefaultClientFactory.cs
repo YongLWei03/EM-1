@@ -32,7 +32,7 @@ namespace EM.Client.Factory
 
       IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
       //TODO Use reflection to setup plugin properties
-      //TODO Pass client properties to plugin
+      plugin.Properties = template.Properties;
 
       DefaultClient client = new DefaultClient()
       {

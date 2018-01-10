@@ -1,4 +1,5 @@
 ﻿using Common.Logging;
+using EM.Common;
 using EM.Common.Client;
 using EM.Common.Plugin;
 using System;

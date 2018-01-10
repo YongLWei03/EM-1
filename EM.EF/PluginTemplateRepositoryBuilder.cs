@@ -1,6 +1,7 @@
 ﻿using EM.Common.Plugin.Template.Repository;
-using EM.Common.PluginTemplate;
 using EM.Common.PluginTemplate.Repository;
+using EM.Plugin.Template;
+using EM.Plugin.Template.Repository;
 using System.Linq;
 
 namespace EM.EF
