@@ -1,4 +1,4 @@
-﻿namespace EM.Common.ClientTemplate.Repository
+﻿namespace EM.Common.Client.Template.Repository
 {
   public interface IClientTemplateRepository
   {

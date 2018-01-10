@@ -2,12 +2,7 @@
 using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Client.Repository;
-using EM.Common.ClientTemplate.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EM.Common.Client.Template.Repository;
 
 namespace EM.Client.Repository
 {

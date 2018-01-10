@@ -1,4 +1,4 @@
-﻿using EM.Common.ClientTemplate;
+﻿using EM.Common.Client.Template;
 
 namespace EM.Common.Client.Factory
 {

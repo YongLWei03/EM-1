@@ -1,4 +1,4 @@
-﻿using EM.Common.ClientTemplate.Repository;
+﻿using EM.Common.Client.Template.Repository;
 using EM.Common.PluginTemplate.Repository;
 using System;
 using System.Collections.Generic;

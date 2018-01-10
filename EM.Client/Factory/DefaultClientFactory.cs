@@ -1,6 +1,6 @@
 ﻿using EM.Common.Client;
 using EM.Common.Client.Factory;
-using EM.Common.ClientTemplate;
+using EM.Common.Client.Template;
 using EM.Common.Plugin;
 using System;
 

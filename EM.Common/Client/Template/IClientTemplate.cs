@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EM.Common.ClientTemplate
+namespace EM.Common.Client.Template
 {
   public interface IClientTemplate
   {

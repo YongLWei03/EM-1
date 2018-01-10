@@ -1,12 +1,10 @@
-﻿using System;
+﻿using EM.Common.Client.Template;
+using EM.Common.Client.Template.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EM.Common.ClientTemplate.Repository
+namespace EM.Client.Template.Repository
 {
-  public class DefaultClientTemplateRepository : IClientTemplateRepository //Move out of EM.Common.
+  public class DefaultClientTemplateRepository : IClientTemplateRepository 
   {
     private Dictionary<string, IClientTemplate> templates = new Dictionary<string, IClientTemplate>();
 

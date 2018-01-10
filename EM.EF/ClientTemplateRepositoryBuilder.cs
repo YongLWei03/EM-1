@@ -1,13 +1,10 @@
-﻿using EM.Common.Client;
+﻿using EM.Client.Template;
+using EM.Client.Template.Repository;
+using EM.Common.Client;
 using EM.Common.Client.Template.Repository;
-using EM.Common.ClientTemplate;
-using EM.Common.ClientTemplate.Repository;
 using EM.Common.PluginTemplate.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EM.EF
 {

@@ -2,7 +2,7 @@
 using EM.Client.Repository;
 using EM.Common.Client;
 using EM.Common.Client.Repository;
-using EM.Common.ClientTemplate.Repository;
+using EM.Common.Client.Template.Repository;
 using EM.Common.PluginTemplate.Repository;
 using EM.EF;
 using System;

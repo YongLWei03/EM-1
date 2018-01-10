@@ -47,10 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientTemplate\DefaultClientTemplate.cs" />
-    <Compile Include="ClientTemplate\IClientTemplate.cs" />
-    <Compile Include="ClientTemplate\Repository\DefaultClientTemplateRepository.cs" />
-    <Compile Include="ClientTemplate\Repository\IClientTemplateRepository.cs" />
+    <Compile Include="Client\Template\IClientTemplate.cs" />
+    <Compile Include="Client\Template\Repository\IClientTemplateRepository.cs" />
     <Compile Include="Client\ClientProperties.cs" />
     <Compile Include="Client\DefaultClient.cs" />
     <Compile Include="Client\Factory\IFactory.cs" />
