@@ -53,7 +53,7 @@ namespace EM.Cmd
           {
             if (!client.Running)
             {
-              client.Run();
+              Task.Factory.StartNew(() => client.Run());
             }
           }
 
