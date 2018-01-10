@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EM.Plugin.Sample
 {
-  public class SamplePluginForever : IPlugin
+  public class SamplePluginForever : MarshalByRefObject, IPlugin
   {
     private ILog logger = LogManager.GetLogger<SamplePluginForever>();
     private bool running = false;
