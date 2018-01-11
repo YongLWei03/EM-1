@@ -18,12 +18,27 @@ DECLARE @TEMPLATEID bigint;
 
 -- -----------------------------------------------------------------------------------
 INSERT INTO [EM].Template ([DLLName], [FullClassName])
+VALUES ('EM.Plugin.dll', 'EM.Plugin.PrimalPlugin');
+
+INSERT INTO [EM].Template ([DLLName], [FullClassName])
 VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePlugin');
 
 INSERT INTO [EM].Template ([DLLName], [FullClassName])
 VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePluginForever');
 -- -----------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------
+SELECT @TEMPLATEID=ID FROM [EM].Template WHERE FullClassName='EM.Plugin.PrimalPlugin';
+INSERT INTO [EM].Client([TemplateID],[Name],[Enabled],[RunContinously],[RunEverySeconds],[LastRun]) 
+VALUES (@TEMPLATEID,'Primal Client','TRUE','TRUE',0,'1900-01-01');
+
+SELECT @LASTID=SCOPE_IDENTITY();
+
+INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
+VALUES (@LASTID,'Name','Primal Client.');
+INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
+VALUES (@LASTID,'Description','The Primal Client starts and runs other clients.');
+-- -----------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------
 SELECT @TEMPLATEID=ID FROM [EM].Template WHERE FullClassName='EM.Plugin.Sample.SamplePluginForever';

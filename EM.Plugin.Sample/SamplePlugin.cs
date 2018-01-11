@@ -17,7 +17,7 @@ namespace EM.Plugin.Sample
 
     public bool Running => running;
 
-    public void Run()
+    public void Start()
     {
       running = true;
       logger.Debug("SamplePlugin running ...");

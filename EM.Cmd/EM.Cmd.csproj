@@ -82,10 +82,6 @@
       <Project>{e466298c-52e5-4a97-8823-26efc6bc91b9}</Project>
       <Name>EM.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EM.Repository\EM.TemplateRepository.Sample.csproj">
-      <Project>{b445548f-fdc8-4414-bf80-58128f8ee4a8}</Project>
-      <Name>EM.TemplateRepository.Sample</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

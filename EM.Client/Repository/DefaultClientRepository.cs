@@ -10,12 +10,13 @@ namespace EM.Client.Repository
   public class DefaultClientRepository : IClientRepository
   {
     private Dictionary<string, IClient> clients = new Dictionary<string, IClient>();
-    private IFactory factory = new DefaultClientFactory();
 
     public DefaultClientRepository()
     {
 
     }
+
+    public IFactory ClientFactory { get; set; } 
     public IClientTemplateRepository ClientTemplateRepository { get; set; }
 
     public IList<string> ClientNames => ClientTemplateRepository.ClientNames;
@@ -36,7 +37,7 @@ namespace EM.Client.Repository
       {
         if (!clients.ContainsKey(clientName))
         {
-          clients.Add(clientName, factory.MakeClient(ClientTemplateRepository[clientName]));
+          clients.Add(clientName, ClientFactory.MakeClient(ClientTemplateRepository[clientName]));
         }
         return clients[clientName];
       }

@@ -34,7 +34,7 @@ namespace EM.Plugin.Sample
 
     public bool Running => running;
 
-    public void Run()
+    public void Start()
     {
       running = true;
       while (!StopRequested)

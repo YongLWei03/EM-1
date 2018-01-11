@@ -1,6 +1,8 @@
 ﻿using Common.Logging;
+using EM.Client.Factory;
 using EM.Client.Repository;
 using EM.Common.Client;
+using EM.Common.Client.Factory;
 using EM.Common.Client.Repository;
 using EM.Common.Client.Template.Repository;
 using EM.Common.PluginTemplate.Repository;
@@ -19,73 +21,52 @@ namespace EM.Cmd
 
       logger.Info("Starting EM");
 
-      var tokenSource = new CancellationTokenSource();
-      CancellationToken ct = tokenSource.Token;
+      IClient client = GetPrimalClient();
 
-      Task t = Task.Factory.StartNew(() =>
+      bool keepingRunning = true;
+      while (keepingRunning)
       {
-        logger.Debug("Task running...");
 
-        ct.ThrowIfCancellationRequested();
-
-        PluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
-        IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
-        ClientTemplateRepositoryBuilder clientBuilder = new ClientTemplateRepositoryBuilder();
-        IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
-        IClientRepository clientRepo = new DefaultClientRepository() { ClientTemplateRepository = clientTemplateRepo };
-        //IClient client = clientRepo["Sample Client"];
-
-        while (true)
+        if (Console.KeyAvailable)
         {
-          if (ct.IsCancellationRequested)
+          ConsoleKeyInfo key = Console.ReadKey(true);
+          switch (key.Key)
           {
-            //TODO list
-            //Monitor clients
-            //Restart clients
-            //Ping clients
-            //Receive heart beat
-            //Maintain status of each client (e.g. running, stopped, crashed) in e.g. db table.
-            foreach (var client in clientRepo.Clients)
-            {
-              if (client.Running)
-              {
-                client.Stop();
-              }
-            }
-            ct.ThrowIfCancellationRequested();
+            case ConsoleKey.Escape:
+              keepingRunning = false;
+              break;
           }
-
-          foreach (var client in clientRepo.Clients)
-          {
-            if (!client.Running)
-            {
-              Task.Factory.StartNew(() => client.Run());
-            }
-          }
-
-          Thread.Sleep(5000);
         }
-      }, ct);
 
-      try
-      {
-        Thread.Sleep(15000);
-        tokenSource.Cancel();
-        logger.Info("Waiting for task to finish.");
-        t.Wait();
-      }
-      catch (AggregateException e)
-      {
-        logger.Error(e.Message, e);
-        foreach (var v in e.InnerExceptions)
+        if (!client.Running)
         {
-          logger.Error(v.Message, v);
+          client.Start();
         }
+
+        Thread.Sleep(5000);
       }
-      finally
-      {
-        tokenSource.Dispose();
-      }
+
+      client.Stop();
+
+    }
+
+
+    private static IClient GetPrimalClient()
+    {
+      var repo = BuildClientRepository();
+      return repo["Primal Client"];
+    }
+
+    private static IClientRepository BuildClientRepository()
+    {
+      //TODO Use IoC, move out of here
+      PluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
+      IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
+      ClientTemplateRepositoryBuilder clientBuilder = new ClientTemplateRepositoryBuilder();
+      IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
+      IFactory clientFactory = new DefaultClientFactory();
+      IClientRepository clientRepo = new DefaultClientRepository() { ClientFactory = clientFactory, ClientTemplateRepository = clientTemplateRepo };
+      return clientRepo;
     }
   }
 }

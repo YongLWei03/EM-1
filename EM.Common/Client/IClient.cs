@@ -11,10 +11,11 @@ namespace EM.Common.Client
   {
     IPlugin Plugin { get; set; }
     ClientProperties Properties { get; set; }
+    ClientRuntimeProperties RuntimeProperties { get; set; }
 
     bool Running { get; }
 
-    void Run();
+    void Start();
     void Stop();
   }
 }

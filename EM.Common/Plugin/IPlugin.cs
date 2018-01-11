@@ -7,7 +7,7 @@ namespace EM.Common.Plugin
     PropertyDictionary Properties { get; set; }
     bool Running { get; }
 
-    void Run();
+    void Start();
     void Stop();
   }
 }
