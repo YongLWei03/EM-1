@@ -9,5 +9,6 @@ namespace EM.Common.Utils
   public interface IIoCFactory
   {
     T GetInstance<T>();
+    object GetInstance(Type propType);
   }
 }

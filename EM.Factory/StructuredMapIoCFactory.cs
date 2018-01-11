@@ -19,8 +19,12 @@ namespace EM.Factory
 
     public T GetInstance<T>()
     {
-      //Type t = typeof(T);
       return container.GetInstance<T>();
+    }
+
+    public object GetInstance(Type t)
+    {
+      return container.GetInstance(t);
     }
   }
 }

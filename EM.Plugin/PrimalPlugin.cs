@@ -1,5 +1,7 @@
-﻿using EM.Common;
+﻿using Common.Logging;
+using EM.Common;
 using EM.Common.Client;
+using EM.Common.Client.Repository;
 using EM.Common.Plugin;
 using System;
 
@@ -7,12 +9,16 @@ namespace EM.Plugin
 {
   public class PrimalPlugin : MarshalByRefObject, IPlugin
   {
+    private ILog logger = LogManager.GetLogger<PrimalPlugin>();
+
     public PropertyDictionary Properties { get; set; }
+    public IClientRepository ClientRepository { get; set; }
 
     public bool Running => false;
 
     public void Start()
     {
+      logger.Debug("ClientRepository= " + ClientRepository == null ? "NULL!!!" : "not null good");
       //foreach (var client in clientRepo.Clients)
       //{
       //  if (!client.Running)
