@@ -2,7 +2,7 @@
 
 namespace EM.Common.Client.Factory
 {
-  public interface IFactory
+  public interface IClientFactory
   {
     IClient MakeClient(IClientTemplate template);
   }

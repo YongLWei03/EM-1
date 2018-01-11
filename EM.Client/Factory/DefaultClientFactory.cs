@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace EM.Client.Factory
 {
-  public class DefaultClientFactory : IFactory
+  public class DefaultClientFactory : IClientFactory
   {
     public DefaultClientFactory()
     {

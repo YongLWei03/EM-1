@@ -1,4 +1,5 @@
 ﻿using EM.Common;
+using EM.Common.Client;
 using EM.Common.Plugin;
 
 namespace EM.Plugin

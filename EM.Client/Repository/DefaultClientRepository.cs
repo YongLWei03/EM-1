@@ -16,7 +16,7 @@ namespace EM.Client.Repository
 
     }
 
-    public IFactory ClientFactory { get; set; } 
+    public IClientFactory ClientFactory { get; set; } 
     public IClientTemplateRepository ClientTemplateRepository { get; set; }
 
     public IList<string> ClientNames => ClientTemplateRepository.ClientNames;
