@@ -1,14 +1,15 @@
 ﻿using EM.Common;
 using EM.Common.Client;
 using EM.Common.Plugin;
+using System;
 
 namespace EM.Plugin
 {
-  public class PrimalPlugin : IPlugin
+  public class PrimalPlugin : MarshalByRefObject, IPlugin
   {
-    public PropertyDictionary Properties { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public PropertyDictionary Properties { get; set; }
 
-    public bool Running => throw new System.NotImplementedException();
+    public bool Running => false;
 
     public void Start()
     {

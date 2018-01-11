@@ -18,8 +18,8 @@ namespace EM.Factory
       For<IClientFactory>().Use<DefaultClientFactory>();
       For<IClientRepository>()
         .Use<DefaultClientRepository>()
-        .Setter<IClientFactory>().IsTheDefault()
-        .Setter<IClientTemplateRepository>().IsTheDefault();
+        .Setter<IClientFactory>().IsTheDefault();
+        //.Setter<IClientTemplateRepository>().IsTheDefault();
     }
   }
 }

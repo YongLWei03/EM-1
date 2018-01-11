@@ -72,6 +72,7 @@ namespace EM.Cmd
       IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
       IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();// new DefaultClientFactory();
       IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();// new DefaultClientRepository() { ClientFactory = clientFactory, ClientTemplateRepository = clientTemplateRepo };
+      clientRepo.ClientTemplateRepository = clientTemplateRepo;
       return clientRepo;
     }
   }
