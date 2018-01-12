@@ -11,5 +11,9 @@ namespace EM.Common.Client
     public bool IsRunContinuously { get; set; }
     public int RunEverySeconds { get; set; }
 
+    public ClientSchedule Clone()
+    {
+      return (ClientSchedule)this.MemberwiseClone();
+    }
   }
 }

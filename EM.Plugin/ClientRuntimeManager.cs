@@ -17,6 +17,8 @@ namespace EM.Plugin
         {
           Task clientTask = Task.Factory.StartNew(() => client.Start());
           client.RuntimeProperties.Task = clientTask;
+          client.Status.LastRun = DateTime.Now;
+          UpdateClientStatus(client);
         }
       }
 
@@ -30,7 +32,12 @@ namespace EM.Plugin
       }
     }
 
-    private static bool CheckIfClientMustRun(IClient client)
+    private void UpdateClientStatus(IClient client)
+    {
+      //todo implement UpdateClientStatus
+    }
+
+    private bool CheckIfClientMustRun(IClient client)
     {
       return client.Schedule.IsRunContinuously ||
         client.Status.LastRun.AddSeconds(client.Schedule.RunEverySeconds) < DateTime.Now;

@@ -14,5 +14,10 @@ namespace EM.Common.Client
     }
 
     public DateTime LastRun { get; set; }
+
+    public ClientStatus Clone()
+    {
+      return (ClientStatus)this.MemberwiseClone();
+    }
   }
 }

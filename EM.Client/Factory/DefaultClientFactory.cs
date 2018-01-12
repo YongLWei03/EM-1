@@ -1,4 +1,5 @@
-﻿using EM.Common.Client;
+﻿using Common.Logging;
+using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Client.Repository;
 using EM.Common.Client.Template;
@@ -14,6 +15,7 @@ namespace EM.Client.Factory
 {
   public class DefaultClientFactory : IClientFactory
   {
+    private ILog logger = LogManager.GetLogger<DefaultClientFactory>();
     private IIoCFactory iocFactory;
     private IClientRepository clientRepo = null;
 
@@ -47,9 +49,9 @@ namespace EM.Client.Factory
           Type propType = prop.PropertyType;
           prop.SetValue(plugin, iocFactory.GetInstance(propType));
         } 
-        catch (Exception)
+        catch (Exception e)
         {
-
+          logger.Warn("Failed to populated property using reflection. This could be an error.", e);
         }
       }
 
@@ -57,11 +59,23 @@ namespace EM.Client.Factory
       {
         AppDomain = ad,
         Plugin = plugin,
-        Properties = GetClientProperties(template)
+        Properties = GetClientProperties(template),
+        Schedule = GetClientSchedule(template),
+        Status = GetClientStatus(template)
       };
      
       return client;
 
+    }
+
+    private ClientStatus GetClientStatus(IClientTemplate template)
+    {
+      return template.Status.Clone();
+    }
+
+    private ClientSchedule GetClientSchedule(IClientTemplate template)
+    {
+      return template.Schedule.Clone();
     }
 
     private ClientProperties GetClientProperties(IClientTemplate template)
@@ -102,14 +116,14 @@ namespace EM.Client.Factory
 
     private IClientRepository GetClientRepository()
     {
-      //TODO Use IoC, move out of here
+      //TODO move out of here
 
-      IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();// new PluginTemplateRepositoryBuilder();
+      IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();
       IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
-      IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();// new ClientTemplateRepositoryBuilder();
+      IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();
       IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
-      IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();// new DefaultClientFactory();
-      IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();// new DefaultClientRepository() { ClientFactory = clientFactory, ClientTemplateRepository = clientTemplateRepo };
+      IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
+      IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();
       clientRepo.ClientTemplateRepository = clientTemplateRepo;
       return clientRepo;
     }
