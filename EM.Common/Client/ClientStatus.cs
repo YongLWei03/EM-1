@@ -11,9 +11,11 @@ namespace EM.Common.Client
     public ClientStatus()
     {
       LastRun = DateTime.MinValue;
+      LastLifeSign = DateTime.MinValue;
     }
 
     public DateTime LastRun { get; set; }
+    public DateTime LastLifeSign { get; set; }
 
     public ClientStatus Clone()
     {

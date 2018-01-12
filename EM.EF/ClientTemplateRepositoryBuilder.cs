@@ -39,12 +39,14 @@ namespace EM.EF
     {
       ClientStatus status = new ClientStatus()
       {
-        LastRun = DateTime.MinValue
+        LastRun = DateTime.MinValue,
+        LastLifeSign = DateTime.MinValue
       };
       var latest = clientStatus.OrderByDescending(x => x.LastRun).FirstOrDefault();
       if (latest != null)
       {
         status.LastRun = latest.LastRun;
+        status.LastLifeSign = latest.LastLifeSign;
       }
       return status;
     }

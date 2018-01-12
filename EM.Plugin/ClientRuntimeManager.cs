@@ -18,10 +18,12 @@ namespace EM.Plugin
           Task clientTask = Task.Factory.StartNew(() => client.Start());
           client.RuntimeProperties.Task = clientTask;
           client.Status.LastRun = DateTime.Now;
-          UpdateClientStatus(client);
+         
         }
       }
+      client.Status.LastLifeSign = DateTime.Now;
 
+      UpdateClientStatus(client);
     }
 
     public void Stop(IClient client)

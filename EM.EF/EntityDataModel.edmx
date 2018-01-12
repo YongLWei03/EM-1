@@ -40,6 +40,7 @@
           <Property Name="DateTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ClientId" Type="bigint" Nullable="false" />
           <Property Name="LastRun" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LastLifeSign" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="PluginTemplate">
           <Key>
@@ -166,6 +167,7 @@
           <Property Name="ClientId" Type="Int64" Nullable="false" />
           <Property Name="LastRun" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Client" Relationship="Self.FK_ClientStatus_Client" FromRole="ClientStatus" ToRole="Client" />
+          <Property Name="LastLifeSign" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="PluginTemplate">
           <Key>
@@ -286,6 +288,7 @@
           <EntitySetMapping Name="ClientStatus">
             <EntityTypeMapping TypeName="EM.DBModel.ClientStatu">
               <MappingFragment StoreEntitySet="ClientStatus">
+                <ScalarProperty Name="LastLifeSign" ColumnName="LastLifeSign" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
