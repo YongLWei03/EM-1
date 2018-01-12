@@ -13,5 +13,6 @@ namespace EM.Common.Client.Repository
     IList<string> ClientNames { get; }
     IEnumerable<IClient> Clients { get; }
     IClient this[string clientName] { get; }
+    void RemoveClientsWithPluginType(Type t);
   }
 }

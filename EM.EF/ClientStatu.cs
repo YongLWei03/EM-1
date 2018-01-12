@@ -18,6 +18,7 @@ namespace EM.EF
         public System.DateTime DateTime { get; set; }
         public long ClientId { get; set; }
         public System.DateTime LastRun { get; set; }
+        public System.DateTime LastLifeSign { get; set; }
     
         public virtual Client Client { get; set; }
     }

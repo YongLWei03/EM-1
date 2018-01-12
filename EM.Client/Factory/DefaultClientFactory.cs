@@ -13,6 +13,7 @@ using System.Reflection;
 
 namespace EM.Client.Factory
 {
+  [Serializable]
   public class DefaultClientFactory : IClientFactory
   {
     private ILog logger = LogManager.GetLogger<DefaultClientFactory>();
@@ -21,51 +22,76 @@ namespace EM.Client.Factory
 
     public DefaultClientFactory(IIoCFactory iocFactory) => (this.iocFactory) = (iocFactory);
 
+    //public IClient MakeClient(IClientTemplate template)
+    //{
+    //  Init();
+
+    //  // Construct and initialize settings for a second AppDomain.
+    //  AppDomainSetup ads = new AppDomainSetup();
+    //  ads.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
+
+    //  ads.DisallowBindingRedirects = false;
+    //  ads.DisallowCodeDownload = true;
+    //  ads.ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
+
+    //  // Create the second AppDomain.
+    //  AppDomain ad = AppDomain.CreateDomain("AD #2", null, ads);
+    //  //ad.FirstChanceException += Ad_FirstChanceException;
+    //  //ad.UnhandledException += Ad_UnhandledException;
+
+    //  Type t = template.PluginTemplate.PluginType;
+
+    //  IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
+    //  plugin.Properties = template.Properties;
+    //  GetPropertiesFromIoC(plugin);
+
+    //  DefaultClient client = new DefaultClient()
+    //  {
+    //    AppDomain = ad,
+    //    Plugin = plugin,
+    //    Properties = GetClientProperties(template),
+    //    Schedule = GetClientSchedule(template),
+    //    Status = GetClientStatus(template)
+    //  };
+     
+    //  return client;
+
+    //}
+
     public IClient MakeClient(IClientTemplate template)
     {
-      Init();
-
-      // Construct and initialize settings for a second AppDomain.
-      AppDomainSetup ads = new AppDomainSetup();
-      ads.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
-
-      ads.DisallowBindingRedirects = false;
-      ads.DisallowCodeDownload = true;
-      ads.ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-
-      // Create the second AppDomain.
-      AppDomain ad = AppDomain.CreateDomain("AD #2", null, ads);
-      //ad.FirstChanceException += Ad_FirstChanceException;
-      //ad.UnhandledException += Ad_UnhandledException;
-
       Type t = template.PluginTemplate.PluginType;
 
-      IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
+      IPlugin plugin = (IPlugin)Activator.CreateInstance(t);
       plugin.Properties = template.Properties;
+      GetPropertiesFromIoC(plugin);
+
+      DefaultClient client = new DefaultClient()
+      {
+        Plugin = plugin,
+        Properties = GetClientProperties(template),
+        Schedule = GetClientSchedule(template),
+        Status = GetClientStatus(template)
+      };
+
+      return client;
+    }
+
+    private void GetPropertiesFromIoC(IPlugin plugin)
+    {
+      Type t = plugin.GetType();
       foreach (PropertyInfo prop in t.GetProperties())
       {
         try
         {
           Type propType = prop.PropertyType;
           prop.SetValue(plugin, iocFactory.GetInstance(propType));
-        } 
+        }
         catch (Exception e)
         {
           logger.Warn("Failed to populated property using reflection. This could be an error.", e);
         }
       }
-
-      DefaultClient client = new DefaultClient()
-      {
-        AppDomain = ad,
-        Plugin = plugin,
-        Properties = GetClientProperties(template),
-        Schedule = GetClientSchedule(template),
-        Status = GetClientStatus(template)
-      };
-     
-      return client;
-
     }
 
     private ClientStatus GetClientStatus(IClientTemplate template)

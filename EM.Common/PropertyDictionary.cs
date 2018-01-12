@@ -11,12 +11,12 @@ namespace EM.Common
   public class PropertyDictionary : Dictionary<string, string>
   {
     public PropertyDictionary() : base() { }
-    public PropertyDictionary(PropertyDictionary pd) : base(pd) { }
+    //public PropertyDictionary(PropertyDictionary pd) : base(pd) { }
     protected PropertyDictionary(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     public PropertyDictionary Clone()
     {
-      return new PropertyDictionary(this);
+      return (PropertyDictionary)this.MemberwiseClone();
     }
   }
 }

@@ -1,12 +1,14 @@
-﻿using EM.Client.Factory;
-using EM.Common.Client;
+﻿using EM.Common.Client;
 using EM.Common.Client.Factory;
 using EM.Common.Client.Repository;
 using EM.Common.Client.Template.Repository;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EM.Client.Repository
 {
+  [Serializable]
   public class DefaultClientRepository : IClientRepository
   {
     private Dictionary<string, IClient> clients = new Dictionary<string, IClient>();
@@ -40,6 +42,14 @@ namespace EM.Client.Repository
           clients.Add(clientName, ClientFactory.MakeClient(ClientTemplateRepository[clientName]));
         }
         return clients[clientName];
+      }
+    }
+
+    public void RemoveClientsWithPluginType(Type t)
+    {
+      foreach (var item in clients.Where(kvp => kvp.Value.Plugin.GetType() == t).ToList())
+      {
+        clients.Remove(item.Key);
       }
     }
   }

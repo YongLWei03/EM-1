@@ -21,6 +21,8 @@ namespace EM.Plugin
     {
       logger.Debug("ClientRepository= " + ClientRepository == null ? "NULL!!!" : "not null good");
 
+      RemoveSelfFromClientRepository();
+
       foreach (IClient client in ClientRepository.Clients)
       {
         runtime.Manage(client);
@@ -41,6 +43,11 @@ namespace EM.Plugin
       {
         runtime.Stop(client);
       }
+    }
+
+    private void RemoveSelfFromClientRepository()
+    {
+      ClientRepository.RemoveClientsWithPluginType(GetType());
     }
 
   }
