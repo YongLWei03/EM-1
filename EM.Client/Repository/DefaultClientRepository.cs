@@ -44,13 +44,5 @@ namespace EM.Client.Repository
         return clients[clientName];
       }
     }
-
-    public void RemoveClientsWithPluginType(Type t)
-    {
-      foreach (var item in clients.Where(kvp => kvp.Value.Plugin.GetType() == t).ToList())
-      {
-        clients.Remove(item.Key);
-      }
-    }
   }
 }

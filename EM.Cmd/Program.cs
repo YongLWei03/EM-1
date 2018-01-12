@@ -59,7 +59,8 @@ namespace EM.Cmd
     private static IClient GetPrimalClient()
     {
       var repo = BuildClientRepository();
-      return repo["Primal Client"];
+      var client =  repo["Primal Client"];
+      return client;
     }
 
     private static IClientRepository BuildClientRepository()

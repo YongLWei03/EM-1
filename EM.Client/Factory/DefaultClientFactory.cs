@@ -60,6 +60,8 @@ namespace EM.Client.Factory
 
     public IClient MakeClient(IClientTemplate template)
     {
+      Init();
+
       Type t = template.PluginTemplate.PluginType;
 
       IPlugin plugin = (IPlugin)Activator.CreateInstance(t);
@@ -145,12 +147,14 @@ namespace EM.Client.Factory
       //TODO move out of here
 
       IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();
-      IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
       IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();
-      IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
       IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
       IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();
+
+      IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
+      IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
       clientRepo.ClientTemplateRepository = clientTemplateRepo;
+
       return clientRepo;
     }
   }

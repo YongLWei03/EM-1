@@ -34,7 +34,7 @@ SELECT @CLIENTSCHEDULEID=SCOPE_IDENTITY();
 
 SELECT @PLUGINTEMPLATEID=ID FROM [EM].PluginTemplate  WHERE FullClassName='EM.Plugin.PrimalPlugin';
 INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled],[ClientScheduleId]) 
-VALUES (@PLUGINTEMPLATEID,'Primal Client','TRUE',@CLIENTSCHEDULEID);
+VALUES (@PLUGINTEMPLATEID,'Primal Client','FALSE',@CLIENTSCHEDULEID);
 SELECT @CLIENTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
