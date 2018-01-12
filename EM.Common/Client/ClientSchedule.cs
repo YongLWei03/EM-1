@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace EM.Common.Client
 {
-  public class ClientRuntimeProperties
+  public class ClientSchedule
   {
-    public ClientRuntimeProperties()
-    {
-      Task = null;
-    }
+    public bool IsRunContinuously { get; set; }
+    public int RunEverySeconds { get; set; }
 
-    public Task Task { get; set; }
   }
 }

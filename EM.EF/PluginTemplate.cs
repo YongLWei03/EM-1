@@ -12,26 +12,19 @@ namespace EM.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class PluginTemplate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
+        public PluginTemplate()
         {
-            this.ClientProperties = new HashSet<ClientProperty>();
-            this.ClientStatus = new HashSet<ClientStatu>();
+            this.Clients = new HashSet<Client>();
         }
     
         public long Id { get; set; }
-        public long PluginTemplateId { get; set; }
-        public string Name { get; set; }
-        public bool Enabled { get; set; }
-        public long ClientScheduleId { get; set; }
+        public string DLLName { get; set; }
+        public string FullClassName { get; set; }
     
-        public virtual ClientSchedule ClientSchedule { get; set; }
-        public virtual PluginTemplate PluginTemplate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientProperty> ClientProperties { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientStatu> ClientStatus { get; set; }
+        public virtual ICollection<Client> Clients { get; set; }
     }
 }

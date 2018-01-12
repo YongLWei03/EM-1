@@ -28,4 +28,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TemplateId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8622c46f-bc7d-4409-af75-178231c2e153" ChangeDateTime="01/12/2018 14:50:57">
+    <Property Name="ElementName" Value="[EM].[Client].[TemplateId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[EM].[Client]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PluginTemplateId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ddedbb4d-9254-456f-9750-345859a3da1d" ChangeDateTime="01/12/2018 14:58:32">
+    <Property Name="ElementName" Value="[EM].[Client].[ScheduleId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[EM].[Client]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClientScheduleId" />
+  </Operation>
 </Operations>

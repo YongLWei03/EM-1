@@ -27,6 +27,8 @@ namespace EM.EF
     
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<ClientProperty> ClientProperties { get; set; }
-        public virtual DbSet<Template> Templates { get; set; }
+        public virtual DbSet<ClientSchedule> ClientSchedules { get; set; }
+        public virtual DbSet<ClientStatu> ClientStatus { get; set; }
+        public virtual DbSet<PluginTemplate> PluginTemplates { get; set; }
     }
 }

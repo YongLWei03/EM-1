@@ -12,17 +12,17 @@ namespace EM.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Template
+    public partial class ClientSchedule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Template()
+        public ClientSchedule()
         {
             this.Clients = new HashSet<Client>();
         }
     
         public long Id { get; set; }
-        public string DLLName { get; set; }
-        public string FullClassName { get; set; }
+        public bool RunContinuously { get; set; }
+        public int RunEverySeconds { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Clients { get; set; }

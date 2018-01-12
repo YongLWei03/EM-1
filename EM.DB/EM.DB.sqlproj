@@ -61,9 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="ClientProperty.sql" />
-    <Build Include="Template.sql" />
+    <Build Include="PluginTemplate.sql" />
     <Build Include="Client.sql" />
     <Build Include="Schema.sql" />
+    <Build Include="ClientSchedule.sql" />
+    <Build Include="ClientStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="EM.DB.refactorlog" />

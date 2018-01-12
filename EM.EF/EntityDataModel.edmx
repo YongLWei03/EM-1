@@ -10,8 +10,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TemplateId" Type="bigint" Nullable="false" />
+          <Property Name="PluginTemplateId" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="ClientScheduleId" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientProperty">
           <Key>
@@ -22,7 +24,24 @@
           <Property Name="Key" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Value" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Template">
+        <EntityType Name="ClientSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RunContinuously" Type="bit" Nullable="false" />
+          <Property Name="RunEverySeconds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ClientId" Type="bigint" Nullable="false" />
+          <Property Name="LastRun" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PluginTemplate">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -30,15 +49,27 @@
           <Property Name="DLLName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="FullClassName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Client_Template">
-          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+        <Association Name="FK_Client_ClientSchedule">
+          <End Role="ClientSchedule" Type="Self.ClientSchedule" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Template">
+            <Principal Role="ClientSchedule">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Client">
-              <PropertyRef Name="TemplateId" />
+              <PropertyRef Name="ClientScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_PluginTemplate">
+          <End Role="PluginTemplate" Type="Self.PluginTemplate" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PluginTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="PluginTemplateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -54,17 +85,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClientStatus_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientStatus" Type="Self.ClientStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientStatus">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EMDBModelStoreContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="EM" store:Type="Tables" />
           <EntitySet Name="ClientProperty" EntityType="Self.ClientProperty" Schema="EM" store:Type="Tables" />
-          <EntitySet Name="Template" EntityType="Self.Template" Schema="EM" store:Type="Tables" />
-          <AssociationSet Name="FK_Client_Template" Association="Self.FK_Client_Template">
-            <End Role="Template" EntitySet="Template" />
+          <EntitySet Name="ClientSchedule" EntityType="Self.ClientSchedule" Schema="EM" store:Type="Tables" />
+          <EntitySet Name="ClientStatus" EntityType="Self.ClientStatus" Schema="EM" store:Type="Tables" />
+          <EntitySet Name="PluginTemplate" EntityType="Self.PluginTemplate" Schema="EM" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_ClientSchedule" Association="Self.FK_Client_ClientSchedule">
+            <End Role="ClientSchedule" EntitySet="ClientSchedule" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_PluginTemplate" Association="Self.FK_Client_PluginTemplate">
+            <End Role="PluginTemplate" EntitySet="PluginTemplate" />
             <End Role="Client" EntitySet="Client" />
           </AssociationSet>
           <AssociationSet Name="FK_ClientProperty_Client" Association="Self.FK_ClientProperty_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientProperty" EntitySet="ClientProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientStatus_Client" Association="Self.FK_ClientStatus_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientStatus" EntitySet="ClientStatus" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -76,10 +129,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PluginTemplateId" Type="Int64" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ClientScheduleId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ClientSchedule" Relationship="Self.FK_Client_ClientSchedule" FromRole="Client" ToRole="ClientSchedule" />
+          <NavigationProperty Name="PluginTemplate" Relationship="Self.FK_Client_PluginTemplate" FromRole="Client" ToRole="PluginTemplate" />
           <NavigationProperty Name="ClientProperties" Relationship="Self.FK_ClientProperty_Client" FromRole="Client" ToRole="ClientProperty" />
-          <Property Name="TemplateId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Template" Relationship="EM.DBModel.FK_Client_Template" FromRole="Client" ToRole="Template" />
+          <NavigationProperty Name="ClientStatus" Relationship="Self.FK_ClientStatus_Client" FromRole="Client" ToRole="ClientStatus" />
         </EntityType>
         <EntityType Name="ClientProperty">
           <Key>
@@ -91,15 +148,58 @@
           <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Client" Relationship="Self.FK_ClientProperty_Client" FromRole="ClientProperty" ToRole="Client" />
         </EntityType>
-        <EntityType Name="Template">
+        <EntityType Name="ClientSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RunContinuously" Type="Boolean" Nullable="false" />
+          <Property Name="RunEverySeconds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Client_ClientSchedule" FromRole="ClientSchedule" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="ClientStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" />
+          <Property Name="LastRun" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ClientStatus_Client" FromRole="ClientStatus" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="PluginTemplate">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DLLName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FullClassName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clients" Relationship="EM.DBModel.FK_Client_Template" FromRole="Template" ToRole="Client" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Client_PluginTemplate" FromRole="PluginTemplate" ToRole="Client" />
         </EntityType>
+        <Association Name="FK_Client_ClientSchedule">
+          <End Role="ClientSchedule" Type="Self.ClientSchedule" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="ClientScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_PluginTemplate">
+          <End Role="PluginTemplate" Type="Self.PluginTemplate" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PluginTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="PluginTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClientProperty_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="ClientProperty" Type="Self.ClientProperty" Multiplicity="*" />
@@ -112,31 +212,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClientStatus_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientStatus" Type="Self.ClientStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientStatus">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="Self.Client" />
           <EntitySet Name="ClientProperties" EntityType="Self.ClientProperty" />
-          <EntitySet Name="Templates" EntityType="Self.Template" />
+          <EntitySet Name="ClientSchedules" EntityType="Self.ClientSchedule" />
+          <EntitySet Name="ClientStatus" EntityType="Self.ClientStatu" />
+          <EntitySet Name="PluginTemplates" EntityType="Self.PluginTemplate" />
+          <AssociationSet Name="FK_Client_ClientSchedule" Association="Self.FK_Client_ClientSchedule">
+            <End Role="ClientSchedule" EntitySet="ClientSchedules" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_PluginTemplate" Association="Self.FK_Client_PluginTemplate">
+            <End Role="PluginTemplate" EntitySet="PluginTemplates" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientProperty_Client" Association="Self.FK_ClientProperty_Client">
             <End Role="Client" EntitySet="Clients" />
             <End Role="ClientProperty" EntitySet="ClientProperties" />
           </AssociationSet>
-          <AssociationSet Name="FK_Client_Template" Association="EM.DBModel.FK_Client_Template">
-            <End Role="Template" EntitySet="Templates" />
+          <AssociationSet Name="FK_ClientStatus_Client" Association="Self.FK_ClientStatus_Client">
             <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientStatus" EntitySet="ClientStatus" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Client_Template">
-          <End Type="EM.DBModel.Template" Role="Template" Multiplicity="1" />
-          <End Type="EM.DBModel.Client" Role="Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Template">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="TemplateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -146,9 +256,11 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="EM.DBModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PluginTemplateId" ColumnName="PluginTemplateId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ClientScheduleId" ColumnName="ClientScheduleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -162,9 +274,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Templates">
-            <EntityTypeMapping TypeName="EM.DBModel.Template">
-              <MappingFragment StoreEntitySet="Template">
+          <EntitySetMapping Name="ClientSchedules">
+            <EntityTypeMapping TypeName="EM.DBModel.ClientSchedule">
+              <MappingFragment StoreEntitySet="ClientSchedule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RunContinuously" ColumnName="RunContinuously" />
+                <ScalarProperty Name="RunEverySeconds" ColumnName="RunEverySeconds" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientStatus">
+            <EntityTypeMapping TypeName="EM.DBModel.ClientStatu">
+              <MappingFragment StoreEntitySet="ClientStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="LastRun" ColumnName="LastRun" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PluginTemplates">
+            <EntityTypeMapping TypeName="EM.DBModel.PluginTemplate">
+              <MappingFragment StoreEntitySet="PluginTemplate">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DLLName" ColumnName="DLLName" />
                 <ScalarProperty Name="FullClassName" ColumnName="FullClassName" />

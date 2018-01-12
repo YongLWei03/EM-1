@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EM.Common.Client
 {
-  public class ClientRuntimeProperties
+  public class ClientStatus
   {
-    public ClientRuntimeProperties()
+    public ClientStatus()
     {
-      Task = null;
+      LastRun = DateTime.MinValue;
     }
 
-    public Task Task { get; set; }
+    public DateTime LastRun { get; set; }
   }
 }

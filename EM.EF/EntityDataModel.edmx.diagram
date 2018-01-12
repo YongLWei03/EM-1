@@ -4,12 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4adefb6e4755477ca6f3f5b5c9005a05" Name="Diagram1">
-        <EntityTypeShape EntityType="EM.DBModel.Client" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="EM.DBModel.ClientProperty" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EM.DBModel.Template" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="02eafa64252f4049bcbe587c4d7878a9" Name="Diagram1">
+        <EntityTypeShape EntityType="EM.DBModel.Client" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EM.DBModel.ClientProperty" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EM.DBModel.ClientSchedule" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EM.DBModel.ClientStatu" Width="1.875" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EM.DBModel.PluginTemplate" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EM.DBModel.FK_Client_ClientSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="EM.DBModel.FK_Client_PluginTemplate" ManuallyRouted="false" />
         <AssociationConnector Association="EM.DBModel.FK_ClientProperty_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="EM.DBModel.FK_Client_Template" />
+        <AssociationConnector Association="EM.DBModel.FK_ClientStatus_Client" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
