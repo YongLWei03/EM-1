@@ -37,7 +37,10 @@ namespace EM.EF
 
     private ClientStatus GetStatus(ICollection<ClientStatu> clientStatus)
     {
-      ClientStatus status = new ClientStatus();
+      ClientStatus status = new ClientStatus()
+      {
+        LastRun = DateTime.MinValue
+      };
       var latest = clientStatus.OrderByDescending(x => x.LastRun).FirstOrDefault();
       if (latest != null)
       {

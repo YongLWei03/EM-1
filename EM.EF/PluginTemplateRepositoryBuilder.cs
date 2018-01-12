@@ -14,7 +14,7 @@ namespace EM.EF
 
       using (var ctx = new Entities())
       {
-        var query = from t in ctx.Templates
+        var query = from t in ctx.PluginTemplates
                     select t;
 
         foreach (var t in query)

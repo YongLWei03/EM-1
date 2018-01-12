@@ -20,6 +20,8 @@ namespace EM.Client
     public IPlugin Plugin { get => plugin; set => plugin = value; }
     public ClientProperties Properties { get => properties; set => properties = value; }
     public ClientRuntimeProperties RuntimeProperties { get => runtimeProperties; set => runtimeProperties = value; }
+    public ClientSchedule Schedule { get; set; }
+    public ClientStatus Status { get; set; }
     public bool Running => running;
 
     public void Start()

@@ -32,8 +32,8 @@ namespace EM.Plugin
 
     private static bool CheckIfClientMustRun(IClient client)
     {
-      return client.Properties.IsRunContinuously ||
-        client.RuntimeProperties.LastRun.AddSeconds(client.Properties.RunEverySeconds) < DateTime.Now;
+      return client.Schedule.IsRunContinuously ||
+        client.Status.LastRun.AddSeconds(client.Schedule.RunEverySeconds) < DateTime.Now;
     }
 
     private bool IsRunning(IClient client)
