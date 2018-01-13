@@ -67,9 +67,9 @@ namespace EM.Cmd
     {
       //TODO Use IoC, move out of here
 
-      IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();
-      IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();
-      IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
+      //IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();
+      //IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();
+      //IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
       IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();
 
       return clientRepo;

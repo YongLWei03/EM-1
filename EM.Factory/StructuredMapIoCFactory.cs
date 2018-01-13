@@ -15,8 +15,7 @@ namespace EM.Factory
   public class StructuredMapIoCFactory : IIoCFactory
   {
     private Container container;
-    private Dictionary<Type, Func<object>> actions;
-
+ 
     public StructuredMapIoCFactory()
     {
       container = new Container(c => { c.AddRegistry<StructuredMapRegistry>(); });

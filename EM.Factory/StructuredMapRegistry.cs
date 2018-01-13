@@ -18,10 +18,7 @@ namespace EM.Factory
       For<IPluginTemplateRepositoryBuilder>().Use<PluginTemplateRepositoryBuilder>();
       For<IClientTemplateRepositoryBuilder>().Use<ClientTemplateRepositoryBuilder>();
       For<IClientFactory>().Use<DefaultClientFactory>();
-      For<IClientRepository>()
-        .Use<DefaultClientRepository>()
-        .Setter<IClientFactory>().IsTheDefault();
-      //.Setter<IClientTemplateRepository>().IsTheDefault();
+      For<IClientRepository>().Use<DefaultClientRepository>();
     }
   }
 }

@@ -12,13 +12,14 @@ namespace EM.Client.Repository
   [Serializable]
   public class DefaultClientRepository : IClientRepository
   {
+    private IClientFactory clientFactory;
     private IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder;
     private Dictionary<string, IClient> clients = new Dictionary<string, IClient>();
 
-    public DefaultClientRepository(IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder)
-      => this.clientTemplateRepositoryBuilder = clientTemplateRepositoryBuilder;
+    public DefaultClientRepository(IClientFactory clientFactory, IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder)
+      => (this.clientFactory, this.clientTemplateRepositoryBuilder) = (clientFactory, clientTemplateRepositoryBuilder);
 
-    private IClientFactory ClientFactory { get; set; }
+
 
     private IEnumerable<IClientTemplate> ClientTemplates
     {
@@ -104,7 +105,7 @@ namespace EM.Client.Repository
 
     private void MakeAndAddNew(IClientTemplate template)
     {
-      clients.Add(template.Name, ClientFactory.MakeClient(template));
+      clients.Add(template.Name, clientFactory.MakeClient(template));
     }
   }
 }
