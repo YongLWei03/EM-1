@@ -26,9 +26,10 @@ namespace EM.Client
 
     public void Start()
     {
-      running = true;
       logger.Debug("Default client running ...");
       logger.Debug("Name= " + Properties.Name);
+
+      running = true;
       plugin.Start();
       running = false;
     }

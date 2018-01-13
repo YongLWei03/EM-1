@@ -36,6 +36,7 @@ namespace EM.Plugin.Sample
 
     public void Start()
     {
+      logger.Debug("Starting");
       running = true;
       while (!StopRequested)
       {

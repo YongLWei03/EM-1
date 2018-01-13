@@ -22,42 +22,6 @@ namespace EM.Client.Factory
 
     public DefaultClientFactory(IIoCFactory iocFactory) => (this.iocFactory) = (iocFactory);
 
-    //public IClient MakeClient(IClientTemplate template)
-    //{
-    //  Init();
-
-    //  // Construct and initialize settings for a second AppDomain.
-    //  AppDomainSetup ads = new AppDomainSetup();
-    //  ads.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
-
-    //  ads.DisallowBindingRedirects = false;
-    //  ads.DisallowCodeDownload = true;
-    //  ads.ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-
-    //  // Create the second AppDomain.
-    //  AppDomain ad = AppDomain.CreateDomain("AD #2", null, ads);
-    //  //ad.FirstChanceException += Ad_FirstChanceException;
-    //  //ad.UnhandledException += Ad_UnhandledException;
-
-    //  Type t = template.PluginTemplate.PluginType;
-
-    //  IPlugin plugin = (IPlugin)ad.CreateInstanceAndUnwrap(t.Assembly.FullName, t.FullName);
-    //  plugin.Properties = template.Properties;
-    //  GetPropertiesFromIoC(plugin);
-
-    //  DefaultClient client = new DefaultClient()
-    //  {
-    //    AppDomain = ad,
-    //    Plugin = plugin,
-    //    Properties = GetClientProperties(template),
-    //    Schedule = GetClientSchedule(template),
-    //    Status = GetClientStatus(template)
-    //  };
-     
-    //  return client;
-
-    //}
-
     public IClient MakeClient(IClientTemplate template)
     {
       Init();
@@ -122,14 +86,6 @@ namespace EM.Client.Factory
       }
     }
 
-    private void Ad_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-    {
-    }
-
-    private void Ad_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
-    {
-    }
-
     private void Init()
     {
       if (clientRepo == null)
@@ -140,14 +96,7 @@ namespace EM.Client.Factory
 
     private IClientRepository GetClientRepository()
     {
-      //TODO move out of here
-
-      IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();
-      IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();
-      IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
-      IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();
-
-      return clientRepo;
+      return iocFactory.GetInstance<IClientRepository>();
     }
   }
 }

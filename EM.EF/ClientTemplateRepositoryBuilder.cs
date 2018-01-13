@@ -64,8 +64,9 @@ namespace EM.EF
             PluginTemplate = pluginTemplates[client.PluginTemplate.FullClassName],
             Properties = GetProperties(client.ClientProperties),
             Schedule = GetSchedule(client.ClientSchedule),
-            Status = GetStatus(client.ClientStatus)
+            Status = GetStatus(client.ClientStatus),
           };
+          ct.Properties.IsEnabled = client.Enabled;
         }
       }
 

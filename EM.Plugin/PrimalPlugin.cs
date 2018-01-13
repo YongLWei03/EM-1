@@ -4,6 +4,7 @@ using EM.Common.Client;
 using EM.Common.Client.Repository;
 using EM.Common.Plugin;
 using System;
+using System.Threading;
 
 namespace EM.Plugin
 {
@@ -15,15 +16,22 @@ namespace EM.Plugin
     public PropertyDictionary Properties { get; set; }
     public IClientRepository ClientRepository { get; set; }
 
-    public bool Running => false;
+    public bool Running { get; private set; }
 
     public void Start()
     {
-      logger.Debug("ClientRepository= " + ClientRepository == null ? "NULL!!!" : "not null good");
-
-      foreach (IClient client in ClientRepository.Clients)
+      Running = true;
+      while (Running)
       {
-        runtime.Manage(client);
+        logger.Debug("ClientRepository= " + ClientRepository == null ? "NULL!!!" : "not null good");
+
+        var clients = ClientRepository.Clients;
+        foreach (IClient client in clients)
+        {
+          runtime.Manage(client);
+        }
+
+        Thread.Sleep(5000);
       }
 
 
@@ -31,6 +39,7 @@ namespace EM.Plugin
 
     public void Stop()
     {
+      Running = false;
       ////TODO list
       ////Monitor clients
       ////Restart clients

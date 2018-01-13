@@ -65,6 +65,7 @@
     <Compile Include="PluginTemplate\Repository\IPluginTemplateRepository.cs" />
     <Compile Include="Utils\ConvertUtils.cs" />
     <Compile Include="Utils\IIoCFactory.cs" />
+    <Compile Include="Utils\LimitedConcurrencyTaskScheduler.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

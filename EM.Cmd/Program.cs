@@ -45,34 +45,28 @@ namespace EM.Cmd
 
         if (!client.Running)
         {
-          client.Start();
-        }
+          Task t = Task.Factory.StartNew(() =>
+          {
+            client.Start();
+          });
 
+        }
         Thread.Sleep(5000);
       }
-
       client.Stop();
-
     }
 
 
     private static IClient GetPrimalClient()
     {
       var repo = BuildClientRepository();
-      var client =  repo["Primal Client"];
+      var client = repo["Primal Client"];
       return client;
     }
 
     private static IClientRepository BuildClientRepository()
     {
-      //TODO Use IoC, move out of here
-
-      //IPluginTemplateRepositoryBuilder pluginBuilder = iocFactory.GetInstance<IPluginTemplateRepositoryBuilder>();
-      //IClientTemplateRepositoryBuilder clientBuilder = iocFactory.GetInstance<IClientTemplateRepositoryBuilder>();
-      //IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
-      IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();
-
-      return clientRepo;
+      return iocFactory.GetInstance<IClientRepository>();
     }
   }
 }
