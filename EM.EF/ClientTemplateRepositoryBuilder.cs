@@ -106,6 +106,7 @@ namespace EM.EF
       {
         clientProperties.Properties.Add(cp.Key, cp.Value);
       }
+      clientProperties.Populate();
       return clientProperties;
     }
   }

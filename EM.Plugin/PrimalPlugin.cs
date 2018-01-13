@@ -22,15 +22,12 @@ namespace EM.Plugin
     {
       Running = true;
       while (Running)
-      {
-        logger.Debug("ClientRepository= " + ClientRepository == null ? "NULL!!!" : "not null good");
-
+      {       
         var clients = ClientRepository.Clients;
         foreach (IClient client in clients)
         {
           runtime.Manage(client);
         }
-
         Thread.Sleep(5000);
       }
 

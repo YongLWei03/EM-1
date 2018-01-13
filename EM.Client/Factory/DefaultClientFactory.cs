@@ -51,7 +51,7 @@ namespace EM.Client.Factory
         try
         {
           Type propType = prop.PropertyType;
-          prop.SetValue(plugin, iocFactory.GetInstance(propType));
+          prop.SetValue(plugin, iocFactory.GetInstance(propType)); //TODO Memory leak? Use "using"?
         }
         catch (Exception e)
         {
@@ -72,18 +72,7 @@ namespace EM.Client.Factory
 
     private ClientProperties GetClientProperties(IClientTemplate template)
     {
-      var clientProperties = template.Properties.Clone();
-      PopulateClientProperties(template, clientProperties);
-
-      return clientProperties;
-    }
-
-    private void PopulateClientProperties(IClientTemplate template, ClientProperties clientProperties)
-    {
-      foreach (var x in template.Properties.Properties)
-      {
-        ConvertUtils.SetPropertyValue(clientProperties, x.Key, x.Value);
-      }
+      return template.Properties.Clone();
     }
 
     private void Init()

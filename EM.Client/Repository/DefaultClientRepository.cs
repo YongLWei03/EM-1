@@ -34,9 +34,10 @@ namespace EM.Client.Repository
     {
       get
       {
-        foreach (IClientTemplate template in ClientTemplates)
+        var templates = ClientTemplates;
+        foreach (IClientTemplate template in templates)
         {
-          CreateOrUpdate(template.Name);
+          CreateOrUpdate(template);
         }
         return clients.Values.AsEnumerable();
       }
@@ -46,14 +47,14 @@ namespace EM.Client.Repository
     {
       get
       {
-        CreateOrUpdate(clientName);
+        var template = clientTemplateRepositoryBuilder.Build(clientName);
+        CreateOrUpdate(template);
         return clients[clientName];
       }
     }
 
-    private void CreateOrUpdate(String clientName)
+    private void CreateOrUpdate(IClientTemplate template)
     {
-      var template = clientTemplateRepositoryBuilder.Build(clientName);
 
       if (IsNewClientRequired(template))
       {
