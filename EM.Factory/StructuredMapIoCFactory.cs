@@ -1,4 +1,8 @@
-﻿using EM.Common.Utils;
+﻿using EM.Common.Client.Repository;
+using EM.Common.Client.Template.Repository;
+using EM.Common.Plugin.Template.Repository;
+using EM.Common.PluginTemplate.Repository;
+using EM.Common.Utils;
 using StructureMap;
 using System;
 using System.Collections.Generic;
@@ -11,6 +15,7 @@ namespace EM.Factory
   public class StructuredMapIoCFactory : IIoCFactory
   {
     private Container container;
+    private Dictionary<Type, Func<object>> actions;
 
     public StructuredMapIoCFactory()
     {

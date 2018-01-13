@@ -3,6 +3,7 @@ using EM.Client.Template.Repository;
 using EM.Common;
 using EM.Common.Client;
 using EM.Common.Client.Template.Repository;
+using EM.Common.Plugin.Template.Repository;
 using EM.Common.PluginTemplate.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,16 @@ namespace EM.EF
 {
   public class ClientTemplateRepositoryBuilder : IClientTemplateRepositoryBuilder
   {
-    public IClientTemplateRepository Build(IPluginTemplateRepository pluginTemplates)
+    private IPluginTemplateRepositoryBuilder pluginTemplateRepositoryBuilder;
+
+    public ClientTemplateRepositoryBuilder(IPluginTemplateRepositoryBuilder pluginTemplateRepositoryBuilder)
+      => this.pluginTemplateRepositoryBuilder = pluginTemplateRepositoryBuilder;
+
+
+    public IClientTemplateRepository Build()
     {
+      IPluginTemplateRepository pluginTemplates = pluginTemplateRepositoryBuilder.Build();
+
       IClientTemplateRepository repo = new DefaultClientTemplateRepository();
       using (var ctx = new Entities())
       {

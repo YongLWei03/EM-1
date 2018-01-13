@@ -151,10 +151,6 @@ namespace EM.Client.Factory
       IClientFactory clientFactory = iocFactory.GetInstance<IClientFactory>();
       IClientRepository clientRepo = iocFactory.GetInstance<IClientRepository>();
 
-      IPluginTemplateRepository pluginRepo = pluginBuilder.Build();
-      IClientTemplateRepository clientTemplateRepo = clientBuilder.Build(pluginRepo);
-      clientRepo.ClientTemplateRepository = clientTemplateRepo;
-
       return clientRepo;
     }
   }

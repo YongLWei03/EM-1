@@ -11,6 +11,8 @@ namespace EM.Client.Template.Repository
 
     public IList<string> ClientNames => templates.Keys.ToList();
 
+    public IEnumerable<IClientTemplate> ClientTemplates => templates.Values.AsEnumerable();
+
     public void Add(string key, IClientTemplate template)
     {
       templates.Add(key, template);

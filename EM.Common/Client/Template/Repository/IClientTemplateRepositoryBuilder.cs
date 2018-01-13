@@ -10,6 +10,6 @@ namespace EM.Common.Client.Template.Repository
 {
   public interface IClientTemplateRepositoryBuilder
   {
-    IClientTemplateRepository Build(IPluginTemplateRepository pluginTemplates);
+    IClientTemplateRepository Build();
   }
 }
