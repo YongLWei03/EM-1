@@ -2,6 +2,7 @@
 using EM.Common;
 using EM.Common.Client;
 using EM.Common.Client.Repository;
+using EM.Common.Client.Runtime;
 using EM.Common.Plugin;
 using System;
 using System.Threading;
@@ -11,10 +12,10 @@ namespace EM.Plugin
   public class PrimalPlugin : MarshalByRefObject, IPlugin
   {
     private ILog logger = LogManager.GetLogger<PrimalPlugin>();
-    private ClientRuntimeManager runtime = new ClientRuntimeManager(); //TODO Use IoC and use the interface
-
+ 
     public PropertyDictionary Properties { get; set; }
     public IClientRepository ClientRepository { get; set; }
+    public IClientRuntimeManager RuntimeManager { get; set; }
 
     public bool Running { get; private set; }
 
@@ -26,7 +27,7 @@ namespace EM.Plugin
         var clients = ClientRepository.Clients;
         foreach (IClient client in clients)
         {
-          runtime.Manage(client);
+          RuntimeManager.Manage(client);
         }
         Thread.Sleep(5000);
       }
@@ -45,7 +46,7 @@ namespace EM.Plugin
       ////Maintain status of each client (e.g. running, stopped, crashed) in e.g. db table.
       foreach (var client in ClientRepository.Clients)
       {
-        runtime.Stop(client);
+        RuntimeManager.Stop(client);
       }
     }
 

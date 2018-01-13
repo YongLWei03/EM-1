@@ -55,6 +55,7 @@
     <Compile Include="ClientProperty.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClientPersistor.cs" />
     <Compile Include="ClientSchedule.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>

@@ -14,10 +14,11 @@ namespace EM.Client.Repository
   {
     private IClientFactory clientFactory;
     private IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder;
+    private IClientPersistor clientPersistor;
     private Dictionary<string, IClient> clients = new Dictionary<string, IClient>();
 
-    public DefaultClientRepository(IClientFactory clientFactory, IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder)
-      => (this.clientFactory, this.clientTemplateRepositoryBuilder) = (clientFactory, clientTemplateRepositoryBuilder);
+    public DefaultClientRepository(IClientFactory clientFactory, IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder, IClientPersistor clientPersistor)
+      => (this.clientFactory, this.clientTemplateRepositoryBuilder, this.clientPersistor) = (clientFactory, clientTemplateRepositoryBuilder, clientPersistor);
 
 
 
@@ -51,6 +52,12 @@ namespace EM.Client.Repository
         CreateOrUpdate(template);
         return clients[clientName];
       }
+    }
+
+
+    public void Update(IClient client)
+    {
+      clientPersistor.Update(client);
     }
 
     private void CreateOrUpdate(IClientTemplate template)
@@ -108,5 +115,6 @@ namespace EM.Client.Repository
     {
       clients.Add(template.Name, clientFactory.MakeClient(template));
     }
+
   }
 }

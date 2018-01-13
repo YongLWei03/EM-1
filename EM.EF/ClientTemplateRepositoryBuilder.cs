@@ -73,7 +73,8 @@ namespace EM.EF
           Schedule = GetSchedule(client.ClientSchedule),
           Status = GetStatus(client.ClientStatus),
         };
-        ct.Properties.IsEnabled = client.Enabled;
+        ct.Name = client.Name;
+        ct.IsEnabled = client.Enabled;
       }
       return ct;
     }

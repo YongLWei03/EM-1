@@ -7,7 +7,15 @@ namespace EM.Client.Template
 {
   public class DefaultClientTemplate : IClientTemplate
   {
-    public string Name { get; set; }
+    public DefaultClientTemplate()
+    {
+      Properties = new ClientProperties();
+      Schedule = new ClientSchedule();
+      Status = new ClientStatus();
+    }
+
+    public string Name { get => Properties.Name; set => Properties.Name = value; }
+    public bool IsEnabled { get => Properties.IsEnabled; set => Properties.IsEnabled = value; }
     public IPluginTemplate PluginTemplate { get; set; }
     public ClientProperties Properties { get; set; }
     public ClientSchedule Schedule { get; set; }

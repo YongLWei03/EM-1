@@ -65,6 +65,10 @@
       <Project>{e466298c-52e5-4a97-8823-26efc6bc91b9}</Project>
       <Name>EM.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EM.Plugin\EM.Plugin.csproj">
+      <Project>{977e2eff-9a51-440f-a13f-198cd299f4ab}</Project>
+      <Name>EM.Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

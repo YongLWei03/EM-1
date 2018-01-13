@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\ClientRuntimeProperties.cs" />
+    <Compile Include="Client\Runtime\ClientRuntimeProperties.cs" />
     <Compile Include="Client\ClientSchedule.cs" />
     <Compile Include="Client\ClientStatus.cs" />
+    <Compile Include="Client\Repository\IClientPersistor.cs" />
+    <Compile Include="Client\Runtime\IClientRuntimeManager.cs" />
     <Compile Include="Client\Template\IClientTemplate.cs" />
     <Compile Include="Client\Template\Repository\IClientTemplateRepository.cs" />
     <Compile Include="Client\ClientProperties.cs" />

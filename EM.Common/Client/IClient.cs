@@ -1,4 +1,5 @@
-﻿using EM.Common.Plugin;
+﻿using EM.Common.Client.Runtime;
+using EM.Common.Plugin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace EM.Common.Client
 {
   public interface IClient
   {
+    string Name { get; set; }
+    bool IsEnabled { get; set; }
+
     IPlugin Plugin { get; set; }
     ClientProperties Properties { get; set; }
     ClientSchedule Schedule { get; set; }

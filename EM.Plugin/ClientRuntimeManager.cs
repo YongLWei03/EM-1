@@ -1,23 +1,23 @@
 ﻿using EM.Common.Client;
+using EM.Common.Client.Repository;
+using EM.Common.Client.Runtime;
 using EM.Common.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace EM.Plugin
 {
-  public class ClientRuntimeManager //TODO Make interface
+  public class ClientRuntimeManager : IClientRuntimeManager
   {
     private LimitedConcurrencyLevelTaskScheduler lcts = null;
     private TaskFactory factory = null;
+    private IClientRepository clientRepository = null;
 
-    public ClientRuntimeManager()
+    public ClientRuntimeManager(IClientRepository clientRepository)
     {
       lcts = new LimitedConcurrencyLevelTaskScheduler(5);
       factory = new TaskFactory(lcts);
+      this.clientRepository = clientRepository;
     }
 
     public void Manage(IClient client)
@@ -46,7 +46,7 @@ namespace EM.Plugin
 
     private void UpdateClientStatus(IClient client)
     {
-      //todo implement UpdateClientStatus
+      clientRepository.Update(client);
     }
 
     private bool CheckIfClientMustRun(IClient client)

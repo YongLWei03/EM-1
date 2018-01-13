@@ -1,5 +1,4 @@
-﻿using EM.Common.Client.Template.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace EM.Common.Client.Repository
 {
-  public interface IClientRepository
+  public interface IClientPersistor
   {
-    IEnumerable<IClient> Clients { get; }
-    IClient this[string clientName] { get; }
-
     void Update(IClient client);
   }
 }

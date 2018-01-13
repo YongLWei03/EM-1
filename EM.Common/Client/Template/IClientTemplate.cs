@@ -11,6 +11,7 @@ namespace EM.Common.Client.Template
   public interface IClientTemplate
   {
     string Name { get; set; }
+    bool IsEnabled { get; set; }
     IPluginTemplate PluginTemplate { get; set; }
     ClientProperties Properties { get; set; }
     ClientSchedule Schedule { get; set; }
