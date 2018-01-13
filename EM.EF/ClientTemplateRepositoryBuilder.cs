@@ -2,6 +2,7 @@
 using EM.Client.Template.Repository;
 using EM.Common;
 using EM.Common.Client;
+using EM.Common.Client.Template;
 using EM.Common.Client.Template.Repository;
 using EM.Common.Plugin.Template.Repository;
 using EM.Common.PluginTemplate.Repository;
@@ -44,6 +45,33 @@ namespace EM.EF
       return repo;
     }
 
+    public IClientTemplate Build(string clientName)
+    {
+      IClientTemplate ct = null;
+
+      using (var ctx = new Entities())
+      {
+        var client = (from c in ctx.Clients
+                      where c.Name == clientName
+                      select c).FirstOrDefault();
+
+        if (client != null)
+        {
+          IPluginTemplateRepository pluginTemplates = pluginTemplateRepositoryBuilder.Build();
+          ct = new DefaultClientTemplate()
+          {
+            Name = client.Name,
+            PluginTemplate = pluginTemplates[client.PluginTemplate.FullClassName],
+            Properties = GetProperties(client.ClientProperties),
+            Schedule = GetSchedule(client.ClientSchedule),
+            Status = GetStatus(client.ClientStatus)
+          };
+        }
+      }
+
+      return ct;
+    }
+
     private ClientStatus GetStatus(ICollection<ClientStatu> clientStatus)
     {
       ClientStatus status = new ClientStatus()
@@ -70,14 +98,14 @@ namespace EM.EF
       return schedule;
     }
 
-    private PropertyDictionary GetProperties(ICollection<ClientProperty> clientProperties)
+    private ClientProperties GetProperties(ICollection<ClientProperty> propertyList)
     {
-      PropertyDictionary pd = new PropertyDictionary();
-      foreach (var cp in clientProperties)
+      ClientProperties clientProperties = new ClientProperties();
+      foreach (var cp in propertyList)
       {
-        pd.Add(cp.Key, cp.Value);
+        clientProperties.Properties.Add(cp.Key, cp.Value);
       }
-      return pd;
+      return clientProperties;
     }
   }
 }

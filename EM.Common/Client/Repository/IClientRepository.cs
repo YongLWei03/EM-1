@@ -10,5 +10,6 @@ namespace EM.Common.Client.Repository
   public interface IClientRepository
   {
     IEnumerable<IClient> Clients { get; }
+    IClient this[string clientName] { get; }
   }
 }

@@ -11,5 +11,6 @@ namespace EM.Common.Client.Template.Repository
   public interface IClientTemplateRepositoryBuilder
   {
     IClientTemplateRepository Build();
+    IClientTemplate Build(string clientName);
   }
 }

@@ -9,9 +9,8 @@ namespace EM.Client.Template
   {
     public string Name { get; set; }
     public IPluginTemplate PluginTemplate { get; set; }
-    public PropertyDictionary Properties { get; set; }
+    public ClientProperties Properties { get; set; }
     public ClientSchedule Schedule { get; set; }
     public ClientStatus Status { get; set; }
-    public ClientRuntimeProperties RuntimeProperties { get; set; }
   }
 }

@@ -65,7 +65,7 @@ namespace EM.Client.Factory
       Type t = template.PluginTemplate.PluginType;
 
       IPlugin plugin = (IPlugin)Activator.CreateInstance(t);
-      plugin.Properties = template.Properties;
+      plugin.Properties = template.Properties.Properties;
       GetPropertiesFromIoC(plugin);
 
       DefaultClient client = new DefaultClient()
@@ -108,22 +108,18 @@ namespace EM.Client.Factory
 
     private ClientProperties GetClientProperties(IClientTemplate template)
     {
-      var properties = new ClientProperties()
-      {
-        Properties = template.Properties.Clone()
-      };
-      PopulateClientProperties(template, properties);
+      var clientProperties = template.Properties.Clone();
+      PopulateClientProperties(template, clientProperties);
 
-      return properties;
+      return clientProperties;
     }
 
     private void PopulateClientProperties(IClientTemplate template, ClientProperties clientProperties)
     {
-      foreach (var x in template.Properties)
+      foreach (var x in template.Properties.Properties)
       {
         ConvertUtils.SetPropertyValue(clientProperties, x.Key, x.Value);
       }
-
     }
 
     private void Ad_UnhandledException(object sender, UnhandledExceptionEventArgs e)

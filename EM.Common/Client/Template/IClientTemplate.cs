@@ -12,9 +12,8 @@ namespace EM.Common.Client.Template
   {
     string Name { get; set; }
     IPluginTemplate PluginTemplate { get; set; }
-    PropertyDictionary Properties { get; set; }
+    ClientProperties Properties { get; set; }
     ClientSchedule Schedule { get; set; }
     ClientStatus Status { get; set; }
-    ClientRuntimeProperties RuntimeProperties { get; set; }
   }
 }
