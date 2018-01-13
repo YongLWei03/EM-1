@@ -55,7 +55,7 @@ namespace EM.Client.Factory
         }
         catch (Exception e)
         {
-          logger.Warn("Failed to populated property using reflection. This could be an error.", e);
+          logger.Warn("Failed to populated property ("+prop.Name+") using reflection. This could be an error.", e);
         }
       }
     }
