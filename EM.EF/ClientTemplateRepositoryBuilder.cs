@@ -5,6 +5,7 @@ using EM.Common.Client;
 using EM.Common.Client.Template;
 using EM.Common.Client.Template.Repository;
 using EM.Common.Plugin.Template.Repository;
+using EM.Common.PluginTemplate;
 using EM.Common.PluginTemplate.Repository;
 using System;
 using System.Collections.Generic;
@@ -32,14 +33,8 @@ namespace EM.EF
 
         foreach (var client in query)
         {
-          repo.Add(client.Name, new DefaultClientTemplate()
-          {
-            Name = client.Name,
-            PluginTemplate = pluginTemplates[client.PluginTemplate.FullClassName],
-            Properties = GetProperties(client.ClientProperties),
-            Schedule = GetSchedule(client.ClientSchedule),
-            Status = GetStatus(client.ClientStatus)
-          });
+          repo.Add(client.Name,
+            BuildClientTemplate(client, pluginTemplates[client.PluginTemplate.FullClassName]));
         }
       }
       return repo;
@@ -57,19 +52,29 @@ namespace EM.EF
 
         if (client != null)
         {
-          IPluginTemplateRepository pluginTemplates = pluginTemplateRepositoryBuilder.Build();
-          ct = new DefaultClientTemplate()
-          {
-            Name = client.Name,
-            PluginTemplate = pluginTemplates[client.PluginTemplate.FullClassName],
-            Properties = GetProperties(client.ClientProperties),
-            Schedule = GetSchedule(client.ClientSchedule),
-            Status = GetStatus(client.ClientStatus),
-          };
-          ct.Properties.IsEnabled = client.Enabled;
+          IPluginTemplate pluginTemplate = pluginTemplateRepositoryBuilder.Build(client.PluginTemplate.FullClassName);
+          ct = BuildClientTemplate(client, pluginTemplate);
         }
       }
 
+      return ct;
+    }
+
+    private IClientTemplate BuildClientTemplate(Client client, IPluginTemplate pluginTemplate)
+    {
+      IClientTemplate ct = null;
+      if (client != null)
+      {
+        ct = new DefaultClientTemplate()
+        {
+          Name = client.Name,
+          PluginTemplate = pluginTemplate,
+          Properties = GetProperties(client.ClientProperties),
+          Schedule = GetSchedule(client.ClientSchedule),
+          Status = GetStatus(client.ClientStatus),
+        };
+        ct.Properties.IsEnabled = client.Enabled;
+      }
       return ct;
     }
 

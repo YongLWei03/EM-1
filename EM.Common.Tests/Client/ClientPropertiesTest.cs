@@ -39,5 +39,32 @@ namespace EM.Common.Tests.Client
       }
 
     }
+
+    [TestMethod]
+    public void PopulateTest()
+    {
+      PropertyDictionary expectedPd = new PropertyDictionary()
+      {
+        {"Name","Name1" },
+        {"Description","Description1" },
+        {"IsEnabled","true" }
+      };
+
+      ClientProperties target = new ClientProperties()
+      {
+        Properties = expectedPd
+      };
+
+      Assert.AreNotEqual(expectedPd["Name"], target.Name,"Name");
+      Assert.AreNotEqual(expectedPd["Description"], target.Description, "Description");
+      Assert.AreNotEqual(bool.Parse(expectedPd["IsEnabled"]), target.IsEnabled, "IsEnabled");
+
+      target.Populate();
+
+      Assert.AreEqual(expectedPd["Name"],target.Name);
+      Assert.AreEqual(expectedPd["Description"], target.Description, "Description");
+      Assert.AreEqual(bool.Parse(expectedPd["IsEnabled"]), target.IsEnabled, "IsEnabled");
+    }
+
   }
 }
