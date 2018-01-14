@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EM.EF
 {
-  public class ClientPersistor : IClientPersistor
+  public class ClientEFRepository : IClientPersistor
   {
     public void Update(IClient client)
     {

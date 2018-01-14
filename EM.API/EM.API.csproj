@@ -9,7 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EM.Common\EM.Common.csproj" />
+    <ProjectReference Include="..\EM.EF\EM.EF.csproj" />
   </ItemGroup>
 
 </Project>

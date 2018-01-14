@@ -2,7 +2,7 @@
 
 namespace EM.Common.Client.Template.Repository
 {
-  public interface IClientTemplateRepository
+  public interface IClientTemplateRepository : IEnumerable<IClientTemplate>
   {
     IList<string> ClientNames { get; }
     IEnumerable<IClientTemplate> ClientTemplates { get; }

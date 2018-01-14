@@ -19,7 +19,7 @@ namespace EM.Factory
       For<IIoCFactory>().Use<StructuredMapIoCFactory>();
       For<IPluginTemplateRepositoryBuilder>().Use<PluginTemplateRepositoryBuilder>();
       For<IClientTemplateRepositoryBuilder>().Use<ClientTemplateRepositoryBuilder>();
-      For<IClientPersistor>().Use<ClientPersistor>();
+      For<IClientPersistor>().Use<ClientEFRepository>();
       For<IClientFactory>().Use<DefaultClientFactory>();
       For<IClientRepository>().Use<DefaultClientRepository>();
       For<IClientRuntimeManager>().Use<ClientRuntimeManager>();
