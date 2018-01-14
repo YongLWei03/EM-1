@@ -23,12 +23,12 @@ namespace EM.API.Cmd.Controllers
       IPluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
       IClientTemplateRepositoryBuilder builder = new ClientTemplateRepositoryBuilder(pluginBuilder);
       IClientTemplateRepository clients = builder.Build();
-      //IList<string> cn = new List<string>();
-      //foreach (var c in clients)
-      //{
-      //  cn.Add(c.Name);
-      //}
-      return new string[] { "1", "2" }; //cn.ToArray();
+      IList<string> cn = new List<string>();
+      foreach (var c in clients)
+      {
+        cn.Add(c.Name);
+      }
+      return cn.ToArray();//new string[] { "1", "2" }; //
     }
 
     // GET api/values/5 
