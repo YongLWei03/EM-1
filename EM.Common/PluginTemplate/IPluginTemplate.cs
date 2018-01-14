@@ -8,6 +8,8 @@ namespace EM.Common.PluginTemplate
 {
   public interface IPluginTemplate
   {
+    string DLLName { get; set; }
+    string FullClassName { get; set; }
     Type PluginType { get; }
   }
 }

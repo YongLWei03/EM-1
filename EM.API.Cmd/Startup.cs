@@ -1,10 +1,12 @@
-﻿using Owin;
+﻿using EM.Factory;
+using Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using WebApi.StructureMap;
 
 namespace EM.API.Cmd
 {
@@ -22,8 +24,8 @@ namespace EM.API.Cmd
           defaults: new { id = RouteParameter.Optional }
       );
 
+      config.UseStructureMap<StructuredMapRegistry>();
       
-
       appBuilder.UseWebApi(config);
     }
   }

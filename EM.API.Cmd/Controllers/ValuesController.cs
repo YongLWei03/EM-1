@@ -12,23 +12,31 @@ namespace EM.API.Cmd.Controllers
   [Route("api/[controller]")]
   public class ValuesController : ApiController
   {
-    private IClientTemplateRepositoryBuilder builder;
+    private IClientTemplateRepositoryBuilder clientBuilder;
+    private IPluginTemplateRepositoryBuilder pluginBuilder;
 
-    //  public ValuesController(IClientTemplateRepositoryBuilder builder) => this.builder = builder;
+    public ValuesController(IPluginTemplateRepositoryBuilder pluginBuilder, IClientTemplateRepositoryBuilder clientBuilder)
+    => (this.pluginBuilder, this.clientBuilder) = (pluginBuilder, clientBuilder);
 
     // GET: api/<controller>
     [HttpGet]
-    public IEnumerable<string> Get()
+    public object Get()
     {
-      IPluginTemplateRepositoryBuilder pluginBuilder = new PluginTemplateRepositoryBuilder();
-      IClientTemplateRepositoryBuilder builder = new ClientTemplateRepositoryBuilder(pluginBuilder);
-      IClientTemplateRepository clients = builder.Build();
-      IList<string> cn = new List<string>();
-      foreach (var c in clients)
+      IClientTemplateRepository clients = clientBuilder.Build();
+      //IList<string> cn = new List<string>();
+      //foreach (var c in clients)
+      //{
+      //  cn.Add(c.Name);
+      //}
+      return clients.Select(c => new
       {
-        cn.Add(c.Name);
-      }
-      return cn.ToArray();//new string[] { "1", "2" }; //
+        Name = c.Name,
+        PluginType = c.PluginTemplate.FullClassName,
+        IsEnabled = c.IsEnabled,
+        LastRun = c.Status.LastRun,
+        LastLifeSign = c.Status.LastLifeSign
+      }).ToArray();
+      //return cn.ToArray();//new string[] { "1", "2" }; //
     }
 
     // GET api/values/5 
