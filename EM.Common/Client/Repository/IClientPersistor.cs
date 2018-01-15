@@ -9,5 +9,6 @@ namespace EM.Common.Client.Repository
   public interface IClientPersistor
   {
     void Update(IClient client);
+    void ToggleEnable(string clientName, bool isEnabled);
   }
 }

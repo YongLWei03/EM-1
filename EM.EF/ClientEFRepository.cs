@@ -7,17 +7,30 @@ namespace EM.EF
 {
   public class ClientEFRepository : IClientPersistor
   {
+    public void ToggleEnable(string clientName, bool isEnabled)
+    {
+      using (var ctx = new Entities())
+      {
+        var clientDB = (from s in ctx.Clients
+                     where s.Name == clientName
+                     select s).FirstOrDefault();
+
+        clientDB.Enabled = isEnabled;
+        ctx.SaveChanges();
+      }
+    }
+
     public void Update(IClient client)
     {
       using (var ctx = new Entities())
       {
-        var query = (from s in ctx.Clients
-                    where s.Name == client.Name
-                    select s).FirstOrDefault();
+        var clientDB = (from s in ctx.Clients
+                     where s.Name == client.Name
+                     select s).FirstOrDefault();
 
-        query.ClientStatus.Add(new ClientStatu()
+        clientDB.ClientStatus.Add(new ClientStatu()
         {
-          Client = query,
+          Client = clientDB,
           DateTime = DateTime.Now,
           LastLifeSign = client.Status.LastLifeSign,
           LastRun = client.Status.LastRun

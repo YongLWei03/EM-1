@@ -26,6 +26,11 @@ namespace EM.Plugin
       {
         client.Status.LastLifeSign = DateTime.Now;
         UpdateClientStatus(client);
+
+        if (CheckIfClientMustStop(client))
+        {
+          Stop(client);
+        }
       }
       else if (CheckIfClientMustRun(client))
       {
@@ -47,6 +52,11 @@ namespace EM.Plugin
     private void UpdateClientStatus(IClient client)
     {
       clientRepository.Update(client);
+    }
+
+    private bool CheckIfClientMustStop(IClient client)
+    {
+      return !CheckIfClientMustRun(client);
     }
 
     private bool CheckIfClientMustRun(IClient client)
