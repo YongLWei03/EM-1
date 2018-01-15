@@ -1,3 +1,8 @@
-<ul class="clients">
-    <li *ngFor="let client of clients">{{client.name}}</li>
+<ul >
+    <li *ngFor="let client of clients">
+        {{client.Name}}
+        {{client.PluginType}}
+        <input type="checkbox" [(ngModel)]="client.IsEnabled" (ngModelChange)="update(client)">
+        {{client.LastRun}}
+        {{client.LastLifeSign}}</li>
 </ul>

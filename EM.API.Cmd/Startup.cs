@@ -18,6 +18,9 @@ namespace EM.API.Cmd
     {
       // Configure Web API for self-host. 
       HttpConfiguration config = new HttpConfiguration();
+
+      config.EnableCors();
+
       config.Routes.MapHttpRoute(
           name: "DefaultApi",
           routeTemplate: "api/{controller}/{id}",
@@ -26,6 +29,7 @@ namespace EM.API.Cmd
 
       config.UseStructureMap<StructuredMapRegistry>();
       
+      //appBuilder.UseC
       appBuilder.UseWebApi(config);
     }
   }

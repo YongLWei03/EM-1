@@ -4,12 +4,14 @@ using EM.EF;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace EM.API.Cmd.Controllers
 {
   [Route("api/[controller]")]
+  [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
   public class ValuesController : ApiController
   {
     private IClientTemplateRepositoryBuilder clientBuilder;
@@ -28,7 +30,7 @@ namespace EM.API.Cmd.Controllers
       //{
       //  cn.Add(c.Name);
       //}
-      return clients.Select(c => new
+      return clients.Select(c => new Model.Client()
       {
         Name = c.Name,
         PluginType = c.PluginTemplate.FullClassName,
@@ -46,8 +48,9 @@ namespace EM.API.Cmd.Controllers
     }
 
     // POST api/values 
-    public void Post([FromBody]string value)
+    public void Post([FromBody]Model.Client client)
     {
+
     }
 
     // PUT api/values/5 

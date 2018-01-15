@@ -17,6 +17,12 @@ export class ClientsComponent implements OnInit {
   
   clients: Client[];
 
+  update(client: Client): void {
+    console.log("will update");
+
+    this.clientService.update(client).subscribe();
+  }
+
   getClients(): void {
     this.clientService.getClients().subscribe(clients => this.clients = clients);
   }

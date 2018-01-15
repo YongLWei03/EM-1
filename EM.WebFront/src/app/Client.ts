@@ -1,3 +1,7 @@
 export class Client {
-    name: string;
+    Name: string;
+    PluginType: string;
+    IsEnabled: boolean;
+    LastRun: Date;
+    LastLifeSign: Date
 }
