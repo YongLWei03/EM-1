@@ -48,6 +48,9 @@ namespace EM.Plugin
       {
         RuntimeManager.Stop(client);
       }
+
+      ClientRepository = null;
+      RuntimeManager = null;
     }
 
   }

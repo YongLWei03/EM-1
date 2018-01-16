@@ -33,7 +33,8 @@ namespace EM.EF
           Client = clientDB,
           DateTime = DateTime.Now,
           LastLifeSign = client.Status.LastLifeSign,
-          LastRun = client.Status.LastRun
+          LastRun = client.Status.LastRun,
+          NextRun = client.Status.NextRun
         });
 
         ctx.SaveChanges();

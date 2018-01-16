@@ -25,20 +25,27 @@ namespace EM.Plugin
       if (IsRunning(client))
       {
         client.Status.LastLifeSign = DateTime.Now;
-        UpdateClientStatus(client);
-
+        client.Status.NextRun = DateTime.MinValue;
         if (CheckIfClientMustStop(client))
         {
           Stop(client);
+          client.Status.NextRun = DateTime.Now.AddSeconds(client.Schedule.RunEverySeconds);
         }
       }
       else if (CheckIfClientMustRun(client))
       {
         Task clientTask = factory.StartNew(() => client.Start());
         client.RuntimeProperties.Task = clientTask;
+        client.Status.LastLifeSign = DateTime.Now;
         client.Status.LastRun = DateTime.Now;
-        UpdateClientStatus(client);
+        client.Status.NextRun = DateTime.MinValue;
       }
+      else
+      {
+        client.Status.NextRun = client.Status.LastRun.AddSeconds(client.Schedule.RunEverySeconds);
+      }
+
+      UpdateClientStatus(client);
     }
 
     public void Stop(IClient client)

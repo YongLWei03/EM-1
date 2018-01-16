@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\Repository\IWashUpRepository.cs" />
     <Compile Include="Client\Runtime\ClientRuntimeProperties.cs" />
     <Compile Include="Client\ClientSchedule.cs" />
     <Compile Include="Client\ClientStatus.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="SamplePlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SamplePluginForever.cs" />
+    <Compile Include="WashUpPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EM.Common\EM.Common.csproj">

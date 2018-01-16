@@ -26,6 +26,9 @@ VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePlugin');
 
 INSERT INTO [EM].PluginTemplate  ([DLLName], [FullClassName])
 VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.SamplePluginForever');
+
+INSERT INTO [EM].PluginTemplate  ([DLLName], [FullClassName])
+VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.WashUpPlugin');
 -- -----------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------
@@ -72,6 +75,21 @@ INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
 VALUES (@CLIENTID,'Name','Sample client.');
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
 VALUES (@CLIENTID,'Description','A client that should run every Y seconds.');
+-- -----------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------
+INSERT INTO [EM].ClientSchedule (RunContinuously, RunEverySeconds) VALUES ('FALSE',60);
+SELECT @CLIENTSCHEDULEID=SCOPE_IDENTITY();
+
+SELECT @PLUGINTEMPLATEID=ID FROM [EM].PluginTemplate WHERE FullClassName='EM.Plugin.Sample.WashUpPlugin';
+INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled],[ClientScheduleId]) 
+VALUES (@PLUGINTEMPLATEID,'WashUp client','TRUE',@CLIENTSCHEDULEID);
+SELECT @CLIENTID=SCOPE_IDENTITY();
+
+INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
+VALUES (@CLIENTID,'Name','WashUp client.');
+INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
+VALUES (@CLIENTID,'Description','Cleans the status table.'); 
 -- -----------------------------------------------------------------------------------
 
 
