@@ -31,7 +31,6 @@ namespace EM.EF
         clientDB.ClientStatus.Add(new ClientStatu()
         {
           Client = clientDB,
-          DateTime = DateTime.Now,
           LastLifeSign = client.Status.LastLifeSign,
           LastRun = client.Status.LastRun,
           NextRun = client.Status.NextRun
