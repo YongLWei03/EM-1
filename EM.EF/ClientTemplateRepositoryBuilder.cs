@@ -86,11 +86,12 @@ namespace EM.EF
         LastRun = DateTime.MinValue,
         LastLifeSign = DateTime.MinValue
       };
-      var latest = clientStatus.OrderByDescending(x => x.LastRun).FirstOrDefault();
+      var latest = clientStatus.OrderByDescending(x => x.DateTime).FirstOrDefault();
       if (latest != null)
       {
         status.LastRun = latest.LastRun;
         status.LastLifeSign = latest.LastLifeSign;
+        status.NextRun = latest.NextRun;
       }
       return status;
     }

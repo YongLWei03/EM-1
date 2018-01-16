@@ -3,5 +3,6 @@ export class Client {
     PluginType: string;
     IsEnabled: boolean;
     LastRun: Date;
-    LastLifeSign: Date
+    LastLifeSign: Date;
+    NextRun: Date;
 }

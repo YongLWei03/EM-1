@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ClientService {
-  private clientUrl = 'http://localhost:9000/api/values'
+  private clientUrl = 'http://localhost:9000/api/client'
   
   constructor(
     private http: HttpClient,

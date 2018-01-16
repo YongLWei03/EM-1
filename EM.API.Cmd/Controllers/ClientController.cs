@@ -14,13 +14,13 @@ namespace EM.API.Cmd.Controllers
 {
   [Route("api/[controller]")]
   [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-  public class ValuesController : ApiController
+  public class ClientController : ApiController
   {
     private IClientPersistor clientPersistor;
     private IClientTemplateRepositoryBuilder clientBuilder;
     private IPluginTemplateRepositoryBuilder pluginBuilder;
 
-    public ValuesController(
+    public ClientController(
       IPluginTemplateRepositoryBuilder pluginBuilder, 
       IClientTemplateRepositoryBuilder clientBuilder,
       IClientPersistor clientPersistor)
@@ -42,7 +42,8 @@ namespace EM.API.Cmd.Controllers
         PluginType = c.PluginTemplate.FullClassName,
         IsEnabled = c.IsEnabled,
         LastRun = c.Status.LastRun,
-        LastLifeSign = c.Status.LastLifeSign
+        LastLifeSign = c.Status.LastLifeSign,
+        NextRun = c.Status.NextRun
       }).ToArray();
       //return cn.ToArray();//new string[] { "1", "2" }; //
     }

@@ -13,5 +13,6 @@ namespace EM.API.Cmd.Model
     public bool IsEnabled { get; set; }
     public DateTime LastRun { get; set; }
     public DateTime LastLifeSign { get; set; }
+    public DateTime NextRun { get; set; }
   }
 }
