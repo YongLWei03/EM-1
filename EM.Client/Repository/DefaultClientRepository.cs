@@ -15,7 +15,7 @@ namespace EM.Client.Repository
   {
     //private IClientFactory clientFactory;
     //private IClientTemplateRepositoryBuilder clientTemplateRepositoryBuilder;
-    private IClientPersistor clientPersistor;
+   // private IClientPersistor clientPersistor;
     private Dictionary<string, IClient> clients = new Dictionary<string, IClient>();
 
     //public DefaultClientRepository(IClientPersistor clientPersistor)
