@@ -19,8 +19,14 @@ namespace EM.Factory
     {
       For<IIoCFactory>().Use<StructuredMapIoCFactory>();
       For<IPluginTemplateRepositoryBuilder>().Use<PluginTemplateRepositoryBuilder>();
+
+      For<IClientTemplateRepositoryBuilder>().AddInstances(x =>
+      {
+        x.Type<PrimalClientTemplateRepositoryBuilder>();
+        x.Type<ClientTemplateRepositoryBuilder>();
+      });
       For<IClientTemplateRepositoryBuilder>().Use<ClientTemplateRepositoryBuilder>();
-      For<IClientTemplateRepositoryBuilder>().Use<PrimalClientTemplateRepositoryBuilder>();
+
       For<IClientPersistor>().Use<ClientEFRepository>();
       For<IWashUpRepository>().Use<WashUpRepository>();
       For<IClientFactory>().Use<DefaultClientFactory>();
@@ -29,11 +35,9 @@ namespace EM.Factory
       {
         x.Type<ClientRuntimeManager>().Ctor<IClientTemplateRepositoryBuilder>().IsTheDefault();
 
-        x.Type<ClientRuntimeManager>().Named("Init").Ctor<IClientTemplateRepositoryBuilder>().Is<PrimalClientTemplateRepositoryBuilder>();
-
-
-
-      });//.Use<ClientRuntimeManager>();
+        x.Type<InitRuntimeManager>().Named("Init").Ctor<IClientTemplateRepositoryBuilder>().Is<PrimalClientTemplateRepositoryBuilder>();
+      });
+      For<IClientRuntimeManager>().Use<ClientRuntimeManager>(); //set default IClientRuntimeManager
     }
   }
 }

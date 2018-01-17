@@ -100,7 +100,8 @@ namespace EM.Client.Runtime
 
     private void MakeAndAddNew(IClientTemplate template)
     {
-      clients.Add(template.Name, clientFactory.MakeClient(template));
+      var client = clientFactory.MakeClient(template);
+      clients.Add(template.Name, client);
     }
 
     private void Merge(IClient client, IClientTemplate ct)
@@ -156,7 +157,7 @@ namespace EM.Client.Runtime
       return !CheckIfClientMustRun(client);
     }
 
-    private bool CheckIfClientMustRun(IClient client)
+    protected virtual bool CheckIfClientMustRun(IClient client)
     {
       return
         client.Properties.IsEnabled && (

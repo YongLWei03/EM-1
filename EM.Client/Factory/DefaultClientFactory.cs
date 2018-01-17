@@ -18,13 +18,13 @@ namespace EM.Client.Factory
   {
     private ILog logger = LogManager.GetLogger<DefaultClientFactory>();
     private IIoCFactory iocFactory;
-    private IClientRepository clientRepo = null;
+    //private IClientRepository clientRepo = null;
 
     public DefaultClientFactory(IIoCFactory iocFactory) => (this.iocFactory) = (iocFactory);
 
     public IClient MakeClient(IClientTemplate template)
     {
-      Init();
+      //Init();
 
       Type t = template.PluginTemplate.PluginType;
 
@@ -75,13 +75,13 @@ namespace EM.Client.Factory
       return template.Properties.Clone();
     }
 
-    private void Init()
-    {
-      if (clientRepo == null)
-      {
-        clientRepo = GetClientRepository();
-      }
-    }
+    //private void Init()
+    //{
+    //  if (clientRepo == null)
+    //  {
+    //    clientRepo = GetClientRepository();
+    //  }
+    //}
 
     private IClientRepository GetClientRepository()
     {
