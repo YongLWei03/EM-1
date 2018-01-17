@@ -1,5 +1,6 @@
 ﻿using EM.Client.Factory;
 using EM.Client.Repository;
+using EM.Client.Runtime;
 using EM.Common.Client.Factory;
 using EM.Common.Client.Repository;
 using EM.Common.Client.Runtime;
@@ -19,11 +20,20 @@ namespace EM.Factory
       For<IIoCFactory>().Use<StructuredMapIoCFactory>();
       For<IPluginTemplateRepositoryBuilder>().Use<PluginTemplateRepositoryBuilder>();
       For<IClientTemplateRepositoryBuilder>().Use<ClientTemplateRepositoryBuilder>();
+      For<IClientTemplateRepositoryBuilder>().Use<PrimalClientTemplateRepositoryBuilder>();
       For<IClientPersistor>().Use<ClientEFRepository>();
       For<IWashUpRepository>().Use<WashUpRepository>();
       For<IClientFactory>().Use<DefaultClientFactory>();
       For<IClientRepository>().Use<DefaultClientRepository>();
-      For<IClientRuntimeManager>().Use<ClientRuntimeManager>();
+      For<IClientRuntimeManager>().AddInstances(x =>
+      {
+        x.Type<ClientRuntimeManager>().Ctor<IClientTemplateRepositoryBuilder>().IsTheDefault();
+
+        x.Type<ClientRuntimeManager>().Named("Init").Ctor<IClientTemplateRepositoryBuilder>().Is<PrimalClientTemplateRepositoryBuilder>();
+
+
+
+      });//.Use<ClientRuntimeManager>();
     }
   }
 }

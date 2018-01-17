@@ -10,6 +10,8 @@ namespace EM.Client.Template.Repository
   {
     private Dictionary<string, IClientTemplate> templates = new Dictionary<string, IClientTemplate>();
 
+    public DefaultClientTemplateRepository() { }
+
     public IList<string> ClientNames => templates.Keys.ToList();
 
     public IEnumerable<IClientTemplate> ClientTemplates => templates.Values.AsEnumerable();

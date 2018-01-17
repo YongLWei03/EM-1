@@ -30,5 +30,10 @@ namespace EM.Factory
     {
       return container.GetInstance(t);
     }
+
+    public T GetInstance<T>(string name)
+    {
+      return container.GetInstance<T>(name);
+    }
   }
 }

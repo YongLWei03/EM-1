@@ -8,7 +8,7 @@ namespace EM.Common.Client.Runtime
 {
   public interface IClientRuntimeManager
   {
-    void Manage(IClient client);
-    void Stop(IClient client);
+    void Manage();// IClient client);
+    void Stop();// IClient client);
   }
 }

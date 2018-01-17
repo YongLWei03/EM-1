@@ -15,13 +15,13 @@ namespace EM.EF
 {
   public class ClientTemplateRepositoryBuilder : IClientTemplateRepositoryBuilder
   {
-    private IPluginTemplateRepositoryBuilder pluginTemplateRepositoryBuilder;
+    protected IPluginTemplateRepositoryBuilder pluginTemplateRepositoryBuilder;
 
     public ClientTemplateRepositoryBuilder(IPluginTemplateRepositoryBuilder pluginTemplateRepositoryBuilder)
       => this.pluginTemplateRepositoryBuilder = pluginTemplateRepositoryBuilder;
 
 
-    public IClientTemplateRepository Build()
+    public virtual IClientTemplateRepository Build()
     {
       IPluginTemplateRepository pluginTemplates = pluginTemplateRepositoryBuilder.Build();
 
@@ -40,7 +40,7 @@ namespace EM.EF
       return repo;
     }
 
-    public IClientTemplate Build(string clientName)
+    public virtual IClientTemplate Build(string clientName)
     {
       IClientTemplate ct = null;
 
@@ -60,7 +60,7 @@ namespace EM.EF
       return ct;
     }
 
-    private IClientTemplate BuildClientTemplate(Client client, IPluginTemplate pluginTemplate)
+    protected IClientTemplate BuildClientTemplate(Client client, IPluginTemplate pluginTemplate)
     {
       IClientTemplate ct = null;
       if (client != null)
@@ -79,7 +79,7 @@ namespace EM.EF
       return ct;
     }
 
-    private ClientStatus GetStatus(ICollection<ClientStatu> clientStatus)
+    protected ClientStatus GetStatus(ICollection<ClientStatu> clientStatus)
     {
       ClientStatus status = new ClientStatus()
       {
@@ -96,7 +96,7 @@ namespace EM.EF
       return status;
     }
 
-    private Common.Client.ClientSchedule GetSchedule(ClientSchedule clientSchedule)
+    protected Common.Client.ClientSchedule GetSchedule(ClientSchedule clientSchedule)
     {
       Common.Client.ClientSchedule schedule = new Common.Client.ClientSchedule()
       {
@@ -106,7 +106,7 @@ namespace EM.EF
       return schedule;
     }
 
-    private ClientProperties GetProperties(ICollection<ClientProperty> propertyList)
+    protected ClientProperties GetProperties(ICollection<ClientProperty> propertyList)
     {
       ClientProperties clientProperties = new ClientProperties();
       foreach (var cp in propertyList)

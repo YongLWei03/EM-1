@@ -50,6 +50,7 @@
     <Compile Include="Factory\DefaultClientFactory.cs" />
     <Compile Include="Repository\DefaultClientRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\ClientRuntimeManager.cs" />
     <Compile Include="Template\DefaultClientTemplate.cs" />
     <Compile Include="Template\Repository\DefaultClientTemplateRepository.cs" />
   </ItemGroup>

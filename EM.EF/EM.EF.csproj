@@ -68,6 +68,7 @@
     <Compile Include="ClientStatu.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PrimalClientTemplateRepositoryBuilder.cs" />
     <Compile Include="ClientTemplateRepositoryBuilder.cs" />
     <Compile Include="EntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>

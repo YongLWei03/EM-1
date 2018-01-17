@@ -12,15 +12,14 @@ namespace EM.Common.Client
   {
     string Name { get; set; }
     bool IsEnabled { get; set; }
+    bool Running { get; set; }
 
     IPlugin Plugin { get; set; }
     ClientProperties Properties { get; set; }
     ClientSchedule Schedule { get; set; }
     ClientStatus Status { get; set; }
+
     ClientRuntimeProperties RuntimeProperties { get; set; }
 
-    bool Running { get; }
-    void Start();
-    void Stop();
   }
 }

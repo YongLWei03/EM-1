@@ -10,5 +10,6 @@ namespace EM.Common.Utils
   {
     T GetInstance<T>();
     object GetInstance(Type propType);
+    T GetInstance<T>(string name);
   }
 }

@@ -14,7 +14,7 @@ namespace EM.Plugin
     private ILog logger = LogManager.GetLogger<PrimalPlugin>();
  
     public PropertyDictionary Properties { get; set; }
-    public IClientRepository ClientRepository { get; set; }
+    //public IClientRepository ClientRepository { get; set; }
     public IClientRuntimeManager RuntimeManager { get; set; }
 
     public bool Running { get; private set; }
@@ -23,12 +23,8 @@ namespace EM.Plugin
     {
       Running = true;
       while (Running)
-      {       
-        var clients = ClientRepository.Clients;
-        foreach (IClient client in clients)
-        {
-          RuntimeManager.Manage(client);
-        }
+      {
+        RuntimeManager.Manage();        
         Thread.Sleep(5000);
       }
 
@@ -44,12 +40,13 @@ namespace EM.Plugin
       ////Ping clients
       ////Receive heart beat
       ////Maintain status of each client (e.g. running, stopped, crashed) in e.g. db table.
-      foreach (var client in ClientRepository.Clients)
-      {
-        RuntimeManager.Stop(client);
-      }
+      //foreach (var client in ClientRepository.Clients)
+      //{
+      //  RuntimeManager.Stop(client);
+      //}
 
-      ClientRepository = null;
+      //ClientRepository = null;
+      RuntimeManager.Stop();
       RuntimeManager = null;
     }
 

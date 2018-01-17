@@ -1,18 +1,9 @@
 ﻿using Common.Logging;
-using EM.Client.Factory;
-using EM.Client.Repository;
-using EM.Common.Client;
-using EM.Common.Client.Factory;
-using EM.Common.Client.Repository;
-using EM.Common.Client.Template.Repository;
-using EM.Common.Plugin.Template.Repository;
-using EM.Common.PluginTemplate.Repository;
+using EM.Common.Client.Runtime;
 using EM.Common.Utils;
-using EM.EF;
 using EM.Factory;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace EM.Cmd
 {
@@ -26,7 +17,7 @@ namespace EM.Cmd
 
       logger.Info("Starting EM");
 
-      IClient client = GetPrimalClient();
+      IClientRuntimeManager initRuntime = iocFactory.GetInstance<IClientRuntimeManager>("Init");
 
       bool keepingRunning = true;
       while (keepingRunning)
@@ -43,30 +34,12 @@ namespace EM.Cmd
           }
         }
 
-        if (!client.Running)
-        {
-          Task t = Task.Factory.StartNew(() =>
-          {
-            client.Start();
-          });
+        initRuntime.Manage();
 
-        }
         Thread.Sleep(5000);
       }
-      client.Stop();
+      initRuntime.Stop();
     }
 
-
-    private static IClient GetPrimalClient()
-    {
-      var repo = BuildClientRepository();
-      var client = repo["Primal Client"];
-      return client;
-    }
-
-    private static IClientRepository BuildClientRepository()
-    {
-      return iocFactory.GetInstance<IClientRepository>();
-    }
   }
 }

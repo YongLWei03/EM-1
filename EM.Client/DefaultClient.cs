@@ -2,8 +2,6 @@
 using EM.Common.Client;
 using EM.Common.Client.Runtime;
 using EM.Common.Plugin;
-using System;
-using System.Threading.Tasks;
 
 namespace EM.Client
 {
@@ -32,25 +30,11 @@ namespace EM.Client
     public ClientRuntimeProperties RuntimeProperties { get => runtimeProperties; set => runtimeProperties = value; }
     public ClientSchedule Schedule { get; set; }
     public ClientStatus Status { get; set; }
-    public bool Running => running;
-
-
-    public void Start()
+    public bool Running
     {
-      running = true;
+      get { return running; }
+      set { running = value; }
 
-      logger.Debug("Default client running ...");
-      logger.Debug("Name= " + Properties.Name);
-
-      plugin.Start();
-      running = false;
     }
-
-    public void Stop()
-    {
-      logger.Debug(Properties.Name + " stopping");
-      plugin.Stop();
-    }
-
   }
 }
