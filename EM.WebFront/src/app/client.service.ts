@@ -26,12 +26,11 @@ export class ClientService {
       )
     }
 
-    getClient(name: string): Observable<Client[]> {
+    getClient(name: string): Observable<Client> {
       const url = `${this.clientUrl}/${name}`;
-      return this.http.get<Client[]>(url)
-      .pipe(
-        tap(client => this.log(`fetched one client name=${name}`)),
-        catchError(this.handleError(`getClient client name=${name}`,[]))
+      return this.http.get<Client>(url).pipe(
+        tap(c => this.log(`fetched one client name=${name} ${c.Name}`)),
+        catchError(this.handleError<Client>(`getClient client name=${name}`))
       )
     }
 

@@ -28,26 +28,18 @@ namespace EM.API.Cmd.Controllers
 
     // GET: api/<controller>
     [HttpGet]
-    public object Get()
+    public Model.Client[] Get()
     {
       IClientTemplateRepository clients = clientBuilder.Build();
-      return clients.Select(c => new Model.Client()
-      {
-        Name = c.Name,
-        Description = c.Properties.Description,
-        PluginType = c.PluginTemplate.FullClassName,
-        IsEnabled = c.IsEnabled,
-        LastRun = c.Status.LastRun,
-        LastLifeSign = c.Status.LastLifeSign,
-        NextRun = c.Status.NextRun
-      }).ToArray();     
+      return clients.Select(c => Model.Client.From(c)).ToArray();     
     }
 
     // GET api/values/5 
     [Route("{name}")]
-    public string Get([FromUri]string name)
+    public Model.Client Get([FromUri]string name)
     {
-      return "value";
+      var client = clientBuilder.Build(name);
+      return Model.Client.From(client);
     }
 
     // POST api/values 
