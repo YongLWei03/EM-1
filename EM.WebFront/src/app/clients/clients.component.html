@@ -13,10 +13,10 @@
 <ul>
     <li *ngFor="let client of clients">
         <a routerLink="/detail/{{client.Name}}">{{client.Name}}</a>
-        {{client.PluginType}}
-        <input type="checkbox" [(ngModel)]="client.IsEnabled" (ngModelChange)="update(client)">
-        {{client.LastRun}}
-        {{client.LastLifeSign}}
-        {{client.NextRun}}
+        {{client.Plugin.Name}}
+        <input type="checkbox" [(ngModel)]="client.Properties.IsEnabled" (ngModelChange)="update(client)">
+        {{client.Runtime.LastRun}}
+        {{client.Runtime.LastLifeSign}}
+        {{client.Runtime.NextRun}}
     </li>
 </ul>

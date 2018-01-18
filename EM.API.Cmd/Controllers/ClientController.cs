@@ -45,7 +45,7 @@ namespace EM.API.Cmd.Controllers
     // POST api/values 
     public HttpResponseMessage Post([FromBody]Model.Client client)
     {
-      clientPersistor.ToggleEnable(client.Name, client.IsEnabled);
+      clientPersistor.ToggleEnable(client.Name, client.Properties.IsEnabled);
       var resp = Request.CreateResponse<Model.Client>(System.Net.HttpStatusCode.OK, client);
       return resp;
     }

@@ -1,9 +1,42 @@
 <div *ngIf="client">
-  <h2>{{ client.Name | uppercase }} Details</h2>
-  <div><span>Description: </span>{{client.Description}}</div>
-  <div>
-      <label>name:
-          <input [(ngModel)]="client.Name" placeholder="Name">
-      </label>
-  </div>
+    <h2>{{ client.Name | uppercase }}</h2>
+    
+    
+    <div>
+        <label>Name:
+            <input [(ngModel)]="client.Name" placeholder="Name">
+        </label>
+    </div>
+    
+    <div>
+        <label>Description: 
+            <input [(ngModel)]="client.Properties.Description">
+        </label>
+    </div>   
+    
+    <div>
+        <label>Enable: 
+            <input [(ngModel)]="client.Properties.IsEnabled" type="checkbox">
+        </label>
+    </div>    
+    
+    <div>
+        <label>Run Continuously: 
+            <input [(ngModel)]="client.Schedule.IsRunContinuously" type="checkbox">
+        </label>
+    </div>
+    
+    <div>
+        <label>Run Every: 
+            <input [(ngModel)]="client.Schedule.RunEverySeconds">
+            (seconds)
+        </label>
+    </div>
+    
+    <div>
+        <label>Plugin: 
+            <input [(ngModel)]="client.Plugin.Name">
+        </label>
+    </div>
+    
 </div>

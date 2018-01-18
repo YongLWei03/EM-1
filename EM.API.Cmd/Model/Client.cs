@@ -9,25 +9,46 @@ namespace EM.API.Cmd.Model
 {
   public class Client
   {
-    public string Name { get; set; }
-    public string Description { get; internal set; }
-    public string PluginType { get; set; }
-    public bool IsEnabled { get; set; }
-    public DateTime LastRun { get; set; }
-    public DateTime LastLifeSign { get; set; }
-    public DateTime NextRun { get; set; }
+    public Client()
+    {
+      Properties = new ClientProperties();
+      Schedule = new ClientSchedule();
+      Plugin = new Plugin();
+      Runtime = new ClientRuntime();
+    }
 
-    internal static Model.Client From(IClientTemplate c)
+    public string Name { get; set; }
+    public ClientProperties Properties { get; set; }
+    public ClientSchedule Schedule { get; set; }
+    public ClientRuntime Runtime { get; set; }
+    public Plugin Plugin { get; set; }
+ 
+
+    public static Model.Client From(IClientTemplate c)
     {
       var client = new Model.Client()
       {
         Name = c.Name,
-        Description = c.Properties.Description,
-        PluginType = c.PluginTemplate.FullClassName,
-        IsEnabled = c.IsEnabled,
-        LastRun = c.Status.LastRun,
-        LastLifeSign = c.Status.LastLifeSign,
-        NextRun = c.Status.NextRun
+        Properties = new ClientProperties()
+        {
+          Description = c.Properties.Description,
+          IsEnabled = c.IsEnabled,
+        },
+        Schedule = new ClientSchedule()
+        {
+          IsRunContinuously = c.Schedule.IsRunContinuously,
+          RunEverySeconds = c.Schedule.RunEverySeconds
+        },
+        Plugin = new Plugin()
+        {
+          Name = c.PluginTemplate.FullClassName,
+        },
+        Runtime = new ClientRuntime()
+        {
+          LastRun = c.Status.LastRun,
+          LastLifeSign = c.Status.LastLifeSign,
+          NextRun = c.Status.NextRun
+        }
       };
       return client;
     }
