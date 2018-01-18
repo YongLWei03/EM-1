@@ -11,8 +11,8 @@
 </div>
 
 <ul>
-    <li *ngFor="let client of clients" (click)="onSelect(client)" [class.selected]="client==selectedClient">
-        {{client.Name}}
+    <li *ngFor="let client of clients">
+        <a routerLink="/detail/{{client.Name}}">{{client.Name}}</a>
         {{client.PluginType}}
         <input type="checkbox" [(ngModel)]="client.IsEnabled" (ngModelChange)="update(client)">
         {{client.LastRun}}
@@ -20,5 +20,3 @@
         {{client.NextRun}}
     </li>
 </ul>
-
-<app-client-detail [client]="selectedClient"></app-client-detail>

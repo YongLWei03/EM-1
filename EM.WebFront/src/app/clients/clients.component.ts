@@ -43,7 +43,7 @@ export class ClientsComponent implements OnInit {
   }
 
   subscribeTo(): void {
-    this.timerSubscription = Observable.timer(5000).first().subscribe(() => this.refreshClients());
+    this.timerSubscription = Observable.timer(50000).first().subscribe(() => this.refreshClients());
   }
 
   onSelect(client: Client): void {

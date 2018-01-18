@@ -26,6 +26,15 @@ export class ClientService {
       )
     }
 
+    getClient(name: string): Observable<Client[]> {
+      const url = `${this.clientUrl}/${name}`;
+      return this.http.get<Client[]>(url)
+      .pipe(
+        tap(client => this.log(`fetched one client name=${name}`)),
+        catchError(this.handleError(`getClient client name=${name}`,[]))
+      )
+    }
+
     update(client: Client): Observable<string> {
       return this.http.post<string>(this.clientUrl, client)
       .pipe(

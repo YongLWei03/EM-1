@@ -44,7 +44,8 @@ namespace EM.API.Cmd.Controllers
     }
 
     // GET api/values/5 
-    public string Get(int id)
+    [Route("{name}")]
+    public string Get([FromUri]string name)
     {
       return "value";
     }
