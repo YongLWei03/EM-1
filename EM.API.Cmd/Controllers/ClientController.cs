@@ -31,21 +31,16 @@ namespace EM.API.Cmd.Controllers
     public object Get()
     {
       IClientTemplateRepository clients = clientBuilder.Build();
-      //IList<string> cn = new List<string>();
-      //foreach (var c in clients)
-      //{
-      //  cn.Add(c.Name);
-      //}
       return clients.Select(c => new Model.Client()
       {
         Name = c.Name,
+        Description = c.Properties.Description,
         PluginType = c.PluginTemplate.FullClassName,
         IsEnabled = c.IsEnabled,
         LastRun = c.Status.LastRun,
         LastLifeSign = c.Status.LastLifeSign,
         NextRun = c.Status.NextRun
-      }).ToArray();
-      //return cn.ToArray();//new string[] { "1", "2" }; //
+      }).ToArray();     
     }
 
     // GET api/values/5 

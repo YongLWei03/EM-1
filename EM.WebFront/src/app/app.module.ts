@@ -8,17 +8,23 @@ import { ClientsComponent } from './clients/clients.component';
 import { ClientService } from './client.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
+import { ClientDetailComponent } from './client-detail/client-detail.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { NewClientComponent } from './new-client/new-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientsComponent,
-    MessagesComponent
+    MessagesComponent,
+    ClientDetailComponent,
+    NewClientComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ClientService, MessageService],
   bootstrap: [AppComponent]

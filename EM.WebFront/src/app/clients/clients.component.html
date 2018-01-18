@@ -1,10 +1,24 @@
-<ul >
-    <li *ngFor="let client of clients">
+<h2>Clients</h2>
+
+<div>
+    <label>Client name:
+        <input #clientName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(clientName.value); clientName.value=''">
+        add
+    </button>
+</div>
+
+<ul>
+    <li *ngFor="let client of clients" (click)="onSelect(client)" [class.selected]="client==selectedClient">
         {{client.Name}}
         {{client.PluginType}}
         <input type="checkbox" [(ngModel)]="client.IsEnabled" (ngModelChange)="update(client)">
         {{client.LastRun}}
         {{client.LastLifeSign}}
-        {{client.NextRun}}</li>
-    </ul>
-    
+        {{client.NextRun}}
+    </li>
+</ul>
+
+<app-client-detail [client]="selectedClient"></app-client-detail>

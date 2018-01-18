@@ -10,6 +10,8 @@ import {Observable} from "rxjs/Rx";
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit {
+
+  selectedClient: Client;
   
   constructor(private clientService: ClientService) { }
   
@@ -42,5 +44,19 @@ export class ClientsComponent implements OnInit {
 
   subscribeTo(): void {
     this.timerSubscription = Observable.timer(5000).first().subscribe(() => this.refreshClients());
+  }
+
+  onSelect(client: Client): void {
+    this.selectedClient = client;
+    console.log("hello world "+ this.selectedClient);
+  }
+
+  add(Name: string): void {
+    Name = Name.trim();
+    if (!Name) { return; }
+    this.clientService.addClient({ Name } as Client)
+      .subscribe(client => {
+        this.clients.push(client);
+      });
   }
 }

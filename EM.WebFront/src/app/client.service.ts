@@ -6,6 +6,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService} from './message.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class ClientService {
@@ -29,6 +32,13 @@ export class ClientService {
         tap(r=>this.log("updated client "+client.Name)),
         catchError(this.handleError('update',''))
       )
+    }
+
+    addClient (client: Client): Observable<Client> {
+      return this.http.post<Client>(this.clientUrl, client, httpOptions).pipe(
+        tap((client: Client) => this.log('added client w/ id=${client.Id}')),
+        catchError(this.handleError<Client>('addClient'))
+      );
     }
     
     private log(message: string) {

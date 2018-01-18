@@ -21,6 +21,20 @@ module.exports = function(grunt) {
 					cmd:'copy .\\EM.Plugin.Sample\\bin\\Release\\EM.Plugin.Sample.* .\\EM.Cmd\\bin\\Release\\',
 					exitCodes: [0,1]				
 				},
+
+				copy_plugin_primal_debug: {
+					cmd:'copy .\\EM.Plugin\\bin\\Debug\\EM.Plugin.* .\\EM.Cmd\\bin\\Debug\\',
+					exitCodes: [0,1]
+				},
+				copy_plugin_primal_release: {
+					cmd:'copy .\\EM.Plugin\\bin\\Release\\EM.Plugin.* .\\EM.Cmd\\bin\\Release\\',
+					exitCodes: [0,1]				
+				},
+
+				run_api: {
+					cmd:'START "EM.API.Cmd" ".\\EM.API.Cmd\\bin\\Debug\\EM.API.Cmd.exe"',
+					exitCodes: [0,1]
+				},
 				
 				test_em_common: {
 					cmd: '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\IDE\\mstest.exe" /testcontainer:.\\EM.Common.Tests\\bin\\Debug\\EM.Common.Tests.dll'
@@ -46,7 +60,7 @@ module.exports = function(grunt) {
 					},
 				},
 				plugin_files: {
-					files: ['EM.Plugin.Sample/bin/Debug/*','EM.Plugin.Sample/bin/Release/*'],
+					files: ['EM.Plugin.Sample/bin/Debug/*','EM.Plugin.Sample/bin/Release/*','EM.Plugin/bin/Debug/*','EM.Plugin/bin/Release/*'],
 					tasks: ['exec:copy_plugins_debug','exec:copy_plugins_release'],
 					options: {
 						event: ['added'],
