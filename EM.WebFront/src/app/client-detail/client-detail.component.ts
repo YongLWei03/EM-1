@@ -32,5 +32,9 @@ export class ClientDetailComponent implements OnInit {
       console.log('detail got one client: '+this.client.Name);
     });
   }
+
+  save(): void {
+    console.log('saving....');
+  }
   
 }
