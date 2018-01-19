@@ -32,6 +32,7 @@ namespace EM.EF
         if (clientDB == null)
         {
           var n = ctx.Clients.Create();
+          ctx.Clients.Attach(n);
 
           n.Name = client.Name;
           n.Enabled = client.IsEnabled;
@@ -102,7 +103,7 @@ namespace EM.EF
         {
           Client = clientDB,
           Key = key,
-          Value = value.ToString()
+          Value = (value?? "").ToString()
         });
       }
       else
