@@ -38,6 +38,7 @@ namespace EM.API.Cmd.Controllers
     [Route("{name}")]
     public Model.Client Get([FromUri]string name)
     {
+      if (string.IsNullOrWhiteSpace(name)) { return new Model.Client(); }
       var client = clientBuilder.Build(name);
       return Model.Client.From(client);
     }
@@ -45,7 +46,8 @@ namespace EM.API.Cmd.Controllers
     // POST api/values 
     public HttpResponseMessage Post([FromBody]Model.Client client)
     {
-      clientPersistor.ToggleEnable(client.Name, client.Properties.IsEnabled);
+      //clientPersistor.ToggleEnable(client.Name, client.Properties.IsEnabled);
+      clientPersistor.Update(Model.Client.To(client));
       var resp = Request.CreateResponse<Model.Client>(System.Net.HttpStatusCode.OK, client);
       return resp;
     }

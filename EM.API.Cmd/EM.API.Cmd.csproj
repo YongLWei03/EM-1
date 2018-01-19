@@ -120,6 +120,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EM.Client\EM.Client.csproj">
+      <Project>{84F074A9-C669-4B9C-9585-08ED5B683FC4}</Project>
+      <Name>EM.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EM.Common\EM.Common.csproj">
       <Project>{bc444e24-53bb-4fa2-b442-bbef892a772a}</Project>
       <Name>EM.Common</Name>
@@ -131,6 +135,10 @@
     <ProjectReference Include="..\EM.Factory\EM.Factory.csproj">
       <Project>{c029c1d3-24bc-40da-8754-339700ee9a10}</Project>
       <Name>EM.Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EM.Plugin\EM.Plugin.csproj">
+      <Project>{977e2eff-9a51-440f-a13f-198cd299f4ab}</Project>
+      <Name>EM.Plugin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -23,18 +23,25 @@ export class ClientDetailComponent implements OnInit {
   ngOnInit() {
     this.getClient();
   }
-
+  
   getClient(): void {
     const name = this.route.snapshot.paramMap.get('name');
-    this.clientService.getClient(name).subscribe(client=>{
-      this.client = client;
-      console.log('client: '+client);
-      console.log('detail got one client: '+this.client.Name);
-    });
+    if (name) {
+      this.clientService.getClient(name).subscribe(client=>{
+        this.client = client;
+        console.log('client: '+client);
+        console.log('detail got one client: '+this.client.Name);
+      });
+    } else {
+      this.client = new Client();
+    }
   }
-
+  
   save(): void {
-    console.log('saving....');
+    console.log('saving.... '+this.client);
+    this.clientService.update(this.client).subscribe(client=>{
+      console.log('saved. '+this.client);
+    });
   }
   
 }

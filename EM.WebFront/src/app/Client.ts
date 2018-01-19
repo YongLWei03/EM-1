@@ -3,6 +3,17 @@ export class Client {
     Plugin: Plugin;
     Properties: Properties;
     Schedule: Schedule;
+
+    constructor() {
+        this.Plugin = new Plugin();
+        this.Properties = new Properties();
+        this.Schedule = new Schedule();
+    }
+
+    public toString = () : string => {
+
+        return `Client (Name: ${this.Name}, Description: ${this.Properties.Description})`;
+    }
 }
 
 export class Schedule {

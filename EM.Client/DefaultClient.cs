@@ -11,7 +11,6 @@ namespace EM.Client
     private ILog logger = LogManager.GetLogger<DefaultClient>();
 
     private IPlugin plugin = null;
-    private ClientProperties properties = new ClientProperties();
     private ClientRuntimeProperties runtimeProperties = new ClientRuntimeProperties();
     private bool running = false;
 

@@ -12,8 +12,8 @@ namespace EM.EF
       using (var ctx = new Entities())
       {
         var clientDB = (from s in ctx.Clients
-                     where s.Name == clientName
-                     select s).FirstOrDefault();
+                        where s.Name == clientName
+                        select s).FirstOrDefault();
 
         clientDB.Enabled = isEnabled;
         ctx.SaveChanges();
@@ -25,16 +25,30 @@ namespace EM.EF
       using (var ctx = new Entities())
       {
         var clientDB = (from s in ctx.Clients
-                     where s.Name == client.Name
-                     select s).FirstOrDefault();
+                        where s.Name == client.Name
+                        select s).FirstOrDefault();
 
-        clientDB.ClientStatus.Add(new ClientStatu()
+        if (clientDB == null)
         {
-          Client = clientDB,
-          LastLifeSign = client.Status.LastLifeSign,
-          LastRun = client.Status.LastRun,
-          NextRun = client.Status.NextRun
-        });
+          var n = ctx.Clients.Create();
+
+          n.Name = client.Name;
+          n.Enabled = client.IsEnabled;
+
+        }
+        else
+        {
+          if (client.Status != null)
+          {
+            clientDB.ClientStatus.Add(new ClientStatu()
+            {
+              Client = clientDB,
+              LastLifeSign = client.Status.LastLifeSign,
+              LastRun = client.Status.LastRun,
+              NextRun = client.Status.NextRun
+            });
+          }
+        }
 
         ctx.SaveChanges();
       }

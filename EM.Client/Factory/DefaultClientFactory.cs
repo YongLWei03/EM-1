@@ -6,9 +6,11 @@ using EM.Common.Client.Template;
 using EM.Common.Client.Template.Repository;
 using EM.Common.Plugin;
 using EM.Common.Plugin.Template.Repository;
+using EM.Common.PluginTemplate;
 using EM.Common.PluginTemplate.Repository;
 using EM.Common.Utils;
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace EM.Client.Factory
@@ -18,15 +20,12 @@ namespace EM.Client.Factory
   {
     private ILog logger = LogManager.GetLogger<DefaultClientFactory>();
     private IIoCFactory iocFactory;
-    //private IClientRepository clientRepo = null;
-
+ 
     public DefaultClientFactory(IIoCFactory iocFactory) => (this.iocFactory) = (iocFactory);
 
     public IClient MakeClient(IClientTemplate template)
     {
-      //Init();
-
-      Type t = template.PluginTemplate.PluginType;
+      Type t = GetPluginType(template.PluginTemplate);
 
       IPlugin plugin = (IPlugin)Activator.CreateInstance(t);
       plugin.Properties = template.Properties.Properties;
@@ -41,6 +40,13 @@ namespace EM.Client.Factory
       };
 
       return client;
+    }
+
+    private Type GetPluginType(IPluginTemplate template)
+    {
+      Assembly SampleAssembly;
+      SampleAssembly = Assembly.LoadFrom(template.DLLName);
+      return SampleAssembly.GetTypes().Where(x => x.FullName == template.FullClassName && x.GetInterfaces().Contains(typeof(IPlugin))).FirstOrDefault();
     }
 
     private void GetPropertiesFromIoC(IPlugin plugin)
@@ -74,14 +80,6 @@ namespace EM.Client.Factory
     {
       return template.Properties.Clone();
     }
-
-    //private void Init()
-    //{
-    //  if (clientRepo == null)
-    //  {
-    //    clientRepo = GetClientRepository();
-    //  }
-    //}
 
     private IClientRepository GetClientRepository()
     {

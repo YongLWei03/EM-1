@@ -10,6 +10,6 @@ namespace EM.Common.PluginTemplate
   {
     string DLLName { get; set; }
     string FullClassName { get; set; }
-    Type PluginType { get; }
+    //Type PluginType { get; }
   }
 }

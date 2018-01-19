@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EM.Client;
+using EM.Common.Client;
 using EM.Common.Client.Template;
+using EM.Plugin.Template;
 
 namespace EM.API.Cmd.Model
 {
@@ -51,6 +54,37 @@ namespace EM.API.Cmd.Model
         }
       };
       return client;
+    }
+
+    public static IClient To(Client client)
+    {
+      var c = new DefaultClient()
+      {
+        Name = client.Name,
+        Properties = new Common.Client.ClientProperties()
+        {
+          Description = client.Properties.Description,
+          IsEnabled = client.Properties.IsEnabled,
+        },
+        Schedule = new Common.Client.ClientSchedule()
+        {
+          IsRunContinuously = client.Schedule.IsRunContinuously,
+          RunEverySeconds = client.Schedule.RunEverySeconds
+        },
+        PluginTemplate = new DefaultPluginTemplate()
+        {
+          FullClassName = client.Plugin.Name,
+          
+        },
+        Status = new Common.Client.ClientStatus()
+        {
+          LastRun = client.Runtime.LastRun,
+          LastLifeSign = client.Runtime.LastLifeSign,
+          NextRun = client.Runtime.NextRun
+        }
+      };
+
+      return c;
     }
   }
 }

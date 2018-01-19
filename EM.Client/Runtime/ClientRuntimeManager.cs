@@ -19,12 +19,10 @@ namespace EM.Client.Runtime
     private ILog logger = LogManager.GetLogger<ClientRuntimeManager>();
     private LimitedConcurrencyLevelTaskScheduler lcts = null;
     private TaskFactory factory = null;
-    //private IClientTemplateRepository templateRepository = null;
     private IClientPersistor clientPersistor;
     private IClientTemplateRepositoryBuilder builder = null;
     private IClientRepository clients = null;
-    //private Dictionary<string, IClient> clients = new Dictionary<string, IClient>();
-
+ 
     public ClientRuntimeManager(IClientFactory clientFactory, IClientPersistor clientPersistor, IClientTemplateRepositoryBuilder builder)
     {
       lcts = new LimitedConcurrencyLevelTaskScheduler(5);
@@ -86,7 +84,9 @@ namespace EM.Client.Runtime
 
     private bool IsPluginChanged(IClientTemplate template)
     {
-      return clients[template.Name].Plugin.GetType() != template.PluginTemplate.PluginType;
+      return
+        clients[template.Name].PluginTemplate.FullClassName != template.PluginTemplate.FullClassName ||
+        clients[template.Name].PluginTemplate.DLLName != template.PluginTemplate.DLLName;
     }
 
     private void TryStopAndRemove(string name)
