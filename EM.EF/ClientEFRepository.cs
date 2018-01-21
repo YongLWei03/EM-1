@@ -31,7 +31,7 @@ namespace EM.EF
 
         if (clientDB != null)
         {
-          //clientDB.ClientProperties.Clear();
+          clientDB.ClientSchedules.ToList().ForEach(x => ctx.ClientSchedules.Remove(x));
           clientDB.ClientProperties.ToList().ForEach(x => ctx.ClientProperties.Remove(x));
           ctx.PluginTemplates.Remove(clientDB.PluginTemplate);
           ctx.Clients.Remove(clientDB);
@@ -69,7 +69,7 @@ namespace EM.EF
           ctx.ClientSchedules.Add(cs);
           cs.Client = n;
           cs.RunContinuously = client.Schedule.IsRunContinuously;
-          cs.RunEverySeconds = client.Schedule.RunEverySeconds;  
+          cs.RunEverySeconds = client.Schedule.RunEverySeconds;
 
           n.PluginTemplate = new PluginTemplate()
           {
