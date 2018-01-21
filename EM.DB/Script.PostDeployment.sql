@@ -32,8 +32,8 @@ VALUES ('EM.Plugin.Sample.dll', 'EM.Plugin.Sample.WashUpPlugin');
 
 -- -----------------------------------------------------------------------------------
 SELECT @PLUGINTEMPLATEID=ID FROM [EM].PluginTemplate  WHERE FullClassName='EM.Plugin.PrimalPlugin';
-INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled],[ClientScheduleId]) 
-VALUES (@PLUGINTEMPLATEID,'Primal Client','FALSE',@CLIENTSCHEDULEID);
+INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled]) 
+VALUES (@PLUGINTEMPLATEID,'Primal Client','FALSE');
 SELECT @CLIENTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
@@ -46,8 +46,8 @@ INSERT INTO [EM].ClientSchedule (ClientId, RunContinuously, RunEverySeconds) VAL
 
 -- -----------------------------------------------------------------------------------
 SELECT @PLUGINTEMPLATEID=ID FROM [EM].PluginTemplate  WHERE FullClassName='EM.Plugin.Sample.SamplePluginForever';
-INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled],[ClientScheduleId]) 
-VALUES (@PLUGINTEMPLATEID,'Run forever client','TRUE',@CLIENTSCHEDULEID);
+INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled]) 
+VALUES (@PLUGINTEMPLATEID,'Run forever client','TRUE');
 SELECT @CLIENTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
@@ -61,8 +61,8 @@ INSERT INTO [EM].ClientSchedule (ClientId, RunContinuously, RunEverySeconds) VAL
 
 -- -----------------------------------------------------------------------------------
 SELECT @PLUGINTEMPLATEID=ID FROM [EM].PluginTemplate WHERE FullClassName='EM.Plugin.Sample.SamplePlugin';
-INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled],[ClientScheduleId]) 
-VALUES (@PLUGINTEMPLATEID,'Sample client','TRUE',@CLIENTSCHEDULEID);
+INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled]) 
+VALUES (@PLUGINTEMPLATEID,'Sample client','TRUE');
 SELECT @CLIENTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
@@ -74,18 +74,17 @@ INSERT INTO [EM].ClientSchedule (ClientId, RunContinuously, RunEverySeconds) VAL
 -- -----------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------
-INSERT INTO [EM].ClientSchedule (RunContinuously, RunEverySeconds) VALUES ('FALSE',60);
-SELECT @CLIENTSCHEDULEID=SCOPE_IDENTITY();
-
 SELECT @PLUGINTEMPLATEID=ID FROM [EM].PluginTemplate WHERE FullClassName='EM.Plugin.Sample.WashUpPlugin';
-INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled],[ClientScheduleId]) 
-VALUES (@PLUGINTEMPLATEID,'WashUp client','TRUE',@CLIENTSCHEDULEID);
+INSERT INTO [EM].Client([PluginTemplateId],[Name],[Enabled]) 
+VALUES (@PLUGINTEMPLATEID,'WashUp client','TRUE');
 SELECT @CLIENTID=SCOPE_IDENTITY();
 
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
 VALUES (@CLIENTID,'Name','WashUp client.');
 INSERT INTO [EM].ClientProperty ([ClientId],[Key],[Value])
 VALUES (@CLIENTID,'Description','Cleans the status table.'); 
+
+INSERT INTO [EM].ClientSchedule (ClientId, RunContinuously, RunEverySeconds) VALUES (@CLIENTID, 'FALSE',60);
 -- -----------------------------------------------------------------------------------
 
 
