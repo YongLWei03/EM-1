@@ -58,8 +58,11 @@ namespace EM.API.Cmd.Controllers
     }
 
     // DELETE api/values/5 
-    public void Delete(int id)
+    [HttpDelete]
+    [AcceptVerbs("Delete")]
+    public void Delete(string name)
     {
+      clientPersistor.Delete(name);
     }
   }
 }

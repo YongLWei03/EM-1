@@ -1,4 +1,6 @@
-﻿using EM.Common.Client;
+﻿using EM.Client;
+using EM.Client.Template;
+using EM.Common.Client;
 using EM.Common.Client.Repository;
 using System;
 using System.Collections.Generic;
@@ -22,10 +24,16 @@ namespace EM.EF
           clientDB.ClientSchedules.ToList().ForEach(x => ctx.ClientSchedules.Remove(x));
           clientDB.ClientProperties.ToList().ForEach(x => ctx.ClientProperties.Remove(x));
           //ctx.PluginTemplates.Remove(clientDB.PluginTemplate);
+          clientDB.ClientStatus.ToList().ForEach(x => ctx.ClientStatus.Remove(x));
           ctx.Clients.Remove(clientDB);
           ctx.SaveChanges();
         }
       }
+    }
+
+    public void Delete(string clientName)
+    {
+      Delete(new DefaultClient() { Name = clientName });
     }
 
     public void Update(IClient client)
@@ -38,32 +46,26 @@ namespace EM.EF
 
         if (clientDB == null)
         {
-          var n = ctx.Clients.Create();
-          ctx.Clients.Add(n);
+          clientDB = ctx.Clients.Create();
+          ctx.Clients.Add(clientDB);
 
-          n.Name = client.Name;
-          n.Enabled = client.IsEnabled;
+          clientDB.Name = client.Name;
+          clientDB.Enabled = client.IsEnabled;
 
-          SetProperty(ctx, n, "Description", client.Properties.Description);
-          SetProperty(ctx, n, "IsEnabled", client.Properties.IsEnabled);
-          SetProperty(ctx, n, "Name", client.Properties.Name);
+          SetProperty(ctx, clientDB, "Description", client.Properties.Description);
+          SetProperty(ctx, clientDB, "IsEnabled", client.Properties.IsEnabled);
+          SetProperty(ctx, clientDB, "Name", client.Properties.Name);
 
           foreach (var cp in client.Properties.Properties)
           {
-            SetProperty(ctx, n, cp.Key, cp.Value);
+            SetProperty(ctx, clientDB, cp.Key, cp.Value);
           }
 
           var cs = ctx.ClientSchedules.Create();
           ctx.ClientSchedules.Add(cs);
-          cs.Client = n;
+          cs.Client = clientDB;
           cs.RunContinuously = client.Schedule.IsRunContinuously;
           cs.RunEverySeconds = client.Schedule.RunEverySeconds;
-
-          n.PluginTemplate = new PluginTemplate()
-          {
-            DLLName = client.PluginTemplate.DLLName,
-            FullClassName = client.PluginTemplate.FullClassName
-          };
 
         }
         else
@@ -83,9 +85,6 @@ namespace EM.EF
           clientDB.ClientSchedules.First().RunContinuously = client.Schedule.IsRunContinuously;
           clientDB.ClientSchedules.First().RunEverySeconds = client.Schedule.RunEverySeconds;
 
-          clientDB.PluginTemplate.DLLName = client.PluginTemplate.DLLName;
-          clientDB.PluginTemplate.FullClassName = client.PluginTemplate.FullClassName;
-
           if (client.Status != null)
           {
             clientDB.ClientStatus.Add(new ClientStatu()
@@ -97,6 +96,16 @@ namespace EM.EF
             });
           }
         }
+
+        var pt = ctx.PluginTemplates.Where(x => x.FullClassName == client.PluginTemplate.DLLName).FirstOrDefault();
+        if (pt == null)
+        {
+          pt = ctx.PluginTemplates.Create();
+          ctx.PluginTemplates.Add(pt);
+          pt.DLLName = client.PluginTemplate.DLLName;
+          pt.FullClassName = client.PluginTemplate.FullClassName;
+        }
+        clientDB.PluginTemplate = pt;
 
         ctx.SaveChanges();
       }

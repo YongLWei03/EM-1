@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService} from './message.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RequestOptions } from '@angular/http';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -44,8 +45,16 @@ export class ClientService {
 
     addClient (client: Client): Observable<Client> {
       return this.http.post<Client>(this.clientUrl, client, httpOptions).pipe(
-        tap((client: Client) => this.log('added client w/ id=${client.Id}')),
+        tap((client: Client) => this.log('added client w/ name=${client.Name}')),
         catchError(this.handleError<Client>('addClient'))
+      );
+    }
+
+    delete(client: Client): Observable<Client> {
+      const url = `${this.clientUrl}/${client.Name}`;
+      return this.http.delete<Client>(url).pipe(
+        tap((client: Client) => this.log('deleted client name=${client.Name}')),
+        catchError(this.handleError<Client>('delete client'))
       );
     }
     

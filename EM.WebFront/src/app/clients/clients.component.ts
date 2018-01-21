@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Rx";
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit {
-
+  
   selectedClient: Client;
   
   constructor(private clientService: ClientService) { }
@@ -22,17 +22,17 @@ export class ClientsComponent implements OnInit {
   
   clients: Client[];
   private timerSubscription: AnonymousSubscription;
-
+  
   update(client: Client): void {
     console.log("will update");
-
+    
     this.clientService.update(client).subscribe();
   }
-
+  
   getClients(): void {
     this.clientService.getClients().subscribe(clients => this.clients = clients);
   }
-
+  
   refreshClients(): void {
     this.clientService.getClients().subscribe(clients => {
       console.log('got new clients');
@@ -41,22 +41,30 @@ export class ClientsComponent implements OnInit {
     });
     
   }
-
+  
   subscribeTo(): void {
-    this.timerSubscription = Observable.timer(50000).first().subscribe(() => this.refreshClients());
+    this.timerSubscription = Observable.timer(5000).first().subscribe(() => this.refreshClients());
   }
-
+  
   onSelect(client: Client): void {
     this.selectedClient = client;
     console.log("hello world "+ this.selectedClient);
   }
-
+  
   add(Name: string): void {
     Name = Name.trim();
     if (!Name) { return; }
     this.clientService.addClient({ Name } as Client)
-      .subscribe(client => {
-        this.clients.push(client);
-      });
+    .subscribe(client => {
+      this.clients.push(client);
+    });
+  }
+  
+  delete(client: Client): void {
+    console.log(`delete client ${client}`);
+    this.clientService.delete(client)
+    .subscribe(client => {
+      console.log('delete completed.');
+    })
   }
 }

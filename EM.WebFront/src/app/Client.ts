@@ -10,10 +10,14 @@ export class Client {
         this.Schedule = new Schedule();
     }
 
-    public toString = () : string => {
+    // public toString = () : string => {
 
-        return `Client (Name: ${this.Name}, Description: ${this.Properties.Description})`;
-    }
+    //     return `Client (Name: ${this.Name}, Description: ${this.Properties.Description})`;
+    // }
+}
+
+Client.prototype.toString = function clientToString() {
+    return `Client (Name: ${this.Name}, Description: ${this.Properties.Description})`;    
 }
 
 export class Schedule {

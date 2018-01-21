@@ -1,14 +1,13 @@
 <h2>Clients</h2>
 
-<div>
+<!-- <div>
     <label>Client name:
         <input #clientName />
     </label>
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button (click)="add(clientName.value); clientName.value=''">
+     <button (click)="add(clientName.value); clientName.value=''">
         add
     </button>
-</div>
+</div> -->
 
 <ul>
     <li *ngFor="let client of clients">
@@ -18,5 +17,6 @@
         {{client.Runtime.LastRun}}
         {{client.Runtime.LastLifeSign}}
         {{client.Runtime.NextRun}}
+        <button (click)="delete(client)">Delete</button>
     </li>
 </ul>
