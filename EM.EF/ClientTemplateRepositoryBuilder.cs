@@ -70,7 +70,7 @@ namespace EM.EF
           Name = client.Name,
           PluginTemplate = pluginTemplate,
           Properties = GetProperties(client.ClientProperties),
-          Schedule = GetSchedule(client.ClientSchedule),
+          Schedule = GetSchedule(client.ClientSchedules.First()),
           Status = GetStatus(client.ClientStatus),
         };
         ct.Name = client.Name;

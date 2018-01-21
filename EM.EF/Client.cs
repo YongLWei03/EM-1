@@ -18,6 +18,7 @@ namespace EM.EF
         public Client()
         {
             this.ClientProperties = new HashSet<ClientProperty>();
+            this.ClientSchedules = new HashSet<ClientSchedule>();
             this.ClientStatus = new HashSet<ClientStatu>();
         }
     
@@ -25,12 +26,12 @@ namespace EM.EF
         public long PluginTemplateId { get; set; }
         public string Name { get; set; }
         public bool Enabled { get; set; }
-        public long ClientScheduleId { get; set; }
     
-        public virtual ClientSchedule ClientSchedule { get; set; }
         public virtual PluginTemplate PluginTemplate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientProperty> ClientProperties { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClientSchedule> ClientSchedules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientStatu> ClientStatus { get; set; }
     }
