@@ -2,6 +2,7 @@
 using EM.Common.Client;
 using EM.Common.Client.Template;
 using EM.Common.PluginTemplate;
+using EM.Plugin.Template;
 
 namespace EM.Client.Template
 {
@@ -12,6 +13,7 @@ namespace EM.Client.Template
       Properties = new ClientProperties();
       Schedule = new ClientSchedule();
       Status = new ClientStatus();
+      PluginTemplate = new DefaultPluginTemplate();
     }
 
     public string Name { get => Properties.Name; set => Properties.Name = value; }

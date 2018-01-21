@@ -25,7 +25,7 @@ namespace EM.API.Cmd.Model
     public ClientSchedule Schedule { get; set; }
     public ClientRuntime Runtime { get; set; }
     public Plugin Plugin { get; set; }
- 
+
 
     public static Model.Client From(IClientTemplate c)
     {
@@ -60,29 +60,21 @@ namespace EM.API.Cmd.Model
     {
       var c = new DefaultClient()
       {
-        Name = client.Name,
-        Properties = new Common.Client.ClientProperties()
-        {
-          Description = client.Properties.Description,
-          IsEnabled = client.Properties.IsEnabled,
-        },
-        Schedule = new Common.Client.ClientSchedule()
-        {
-          IsRunContinuously = client.Schedule.IsRunContinuously,
-          RunEverySeconds = client.Schedule.RunEverySeconds
-        },
-        PluginTemplate = new DefaultPluginTemplate()
-        {
-          FullClassName = client.Plugin.Name,
-          
-        },
-        Status = new Common.Client.ClientStatus()
-        {
-          LastRun = client.Runtime.LastRun,
-          LastLifeSign = client.Runtime.LastLifeSign,
-          NextRun = client.Runtime.NextRun
-        }
+        Name = client.Name
       };
+
+      c.Properties.Description = client.Properties.Description;
+      c.Properties.IsEnabled = client.Properties.IsEnabled;
+
+      c.Schedule.IsRunContinuously = client.Schedule.IsRunContinuously;
+      c.Schedule.RunEverySeconds = client.Schedule.RunEverySeconds;
+
+      c.PluginTemplate.FullClassName = client.Plugin.Name;
+      c.PluginTemplate.DLLName = client.Plugin.Name;//TODO fix me
+
+      c.Status.LastRun = client.Runtime.LastRun;
+      c.Status.LastLifeSign = client.Runtime.LastLifeSign;
+      c.Status.NextRun = client.Runtime.NextRun;
 
       return c;
     }
