@@ -8,18 +8,6 @@ namespace EM.EF
 {
   public class ClientEFRepository : IClientPersistor
   {
-    public void ToggleEnable(string clientName, bool isEnabled)
-    {
-      using (var ctx = new Entities())
-      {
-        var clientDB = (from s in ctx.Clients
-                        where s.Name == clientName
-                        select s).FirstOrDefault();
-
-        clientDB.Enabled = isEnabled;
-        ctx.SaveChanges();
-      }
-    }
 
     public void Delete(IClient client)
     {
@@ -33,7 +21,7 @@ namespace EM.EF
         {
           clientDB.ClientSchedules.ToList().ForEach(x => ctx.ClientSchedules.Remove(x));
           clientDB.ClientProperties.ToList().ForEach(x => ctx.ClientProperties.Remove(x));
-          ctx.PluginTemplates.Remove(clientDB.PluginTemplate);
+          //ctx.PluginTemplates.Remove(clientDB.PluginTemplate);
           ctx.Clients.Remove(clientDB);
           ctx.SaveChanges();
         }

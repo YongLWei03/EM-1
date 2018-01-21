@@ -10,6 +10,5 @@ namespace EM.Common.Client.Repository
   {
     void Delete(IClient client);
     void Update(IClient client);
-    void ToggleEnable(string clientName, bool isEnabled);
   }
 }
