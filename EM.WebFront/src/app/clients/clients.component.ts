@@ -65,6 +65,7 @@ export class ClientsComponent implements OnInit {
     this.clientService.delete(client)
     .subscribe(client => {
       console.log('delete completed.');
+      this.refreshClients();
     })
   }
 }

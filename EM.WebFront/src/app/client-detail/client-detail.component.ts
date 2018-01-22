@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import {Router} from '@angular/router';
 
 import { Client } from '../Client';
 import { ClientService } from '../client.service'
@@ -16,6 +17,7 @@ export class ClientDetailComponent implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private clientService: ClientService,
     private location: Location
   ) {  }
@@ -41,6 +43,7 @@ export class ClientDetailComponent implements OnInit {
     console.log('saving.... '+this.client);
     this.clientService.update(this.client).subscribe(client=>{
       console.log('saved. '+this.client);
+      this.router.navigateByUrl('/clients');
     });
   }
   
