@@ -44,7 +44,7 @@ namespace EM.API.Cmd.Model
         },
         Plugin = new Plugin()
         {
-          Name = c.PluginTemplate.FullClassName,
+          FullClassName = c.PluginTemplate.FullClassName,
         },
         Runtime = new ClientRuntime()
         {
@@ -69,8 +69,8 @@ namespace EM.API.Cmd.Model
       c.Schedule.IsRunContinuously = client.Schedule.IsRunContinuously;
       c.Schedule.RunEverySeconds = client.Schedule.RunEverySeconds;
 
-      c.PluginTemplate.FullClassName = client.Plugin.Name;
-      c.PluginTemplate.DLLName = client.Plugin.Name;//TODO fix me
+      c.PluginTemplate.FullClassName = client.Plugin.FullClassName;
+      c.PluginTemplate.DLLName = client.Plugin.FullClassName;//TODO fix me
 
       c.Status.LastRun = client.Runtime.LastRun;
       c.Status.LastLifeSign = client.Runtime.LastLifeSign;

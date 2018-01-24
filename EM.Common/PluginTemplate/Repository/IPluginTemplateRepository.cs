@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EM.Common.PluginTemplate.Repository
 {
-  public interface IPluginTemplateRepository
+  public interface IPluginTemplateRepository : IEnumerable<IPluginTemplate>
   {
     void Add(string name, IPluginTemplate pluginTemplate);
 

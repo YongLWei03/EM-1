@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PluginController.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\ClientProperties.cs" />
     <Compile Include="Model\ClientRuntime.cs" />

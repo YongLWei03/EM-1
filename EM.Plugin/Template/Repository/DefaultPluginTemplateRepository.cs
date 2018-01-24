@@ -1,5 +1,6 @@
 ﻿using EM.Common.PluginTemplate;
 using EM.Common.PluginTemplate.Repository;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace EM.Plugin.Template.Repository
@@ -13,10 +14,25 @@ namespace EM.Plugin.Template.Repository
       templates.Add(name, template);
     }
 
+    public IEnumerator<IPluginTemplate> GetEnumerator()
+    {
+      return ReturnEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return ReturnEnumerator();
+    }
+
     public IPluginTemplate this[string name]
     {
       get { return templates[name]; }
       set { templates[name] = value; }
+    }
+
+    private IEnumerator<IPluginTemplate> ReturnEnumerator()
+    {
+      return templates.Values.GetEnumerator();
     }
   }
 }
