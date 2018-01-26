@@ -43,9 +43,9 @@
         <label>Plugin 2: 
            
             <select [(ngModel)]="client.Plugin">
-            <option *ngFor="let plugin of plugins"  [(ngValue)]="plugin">{{plugin.FullClassName}}</option>
- 
-            </select>
+                <option *ngFor="let plugin of plugins"  [ngValue]="plugin">{{plugin.FullClassName}}</option>
+     
+                </select>
         </label>
     </div>
     
