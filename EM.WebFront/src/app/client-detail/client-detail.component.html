@@ -33,9 +33,19 @@
         </label>
     </div>
     
-    <div>
+    <!-- <div>
         <label>Plugin: 
             <input [(ngModel)]="client.Plugin.Name">
+        </label>
+    </div> -->
+
+    <div>
+        <label>Plugin 2: 
+           
+            <select [(ngModel)]="client.Plugin">
+            <option *ngFor="let plugin of plugins"  [(ngValue)]="plugin">{{plugin.FullClassName}}</option>
+ 
+            </select>
         </label>
     </div>
     

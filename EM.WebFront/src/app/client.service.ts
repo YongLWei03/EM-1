@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Client } from './Client';
+import { Plugin } from './Plugin';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService} from './message.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
+import { AbstractService } from './abstractservice';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
-export class ClientService {
-  private clientUrl = 'http://localhost:9000/api/client'
+export class ClientService extends AbstractService {
   
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    messageService: MessageService) { super(messageService); }
     
     getClients(): Observable<Client[]> {
       return this.http.get<Client[]>(this.clientUrl)
@@ -36,6 +37,7 @@ export class ClientService {
     }
 
     update(client: Client): Observable<string> {
+      console.log(client.Plugin.FullClassName);
       return this.http.post<string>(this.clientUrl, client)
       .pipe(
         tap(r=>this.log("updated client "+client.Name)),
@@ -56,24 +58,6 @@ export class ClientService {
         tap((client: Client) => this.log('deleted client name=${client.Name}')),
         catchError(this.handleError<Client>('delete client'))
       );
-    }
-    
-    private log(message: string) {
-      this.messageService.add('ClientService: ' + message);    
-    }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-    
-        // TODO: send the error to remote logging infrastructure
-        console.error(error); // log to console instead
-    
-        // TODO: better job of transforming error for user consumption
-        this.log(`${operation} failed: ${error.message}`);
-    
-        // Let the app keep running by returning an empty result.
-        return of(result as T);
-      };
     }
     
   }

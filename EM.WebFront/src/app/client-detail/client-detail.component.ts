@@ -6,6 +6,9 @@ import {Router} from '@angular/router';
 import { Client } from '../Client';
 import { ClientService } from '../client.service'
 
+import { Plugin } from '../Plugin';
+import { PluginService } from '../plugin.service'
+
 @Component({
   selector: 'app-client-detail',
   templateUrl: './client-detail.component.html',
@@ -15,15 +18,19 @@ export class ClientDetailComponent implements OnInit {
   
   @Input() client: Client;
   
+  plugins: Plugin[];
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private clientService: ClientService,
+    private pluginService: PluginService,
     private location: Location
   ) {  }
   
   ngOnInit() {
     this.getClient();
+    this.getPlugins();
   }
   
   getClient(): void {
@@ -39,8 +46,16 @@ export class ClientDetailComponent implements OnInit {
     }
   }
   
+  getPlugins(): void {
+    this.pluginService.getPlugins().subscribe(plugins => {
+      this.plugins = plugins;
+      console.log('got plugins');
+    });
+  }
+  
   save(): void {
     console.log('saving.... '+this.client);
+    console.log('saving Plugin.Name.... '+this.client.Plugin.FullClassName);
     this.clientService.update(this.client).subscribe(client=>{
       console.log('saved. '+this.client);
       this.router.navigateByUrl('/clients');

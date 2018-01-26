@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientService } from './client.service';
+import { PluginService } from './plugin.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 import { ClientDetailComponent } from './client-detail/client-detail.component';
@@ -26,7 +27,7 @@ import { NewClientComponent } from './new-client/new-client.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ClientService, MessageService],
+  providers: [ClientService, PluginService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

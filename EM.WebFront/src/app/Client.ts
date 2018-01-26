@@ -1,3 +1,5 @@
+import { Plugin } from './Plugin';
+
 export class Client {
     Name: string;
     Plugin: Plugin;
@@ -34,8 +36,4 @@ export class Runtime {
     LastRun: Date;
     LastLifeSign: Date;
     NextRun: Date;
-}
-
-export class Plugin {
-    Name: string;
 }
