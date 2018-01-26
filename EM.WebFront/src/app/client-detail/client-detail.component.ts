@@ -40,6 +40,7 @@ export class ClientDetailComponent implements OnInit {
         this.client = client;
         console.log('client: '+client);
         console.log('detail got one client: '+this.client.Name);
+        console.log(this.client.Plugin.FullClassName+' '+this.client.Plugin.DLLName);
       });
     } else {
       this.client = new Client();
@@ -60,6 +61,11 @@ export class ClientDetailComponent implements OnInit {
       console.log('saved. '+this.client);
       this.router.navigateByUrl('/clients');
     });
+  }
+
+  byFullClassName(p1: Plugin, p2: Plugin): boolean {
+    return p1.FullClassName === p2.FullClassName && p1.DLLName === p2.DLLName;
+
   }
   
 }

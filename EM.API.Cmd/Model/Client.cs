@@ -44,6 +44,7 @@ namespace EM.API.Cmd.Model
         },
         Plugin = new Plugin()
         {
+          DLLName = c.PluginTemplate.DLLName,
           FullClassName = c.PluginTemplate.FullClassName,
         },
         Runtime = new ClientRuntime()
